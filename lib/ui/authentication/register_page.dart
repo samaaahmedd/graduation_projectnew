@@ -10,6 +10,7 @@ import 'package:with_you_app/common/material/drop_down_menu_single_select.dart';
 import 'package:with_you_app/common/material/text_styles.dart';
 import 'package:with_you_app/domain/authentication/register_use_case.dart';
 import 'package:with_you_app/domain/models/authentication/register_entity.dart';
+import 'package:with_you_app/ui/authentication/email_verification_page.dart';
 import 'package:with_you_app/ui/home_page/home_page.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -179,7 +180,7 @@ class _RegisterPageState extends State<RegisterPage> {
       );
       final result = await _registerUseCase.execute(context, registerEntity);
       if (result) {
-        navigateRemoveReplacement(context, const HomePage());
+        navigate(context, const EmailVerificationPage());
       }
       _isLoading = false;
       setState(() {});

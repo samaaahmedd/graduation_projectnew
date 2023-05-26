@@ -188,6 +188,7 @@ class AppButtons extends StatelessWidget {
                             softWrap: true,
                           )),
                 )),
+            const SizedBox(width: 10,),
             AnimatedSwitcher(
               duration: const Duration(milliseconds: 500),
               key: ValueKey(isLoading),
@@ -197,7 +198,7 @@ class AppButtons extends StatelessWidget {
                       width: 15,
                       child: CircularProgressIndicator(
                         color: AppColors.primaryColor,
-                        strokeWidth: 2,
+                        strokeWidth: 3,
                       ),
                     )
                   : const SizedBox(

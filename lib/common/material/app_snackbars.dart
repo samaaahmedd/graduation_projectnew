@@ -30,6 +30,7 @@ class AppSnackBars extends StatelessWidget {
   final Widget? leadingWidget;
 
   static void success(context, {required String title, String? subTitle}) {
+    ScaffoldMessenger.of(context).removeCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       AppSnackBars(
         title: title,
@@ -55,6 +56,7 @@ class AppSnackBars extends StatelessWidget {
   }
 
   static void warning(context, {required String title, String? subTitle}) {
+    ScaffoldMessenger.of(context).removeCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       AppSnackBars(
         title: title,
@@ -67,11 +69,12 @@ class AppSnackBars extends StatelessWidget {
   }
 
 
-  static void hint(context, {required String title, required IconData icon}) {
+  static void hint(context, {required String title}) {
+    ScaffoldMessenger.of(context).removeCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       AppSnackBars(
         title: title,
-        leadingWidget: Icon(icon),
+        icon:  Icons.tips_and_updates_outlined,
         borderSide: const BorderSide(width: 1, color: AppColors.neutral_30),
       ).build(context) as SnackBar,
     );
@@ -135,7 +138,6 @@ class AppSnackBars extends StatelessWidget {
     switch (snackBarPosition) {
       case null:
       case SnackBarPosition.normal:
-        return null;
       case SnackBarPosition.bottom:
         return EdgeInsets.only(
             bottom: (MediaQuery.of(context).viewPadding.bottom + 30),

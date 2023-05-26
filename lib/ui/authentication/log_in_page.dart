@@ -6,7 +6,8 @@ import 'package:with_you_app/common/material/app_buttons.dart';
 import 'package:with_you_app/common/material/app_colors.dart';
 import 'package:with_you_app/common/material/app_text_form_field.dart';
 import 'package:with_you_app/common/material/text_styles.dart';
-import 'package:with_you_app/domain/authentication/loh_in_use_case.dart';
+import 'package:with_you_app/domain/authentication/log_in_use_case.dart';
+import 'package:with_you_app/ui/authentication/email_verification_page.dart';
 import 'package:with_you_app/ui/authentication/register_page.dart';
 import 'package:with_you_app/ui/home_page/home_page.dart';
 

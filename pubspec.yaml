@@ -28,6 +28,10 @@ flutter:
   assets:
     - assets/
 
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: fonts/Roboto-Regular.ttf
 
   # example:
   # fonts:

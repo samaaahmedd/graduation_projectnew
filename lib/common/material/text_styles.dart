@@ -9,7 +9,7 @@ class TextStyles {
     return TextStyle(
         height: height,
         color: color,
-        fontFamily: 'OpenSans',
+        fontFamily: 'Roboto',
         overflow: textOverFlow ?? TextOverflow.visible,
         fontWeight: FontWeight.w400,
         fontSize: fontSize);
@@ -23,7 +23,7 @@ class TextStyles {
       TextStyle(
           height: height,
           color: color,
-          fontFamily: 'OpenSans',
+          fontFamily: 'Roboto',
           fontWeight: FontWeight.w700,
           fontSize: fontSize);
 
@@ -36,7 +36,7 @@ class TextStyles {
           height: height,
           color: color,
           overflow: textOverFlow ?? TextOverflow.visible,
-          fontFamily: 'OpenSans',
+          fontFamily: 'Roboto',
           fontWeight: FontWeight.w500,
           fontSize: fontSize);
 }

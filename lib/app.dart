@@ -13,7 +13,8 @@ class TheApp extends StatelessWidget {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    return const MaterialApp(
-        debugShowCheckedModeBanner: false, home: SplashPage());
+    return  MaterialApp(
+      theme: ThemeData(fontFamily: "Roboto"),
+        debugShowCheckedModeBanner: false, home: const SplashPage());
   }
 }

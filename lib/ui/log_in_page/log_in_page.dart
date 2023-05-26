@@ -13,8 +13,8 @@ class _LogInPageState extends State<LogInPage> {
   // final SetLogInUseCase _setLogInUseCase = SetLogInUseCase();
 
   final _formKey = GlobalKey<FormState>();
-  String? _email;
-  String? _password;
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

@@ -42,3 +42,8 @@ Future<T?> navigateRemoveReplacement<T>(
           settings: settings,
           fullscreenDialog: fullscreenDialog));
 }
+
+void pop<T>(
+    BuildContext context,) {
+  return Navigator.of(context).pop();
+}

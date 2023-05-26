@@ -6,10 +6,10 @@ import 'package:with_you_app/common/material/app_buttons.dart';
 import 'package:with_you_app/common/material/app_colors.dart';
 import 'package:with_you_app/common/material/app_text_form_field.dart';
 import 'package:with_you_app/common/material/text_styles.dart';
-import 'package:with_you_app/domain/authentication/log_in_use_case.dart';
-import 'package:with_you_app/ui/authentication/email_verification_page.dart';
+import 'package:with_you_app/domain/models/authentication/user_auth_state.dart';
+import 'package:with_you_app/domain/use_cases/authentication/log_in_use_case.dart';
 import 'package:with_you_app/ui/authentication/register_page.dart';
-import 'package:with_you_app/ui/home_page/home_page.dart';
+import 'package:with_you_app/ui/host_page.dart';
 
 class LogInPage extends StatefulWidget {
   const LogInPage({Key? key}) : super(key: key);
@@ -73,10 +73,9 @@ class _LogInPageState extends State<LogInPage> {
                         height: 35,
                       ),
                       AppButtons.primaryButton(
-                        text: "Log In",
-                        onPressed: _onLogIn,
-                        isLoading: _isLoading
-                      ),
+                          text: "Log In",
+                          onPressed: _onLogIn,
+                          isLoading: _isLoading),
                       const SizedBox(
                         height: 15,
                       ),
@@ -120,8 +119,15 @@ class _LogInPageState extends State<LogInPage> {
       setState(() {});
       final result = await _logInUseCase.execute(context,
           email: _emailController.text, password: _passwordController.text);
-      if (result) {
-        navigateRemoveReplacement(context, const HomePage());
+      switch (result) {
+        case UserAuthStateEnum.isVerified:
+        case UserAuthStateEnum.unVerified:
+          navigateRemoveReplacement(context, const HostPage());
+          break;
+          // navigate(context, const EmailVerificationPage());
+          // break;
+          case UserAuthStateEnum.unAuthenticated:
+          break;
       }
       _isLoading = false;
       setState(() {});

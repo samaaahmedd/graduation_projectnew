@@ -5,12 +5,10 @@ import 'package:with_you_app/common/common.dart';
 import 'package:with_you_app/common/material/app_bars.dart';
 import 'package:with_you_app/common/material/app_buttons.dart';
 import 'package:with_you_app/common/material/app_colors.dart';
-import 'package:with_you_app/common/material/app_text_form_field.dart';
 import 'package:with_you_app/common/material/text_styles.dart';
-import 'package:with_you_app/domain/authentication/log_in_use_case.dart';
-import 'package:with_you_app/domain/authentication/send_verification_email_use_case.dart';
-import 'package:with_you_app/ui/authentication/register_page.dart';
-import 'package:with_you_app/ui/home_page/home_page.dart';
+import 'package:with_you_app/domain/use_cases/authentication/check_if_email_verified.dart';
+import 'package:with_you_app/domain/use_cases/authentication/send_verification_email_use_case.dart';
+import 'package:with_you_app/ui/host_page.dart';
 
 class EmailVerificationPage extends StatefulWidget {
   const EmailVerificationPage({Key? key}) : super(key: key);
@@ -21,6 +19,8 @@ class EmailVerificationPage extends StatefulWidget {
 
 class _EmailVerificationPageState extends State<EmailVerificationPage> {
   final SendVerificationEmail _sendVerificationEmail = SendVerificationEmail();
+  final CheckIfEmailVerified _checkIfEmailVerified = CheckIfEmailVerified();
+
   bool _resendIsLoading = false;
   bool _verifyLoading = false;
   @override
@@ -58,11 +58,11 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
               onPressed: () async {
                 _verifyLoading = true;
                 setState(() {});
-                final result = await _sendVerificationEmail.execute(context);
+                final result = await _checkIfEmailVerified.execute(context);
                 _verifyLoading = false;
                 setState(() {});
-                if(result){
-                  navigateRemoveReplacement(context, const HomePage());
+                if (result) {
+                  navigateRemoveReplacement(context, const HostPage());
                 }
               },
             ),

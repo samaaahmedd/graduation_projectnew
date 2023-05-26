@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:with_you_app/common/common.dart';
 import 'package:with_you_app/common/images_paths/images_paths.dart';
 import 'package:with_you_app/common/material/app_colors.dart';
+import 'package:with_you_app/domain/use_cases/authentication/check_if_user_login_use_case.dart';
 import 'package:with_you_app/ui/authentication/log_in_page.dart';
+import 'package:with_you_app/ui/host_page.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -13,13 +15,11 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  // final GetLogInStatus _getLogInStatus = GetLogInStatus();
-  bool isLogIn = false;
+  final CheckIfUserLogInUseCase _ifUserLogInUseCase = CheckIfUserLogInUseCase();
 
   @override
   void initState() {
-    _checkIfLogIn();
-    Timer(const Duration(seconds: 3), () => _navigateToHomePage());
+    Timer(const Duration(seconds: 4), () => _navigateTo());
     super.initState();
   }
 
@@ -34,7 +34,8 @@ class _SplashPageState extends State<SplashPage> {
             colors: AppColors.primaryGradiantColors,
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-          ),        ),
+          ),
+        ),
         child: Image.asset(
           ImagesPaths.logo,
           scale: 1.2,
@@ -44,20 +45,13 @@ class _SplashPageState extends State<SplashPage> {
     );
   }
 
-  void _navigateToHomePage() {
-      navigateReplacement(context, const LogInPage());
+  void _navigateTo() {
+    final isLogIn = _ifUserLogInUseCase.execute();
     if (isLogIn) {
-      // Navigator.of(context).pushReplacement(MaterialPageRoute(
-      //   builder: (context) => const HostPage(),
-      // ));
+      navigateRemoveReplacement(context, const HostPage());
     } else {
-      // Navigator.of(context).pushReplacement(MaterialPageRoute(
-      //   builder: (context) => const  WelcomePage(),
-      // ));
+      navigateRemoveReplacement(context, const LogInPage());
     }
   }
 
-  Future<void> _checkIfLogIn() async {
-    // isLogIn = await _getLogInStatus();
-  }
 }

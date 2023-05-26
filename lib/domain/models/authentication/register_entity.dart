@@ -1,3 +1,4 @@
+import 'package:with_you_app/common/firebase_keys/firebase_keys.dart';
 
 class UserRegisterEntity {
   final String name;
@@ -8,6 +9,25 @@ class UserRegisterEntity {
   final String gender;
   final String country;
 
+  UserRegisterEntity({
+    required this.name,
+    required this.phoneNumber,
+    required this.age,
+    required this.emailAddress,
+    required  this.password,
+    required  this.gender,
+    required  this.country,
+  });
 
-  UserRegisterEntity(this.name, this.phoneNumber, this.age, this.emailAddress, this.password, this.gender, this.country,);
+  Map<String, dynamic> toMap() {
+    return {
+      FireBaseUserKeys.name: name,
+      FireBaseUserKeys.email: emailAddress,
+      FireBaseUserKeys.password: password,
+      FireBaseUserKeys.phone: phoneNumber,
+      FireBaseUserKeys.gender: gender,
+      FireBaseUserKeys.age: age,
+      FireBaseUserKeys.country: country,
+    };
+  }
 }

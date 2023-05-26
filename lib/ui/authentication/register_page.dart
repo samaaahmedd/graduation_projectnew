@@ -8,10 +8,9 @@ import 'package:with_you_app/common/material/app_colors.dart';
 import 'package:with_you_app/common/material/app_text_form_field.dart';
 import 'package:with_you_app/common/material/drop_down_menu_single_select.dart';
 import 'package:with_you_app/common/material/text_styles.dart';
-import 'package:with_you_app/domain/authentication/register_use_case.dart';
 import 'package:with_you_app/domain/models/authentication/register_entity.dart';
-import 'package:with_you_app/ui/authentication/email_verification_page.dart';
-import 'package:with_you_app/ui/home_page/home_page.dart';
+import 'package:with_you_app/domain/use_cases/authentication/register_use_case.dart';
+import 'package:with_you_app/ui/host_page.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -87,17 +86,19 @@ class _RegisterPageState extends State<RegisterPage> {
                       AppTextFormField(
                         controller: _passwordController,
                         hint: "Password",
-                        maxLength: 50,
+                        maxLength: 25,
                         obscureText: true,
                       ),
                       AppTextFormField(
                         controller: _phoneController,
                         hint: "Phone Number",
+                        maxLength: 11,
                         keyboardType: TextInputType.phone,
                       ),
                       AppTextFormField(
                         controller: _ageController,
                         hint: "Age",
+                        maxLength: 3,
                         keyboardType: TextInputType.number,
                       ),
                       SingleSelectDropDown(
@@ -170,17 +171,17 @@ class _RegisterPageState extends State<RegisterPage> {
       _isLoading = true;
       setState(() {});
       UserRegisterEntity registerEntity = UserRegisterEntity(
-        _nameController.text,
-        _phoneController.text,
-        _ageController.text,
-        _emailController.text,
-        _passwordController.text,
-        _gender,
-        _country,
+        name: _nameController.text,
+        phoneNumber: _phoneController.text,
+        age: _ageController.text,
+        emailAddress: _emailController.text,
+        password: _passwordController.text,
+        gender: _gender,
+        country: _country,
       );
       final result = await _registerUseCase.execute(context, registerEntity);
       if (result) {
-        navigate(context, const EmailVerificationPage());
+        navigateRemoveReplacement(context, const HostPage());
       }
       _isLoading = false;
       setState(() {});

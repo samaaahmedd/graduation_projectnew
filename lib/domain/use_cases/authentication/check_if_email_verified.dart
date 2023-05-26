@@ -1,21 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:with_you_app/common/material/app_snackbars.dart';
 
-class SendVerificationEmail {
+class CheckIfEmailVerified {
   Future<bool> execute(context) async {
     try {
       final user = FirebaseAuth.instance.currentUser;
       if (user != null) {
         final emailVerified = user.emailVerified;
         if (!emailVerified) {
-          await user.sendEmailVerification();
-          AppSnackBars.success(context, title: 'Verification Email Sent');
+          AppSnackBars.hint(context, title: 'Please Verify Email First');
           return false;
-        } else {
-          return true;
         }
       }
-      return false;
+      return true;
     } on FirebaseAuthException catch (e) {
       AppSnackBars.error(context, title: e.code.replaceAll('-', ' '));
     } catch (e) {

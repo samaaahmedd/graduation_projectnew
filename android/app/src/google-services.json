@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "654720043553",
+    "project_id": "with-you-18b0f",
+    "storage_bucket": "with-you-18b0f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:654720043553:android:f8ea9441db092860b4f160",
+        "android_client_info": {
+          "package_name": "com.megs.withYouApp.with_you_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCLXUH6egP1hkaz7XncNDX6dlaUptj8nE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

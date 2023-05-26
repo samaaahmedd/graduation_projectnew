@@ -1,10 +1,15 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:with_you_app/common/common.dart';
 import 'package:with_you_app/common/material/app_bars.dart';
 import 'package:with_you_app/common/material/app_buttons.dart';
 import 'package:with_you_app/common/material/app_colors.dart';
 import 'package:with_you_app/common/material/app_text_form_field.dart';
+import 'package:with_you_app/common/material/drop_down_menu_single_select.dart';
 import 'package:with_you_app/common/material/text_styles.dart';
+import 'package:with_you_app/domain/authentication/register_use_case.dart';
+import 'package:with_you_app/domain/models/authentication/register_entity.dart';
 import 'package:with_you_app/ui/home_page/home_page.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -15,12 +20,30 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final RegisterUseCase _registerUseCase = RegisterUseCase();
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _ageController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  bool _isLoading = false;
+  String _gender = 'Male';
+  String _country = 'Egypt';
+  final List<String> _countries = [
+    'Egypt',
+    'United Status',
+    'Saudi Arabia',
+    'Tunis',
+    'Emirates',
+    'Angola',
+    'japan',
+    'Spain',
+    'Brazil',
+    'China',
+    'France',
+    'Greece',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +69,7 @@ class _RegisterPageState extends State<RegisterPage> {
               elevation: .5,
               child: Padding(
                 padding:
-                const EdgeInsets.symmetric(horizontal: 12, vertical: 40),
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 40),
                 child: Form(
                   key: _formKey,
                   child: Column(
@@ -55,16 +78,6 @@ class _RegisterPageState extends State<RegisterPage> {
                         controller: _nameController,
                         hint: "Name",
                         keyboardType: TextInputType.emailAddress,
-                      ),
-                      AppTextFormField(
-                        controller: _phoneController,
-                        hint: "Phone Number",
-                        keyboardType: TextInputType.phone,
-                      ),
-                      AppTextFormField(
-                        controller: _ageController,
-                        hint: "Age",
-                        keyboardType: TextInputType.number,
                       ),
                       AppTextFormField(
                         controller: _emailController,
@@ -76,12 +89,45 @@ class _RegisterPageState extends State<RegisterPage> {
                         maxLength: 50,
                         obscureText: true,
                       ),
+                      AppTextFormField(
+                        controller: _phoneController,
+                        hint: "Phone Number",
+                        keyboardType: TextInputType.phone,
+                      ),
+                      AppTextFormField(
+                        controller: _ageController,
+                        hint: "Age",
+                        keyboardType: TextInputType.number,
+                      ),
+                      SingleSelectDropDown(
+                        onChanged: (selectedItem) {
+                          _gender = selectedItem ?? '';
+                          setState(() {});
+                        },
+                        itemsValues: const ['Male', 'Female'],
+                        showItems: const ['Male', 'Female'],
+                        hint: "Gender",
+                        value: _gender,
+                        selectedText: _gender,
+                      ),
+                      SingleSelectDropDown(
+                        onChanged: (selectedItem) {
+                          _country = selectedItem ?? '';
+                          setState(() {});
+                        },
+                        itemsValues: _countries,
+                        showItems: _countries,
+                        hint: "Country",
+                        value: _country,
+                        selectedText: _country,
+                      ),
                       const SizedBox(
                         height: 25,
                       ),
                       AppButtons.primaryButton(
-                        text: "Log In",
-                        onPressed: _onLogIn,
+                        text: "Register",
+                        onPressed: _onRegister,
+                        isLoading: _isLoading,
                       ),
                     ],
                   ),
@@ -108,17 +154,35 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 )
               ],
-            )
+            ),
+            const SizedBox(
+              height: 50,
+            ),
           ],
         ),
       ),
     );
   }
 
-  void _onLogIn() async {
+  void _onRegister() async {
     if (_formKey.currentState!.validate()) {
-      navigateRemoveReplacement(context, const HomePage());
+      _isLoading = true;
+      setState(() {});
+      UserRegisterEntity registerEntity = UserRegisterEntity(
+        _nameController.text,
+        _phoneController.text,
+        _ageController.text,
+        _emailController.text,
+        _passwordController.text,
+        _gender,
+        _country,
+      );
+      final result = await _registerUseCase.execute(context, registerEntity);
+      if (result) {
+        navigateRemoveReplacement(context, const HomePage());
+      }
+      _isLoading = false;
+      setState(() {});
     }
   }
-
 }

@@ -193,8 +193,8 @@ class AppButtons extends StatelessWidget {
               key: ValueKey(isLoading),
               child: isLoading
                   ? const SizedBox(
-                      height: 10,
-                      width: 10,
+                      height: 15,
+                      width: 15,
                       child: CircularProgressIndicator(
                         color: AppColors.primaryColor,
                         strokeWidth: 2,

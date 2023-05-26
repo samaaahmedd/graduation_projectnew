@@ -1,9 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:with_you_app/common/common.dart';
 import 'package:with_you_app/common/material/app_buttons.dart';
 import 'package:with_you_app/common/material/app_colors.dart';
 import 'package:with_you_app/common/material/app_text_form_field.dart';
 import 'package:with_you_app/common/material/text_styles.dart';
+import 'package:with_you_app/domain/authentication/loh_in_use_case.dart';
 import 'package:with_you_app/ui/authentication/register_page.dart';
 import 'package:with_you_app/ui/home_page/home_page.dart';
 
@@ -15,10 +18,12 @@ class LogInPage extends StatefulWidget {
 }
 
 class _LogInPageState extends State<LogInPage> {
+  final LogInUseCase _logInUseCase = LogInUseCase();
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  bool _isLoading = false;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -69,6 +74,7 @@ class _LogInPageState extends State<LogInPage> {
                       AppButtons.primaryButton(
                         text: "Log In",
                         onPressed: _onLogIn,
+                        isLoading: _isLoading
                       ),
                       const SizedBox(
                         height: 15,
@@ -90,7 +96,9 @@ class _LogInPageState extends State<LogInPage> {
                   width: 10,
                 ),
                 InkWell(
-                  onTap: () {navigate(context, const RegisterPage());},
+                  onTap: () {
+                    navigate(context, const RegisterPage());
+                  },
                   child: const Text(
                     "Register Now",
                     style: TextStyle(
@@ -107,8 +115,15 @@ class _LogInPageState extends State<LogInPage> {
 
   void _onLogIn() async {
     if (_formKey.currentState!.validate()) {
-      navigateRemoveReplacement(context, const HomePage());
+      _isLoading = true;
+      setState(() {});
+      final result = await _logInUseCase.execute(context,
+          email: _emailController.text, password: _passwordController.text);
+      if (result) {
+        navigateRemoveReplacement(context, const HomePage());
+      }
+      _isLoading = false;
+      setState(() {});
     }
   }
-
 }

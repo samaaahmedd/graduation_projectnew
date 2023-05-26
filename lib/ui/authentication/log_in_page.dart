@@ -73,57 +73,6 @@ class _LogInPageState extends State<LogInPage> {
                       const SizedBox(
                         height: 15,
                       ),
-                      // Text(
-                      //   "OR",
-                      //   style: TextStyles.regular(
-                      //     fontSize: 12,
-                      //     color: AppColors.textPrimaryColor,
-                      //   ),
-                      // ),
-                      // const SizedBox(
-                      //   height: 10,
-                      // ),
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.center,
-                      //   children: [
-                      //     Container(
-                      //       width: 60,
-                      //       height: 60,
-                      //       margin: const EdgeInsets.symmetric(horizontal: 10),
-                      //       padding: const EdgeInsets.symmetric(vertical: 12),
-                      //       decoration: BoxDecoration(
-                      //         color: AppColors.forthColor,
-                      //         borderRadius: BorderRadius.circular(4),
-                      //         border: Border.all(color: Colors.white, width: 1),
-                      //       ),
-                      //       child: Image.asset(
-                      //         "images/common/facebook.png",
-                      //         fit: BoxFit.contain,
-                      //       ),
-                      //     ),
-                      //     GestureDetector(
-                      //       onTap: () {},
-                      //       behavior: HitTestBehavior.translucent,
-                      //       child: Container(
-                      //         height: 60,
-                      //         width: 60,
-                      //         margin: const EdgeInsets.symmetric(horizontal: 10),
-                      //         padding: const EdgeInsets.symmetric(vertical: 12),
-                      //         decoration: BoxDecoration(
-                      //           color: AppColors.forthColor,
-                      //           borderRadius: BorderRadius.circular(4),
-                      //           border: Border.all(color: Colors.white, width: 1),
-                      //         ),
-                      //         child: Image.asset(
-                      //           "images/common/google.png",
-                      //           width: 20,
-                      //           height: 20,
-                      //           fit: BoxFit.contain,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //   ],
-                      // ),
                     ],
                   ),
                 ),

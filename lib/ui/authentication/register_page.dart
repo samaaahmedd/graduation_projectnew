@@ -17,6 +17,8 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _ageController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -50,17 +52,17 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: Column(
                     children: [
                       AppTextFormField(
-                        controller: _emailController,
+                        controller: _nameController,
                         hint: "Name",
                         keyboardType: TextInputType.emailAddress,
                       ),
                       AppTextFormField(
-                        controller: _emailController,
+                        controller: _phoneController,
                         hint: "Phone Number",
                         keyboardType: TextInputType.phone,
                       ),
                       AppTextFormField(
-                        controller: _emailController,
+                        controller: _ageController,
                         hint: "Age",
                         keyboardType: TextInputType.number,
                       ),
@@ -119,5 +121,4 @@ class _RegisterPageState extends State<RegisterPage> {
     }
   }
 
-  void _navigateToRegisterPage() {}
 }

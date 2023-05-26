@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:with_you_app/common/common.dart';
 import 'package:with_you_app/common/images_paths/images_paths.dart';
 import 'package:with_you_app/common/material/app_colors.dart';
-import 'package:with_you_app/ui/log_in_page/log_in_page.dart';
+import 'package:with_you_app/ui/authentication/log_in_page.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);

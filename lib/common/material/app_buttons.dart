@@ -129,11 +129,11 @@ class AppButtons extends StatelessWidget {
       padding: margin ?? EdgeInsets.zero,
       child: MaterialButton(
         onPressed: isLoading ? null : onPressed,
-        focusColor: buttonColor ?? AppColors.primaryColor,
+        focusColor: buttonColor ?? AppColors.neutral_90,
         disabledColor: disabledButtonColor ?? AppColors.buttonTertiaryColor,
         splashColor: Colors.transparent,
         textColor: textColor ?? AppColors.forthColor,
-        color: buttonColor ?? AppColors.primaryColor,
+        color: buttonColor ?? AppColors.neutral_600,
         elevation: elevation ?? 0,
         highlightColor: Colors.transparent,
         focusElevation: 0,
@@ -166,7 +166,7 @@ class AppButtons extends StatelessWidget {
                           style: textStyle ??
                               TextStyles.bold(
                                 color: textColor ?? AppColors.forthColor,
-                                fontSize: fontSize ?? 18,
+                                fontSize: fontSize ?? 15,
                               ),
                           overflow: TextOverflow.fade,
                           maxLines: 1,
@@ -181,7 +181,7 @@ class AppButtons extends StatelessWidget {
                             style: textStyle ??
                                 TextStyles.bold(
                                   color: textColor ?? AppColors.forthColor,
-                                  fontSize: fontSize ?? 18,
+                                  fontSize: fontSize ?? 15,
                                 ),
                             overflow: TextOverflow.fade,
                             maxLines: 1,

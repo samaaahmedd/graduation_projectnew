@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import 'app_colors.dart';
@@ -65,93 +64,97 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      initialValue: widget.initialValue,
-      cursorColor: AppColors.primaryColor,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-      enabled: widget.isEnabled,
-      keyboardType: widget.keyboardType,
-      controller: widget.controller,
-      onTapOutside: (event) {
-        FocusScope.of(context).unfocus();
-      },
-      decoration: InputDecoration(
-        filled: true,
-          hintText: widget.hint,
-          suffixIcon: widget.obscureText
-              ? GestureDetector(
-                  onTap: onEyePressed,
-                  behavior: HitTestBehavior.translucent,
-                  child: Icon(
-                    passwordObscured
-                        ? Icons.remove_red_eye
-                        : Icons.remove_red_eye_outlined,
-                    color: AppColors.textPrimaryColor,
-                    size: 16,
-                  ),
-                )
-              : const SizedBox(),
-          hintStyle: TextStyles.regular(
-              color: AppColors.textPrimaryColor.withOpacity(.5),),
-          labelStyle: TextStyles.regular(
-            color: AppColors.greyColor,
-          ),
-          fillColor: AppColors.forthColor,
-          errorStyle: const TextStyle(color: Colors.redAccent),
-          errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(5),
-            borderSide: const BorderSide(
-                color: AppColors.warning, width: 1, style: BorderStyle.solid),
-          ),
-          contentPadding: const EdgeInsets.symmetric(
-            vertical:8,
-            horizontal:16,
-          ),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(5),
-            borderSide: const BorderSide(
-                color: AppColors.borderColor,
-                width: 1,
-                style: BorderStyle.solid),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(5),
-            borderSide: const BorderSide(
-                color: AppColors.borderColor,
-                width: 1,
-                style: BorderStyle.solid),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(5),
-            borderSide: const BorderSide(
-                color: AppColors.borderColor,
-                width: 1,
-                style: BorderStyle.solid),
-          ),
-          focusedErrorBorder:  OutlineInputBorder(
-            borderRadius: BorderRadius.circular(5),
-            borderSide: const BorderSide(
-                color: AppColors.warning, width: 1, style: BorderStyle.solid),
-          ),
-          counterText: ""),
-      obscureText: passwordObscured,
-      style: TextStyles.regular(
-        color: widget.isValid
-            ? widget.textColor ?? AppColors.textPrimaryColor
-            : Colors.redAccent,
-        fontSize:16,
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical:10.0),
+      child: TextFormField(
+        initialValue: widget.initialValue,
+        cursorColor: AppColors.primaryColor,
+        // autovalidateMode: AutovalidateMode.onUserInteraction,
+        enabled: widget.isEnabled,
+        keyboardType: widget.keyboardType,
+        controller: widget.controller,
+        onTapOutside: (event) {
+          FocusScope.of(context).unfocus();
+        },
+        decoration: InputDecoration(
+            filled: true,
+            hintText: widget.hint,
+            suffixIcon: widget.obscureText
+                ? GestureDetector(
+                    onTap: onEyePressed,
+                    behavior: HitTestBehavior.translucent,
+                    child: Icon(
+                      passwordObscured
+                          ? Icons.remove_red_eye
+                          : Icons.remove_red_eye_outlined,
+                      color: AppColors.textPrimaryColor,
+                      size: 16,
+                    ),
+                  )
+                : const SizedBox(),
+            hintStyle: TextStyles.regular(
+              color: AppColors.textPrimaryColor.withOpacity(.5),
+            ),
+            labelStyle: TextStyles.regular(
+              color: AppColors.greyColor,
+            ),
+            fillColor: AppColors.forthColor,
+            errorStyle: const TextStyle(color: Colors.redAccent),
+            errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(5),
+              borderSide: const BorderSide(
+                  color: AppColors.warning, width: 1, style: BorderStyle.solid),
+            ),
+            contentPadding: const EdgeInsets.symmetric(
+              vertical: 8,
+              horizontal: 16,
+            ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(5),
+              borderSide: const BorderSide(
+                  color: AppColors.neutral_60,
+                  width: 1,
+                  style: BorderStyle.solid),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(5),
+              borderSide: const BorderSide(
+                  color: AppColors.neutral_60,
+                  width: 1,
+                  style: BorderStyle.solid),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(5),
+              borderSide: const BorderSide(
+                  color: AppColors.neutral_100,
+                  width: 1,
+                  style: BorderStyle.solid),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(5),
+              borderSide: const BorderSide(
+                  color: AppColors.warning, width: 1, style: BorderStyle.solid),
+            ),
+            counterText: ""),
+        obscureText: passwordObscured,
+        style: TextStyles.regular(
+          color: widget.isValid
+              ? widget.textColor ?? AppColors.textPrimaryColor
+              : Colors.redAccent,
+          fontSize: 16,
+        ),
+        validator: (value) {
+          if (value == null || value == '') {
+            return '${widget.hint} can\'t be empty';
+          }
+          return null;
+        },
+        maxLength: widget.maxLength,
+        maxLines: widget.maxLines,
+        minLines: widget.minLines,
+        onChanged: widget.onchange,
+        onTap: widget.onTap,
       ),
-      validator: (value) {
-        if (value == null || value == '') {
-          return '${widget.hint} can\'t be empty';
-        }
-        return null;
-      },
-      maxLength: widget.maxLength,
-      maxLines: widget.maxLines,
-      minLines: widget.minLines,
-      onChanged: widget.onchange,
-      onTap: widget.onTap,
     );
   }
 

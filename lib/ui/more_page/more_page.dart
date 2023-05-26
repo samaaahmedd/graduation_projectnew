@@ -12,6 +12,7 @@ import 'package:with_you_app/ui/authentication/log_in_page.dart';
 import 'package:with_you_app/ui/more_page/about_app_page/about_app_page.dart';
 import 'package:with_you_app/ui/more_page/contact_us_page/contact_us_page.dart';
 import 'package:with_you_app/ui/more_page/terms_privacy_page/terms_privacy_page.dart';
+import 'package:with_you_app/ui/more_page/update_password/update_password_page.dart';
 
 class MorePage extends StatefulWidget {
   const MorePage({Key? key}) : super(key: key);
@@ -56,9 +57,9 @@ class _MorePageState extends State<MorePage> {
             //         fontWeight: FontWeight.w500,
             //         fontSize: 20)),
             AppTile(
-              icon: Icons.settings,
-              onTap: () {},
-              text: "Setting",
+              icon: Iconsax.key ,
+              onTap: ()=> navigate(context, const UpdatePasswordPage()),
+              text: "Update Password",
             ),
             AppTile(
               icon: Icons.error_outline,

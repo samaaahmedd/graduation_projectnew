@@ -88,7 +88,7 @@ class AppSnackBars extends StatelessWidget {
       shape: RoundedRectangleBorder(
           borderRadius: const BorderRadius.all(Radius.circular(8)),
           side: borderSide ?? BorderSide.none),
-      duration: Duration(seconds: duration ?? 10),
+      duration: Duration(seconds: duration ?? 6),
       backgroundColor: color ?? Colors.white,
       elevation: elevation,
       content: Row(

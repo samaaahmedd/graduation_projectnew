@@ -4,6 +4,7 @@ import 'package:with_you_app/common/material/app_colors.dart';
 import 'package:with_you_app/ui/home/home_page.dart';
 
 import 'more_page./more_page.dart';
+import 'my_trips/my_trips_page.dart';
 import 'search/search_page.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 class HostPage extends StatefulWidget {
@@ -15,7 +16,7 @@ class HostPage extends StatefulWidget {
 
 class _HostPageState extends State<HostPage> {
   final PersistentTabController _persistentTabController =PersistentTabController();
-  final List<Widget> _tabs = const [HomePage(),HomePage(),HomePage(), SearchPage(),MorePage(), ];
+  final List<Widget> _tabs = const [HomePage(),MyTripsPage(),HomePage(), SearchPage(),MorePage(), ];
 
   List<PersistentBottomNavBarItem> _navBarsItems() {
     return [

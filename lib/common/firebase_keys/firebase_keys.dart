@@ -9,3 +9,19 @@ class FireBaseUserKeys{
   static const String phone = 'phone';
   static const String gender = 'gender';
 }
+
+class FireBaseTripKeys{
+  static const String tripsCollection = 'trips';
+  static const String userId = 'userId';
+  static const String title = 'title';
+  static const String price = 'price';
+  static const String activities = 'activities';
+  static const String description = 'description';
+  static const String meetingPoint = 'meetingPoint';
+  static const String noPersons = 'noPersons';
+  static const String contactPhone = 'contactPhone';
+  static const String notes = 'notes';
+  static const String notAllowed = 'notAllowedHints';
+  static const String durationInDays = 'durationInDays';
+  static const String images = 'images';
+}

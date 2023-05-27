@@ -86,14 +86,22 @@ class _PickImageWidgetState extends State<PickImageWidget> {
   Widget _pickedImageTile(File image, int index) {
     return ListTile(
       minLeadingWidth: 20,
-      contentPadding: const EdgeInsets.symmetric(horizontal: 5),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 5,vertical: 5),
       title: Text(
         image.path.split('/').last,
         overflow: TextOverflow.ellipsis,
-        maxLines: 1,
+        maxLines: 2,
         style: TextStyles.regular(),
       ),
-      leading: const Icon(Icons.image, size: 22),
+      leading: ClipRRect(
+          clipBehavior: Clip.antiAliasWithSaveLayer,
+          borderRadius: BorderRadius.circular(8),
+          child: Image.file(
+            pickedImage[index],
+            fit: BoxFit.cover,
+            width: 50,
+            height: 50,
+          )),
       trailing: IconButton(
           onPressed: () {
             pickedImage.removeAt(index);

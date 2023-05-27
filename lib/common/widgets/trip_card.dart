@@ -14,11 +14,14 @@ class TripCard extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
+        height: 320,
+        width: MediaQuery.of(context).size.width,
         margin: const EdgeInsets.symmetric(vertical: 8),
         clipBehavior: Clip.antiAliasWithSaveLayer,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
           color: Colors.white,
+          border: Border.all(color: AppColors.neutral_30),
           boxShadow: const [
             BoxShadow(
               color: AppColors.neutral_30,
@@ -32,10 +35,16 @@ class TripCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Image.asset(
-              'assets/place.png',
-              fit: BoxFit.fitWidth,
-              isAntiAlias: true,
+            Expanded(
+              child: FadeInImage.assetNetwork(
+               image: tripDetails.images.first,
+                fit: BoxFit.cover,
+                width: MediaQuery.of(context).size.width,
+                placeholder: ' ',
+                placeholderErrorBuilder: (context, error, stackTrace) {
+                  return Container(color: Colors.grey.withOpacity(.3),);
+                },
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(15),

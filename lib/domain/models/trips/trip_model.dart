@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:with_you_app/common/firebase_keys/firebase_keys.dart';
@@ -50,6 +51,7 @@ class TripEntity {
   }
 
   static TripEntity fromJson(Map<String, dynamic> json) {
+    List<String> imagesConverted = (json[FireBaseTripKeys.images] as List).map((e)=> e as String).toList();
     return TripEntity(
       userId: json[FireBaseTripKeys.userId].toString(),
       title: json[FireBaseTripKeys.title].toString(),
@@ -62,8 +64,7 @@ class TripEntity {
       phoneNumber: json[FireBaseTripKeys.contactPhone].toString(),
       notes: json[FireBaseTripKeys.notes].toString(),
       notAllowed: json[FireBaseTripKeys.notAllowed].toString(),
-      // images: json[FireBaseTripKeys.images],
-      images: []
+      images: imagesConverted,
     );
   }
 }

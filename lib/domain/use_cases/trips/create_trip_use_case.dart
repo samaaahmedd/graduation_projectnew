@@ -17,8 +17,9 @@ class CreateTripUseCase {
   Future<bool> execute(context, TripEntity tripEntity) async {
     List<String> uploadedImagesPaths = [];
     try {
+      // upload images
       for (File image in tripEntity.pickedImages ?? []) {
-        int randomNumber = _random.nextInt(10000000000);
+        int randomNumber = _random.nextInt(100000000);
         final uploadImageResult = await _storageRef
             .child(
                 '${FireBaseStorageKeys.tripsImagesCollection}/$randomNumber${image.path.split('/').last}')
@@ -30,6 +31,7 @@ class CreateTripUseCase {
         final uploadPath = await uploadImageResult.ref.getDownloadURL();
         uploadedImagesPaths.add(uploadPath);
       }
+      // add trip details to cloud
       await trips.add(tripEntity.toJson(
           _user?.uid ?? tripEntity.userId, uploadedImagesPaths));
       AppSnackBars.success(context, title: 'Trip Created Successfully');
@@ -41,14 +43,5 @@ class CreateTripUseCase {
       AppSnackBars.error(context, title: e.toString());
       return false;
     }
-    // return await trips
-    //     .add(tripEntity.toJson(_user?.uid ?? tripEntity.userId))
-    //     .then((value) {
-    //   AppSnackBars.success(context, title: 'Trip Created Successfully');
-    //   return true;
-    // }).catchError((error) {
-    //   AppSnackBars.error(context, title: error);
-    //   return false;
-    // });
   }
 }

@@ -1,5 +1,9 @@
+import 'dart:io';
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:with_you_app/common/firebase_keys/firebase_keys.dart';
 import 'package:with_you_app/common/material/app_snackbars.dart';
 import 'package:with_you_app/domain/models/trips/trip_model.dart';
@@ -7,14 +11,44 @@ import 'package:with_you_app/domain/models/trips/trip_model.dart';
 class CreateTripUseCase {
   CollectionReference trips =
       FirebaseFirestore.instance.collection(FireBaseTripKeys.tripsCollection);
-  final user = FirebaseAuth.instance.currentUser;
+  final _user = FirebaseAuth.instance.currentUser;
+  final _storageRef = FirebaseStorage.instance.ref();
+  final Random _random = Random();
   Future<bool> execute(context, TripEntity tripEntity) async {
-  return  await trips.add(tripEntity.toJson(user?.uid ?? tripEntity.userId)).then((value) {
+    List<String> uploadedImagesPaths = [];
+    try {
+      for (File image in tripEntity.pickedImages ?? []) {
+        int randomNumber = _random.nextInt(10000000000);
+        final uploadImageResult = await _storageRef
+            .child(
+                '${FireBaseStorageKeys.tripsImagesCollection}/$randomNumber${image.path.split('/').last}')
+            .putFile(
+                image,
+                SettableMetadata(
+                  contentType: "image/jpeg",
+                ));
+        final uploadPath = await uploadImageResult.ref.getDownloadURL();
+        uploadedImagesPaths.add(uploadPath);
+      }
+      await trips.add(tripEntity.toJson(
+          _user?.uid ?? tripEntity.userId, uploadedImagesPaths));
       AppSnackBars.success(context, title: 'Trip Created Successfully');
       return true;
-    }).catchError((error) {
-      AppSnackBars.error(context, title: error);
+    } on Exception catch (e) {
+      AppSnackBars.error(context, title: e.toString());
       return false;
-    });
+    } catch (e) {
+      AppSnackBars.error(context, title: e.toString());
+      return false;
+    }
+    // return await trips
+    //     .add(tripEntity.toJson(_user?.uid ?? tripEntity.userId))
+    //     .then((value) {
+    //   AppSnackBars.success(context, title: 'Trip Created Successfully');
+    //   return true;
+    // }).catchError((error) {
+    //   AppSnackBars.error(context, title: error);
+    //   return false;
+    // });
   }
 }

@@ -36,7 +36,7 @@ class AppBars extends StatelessWidget {
       automaticallyImplyLeading: false,
       title: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12.0),
-        child: Text(title ?? '', style: TextStyles.bold(fontSize: 23)),
+        child: Text(title , style: TextStyles.bold(fontSize: 23)),
       )
     );
   }
@@ -54,7 +54,7 @@ class AppBars extends StatelessWidget {
             )),
         title: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
-          child: Text(title ?? '', style: TextStyles.bold(fontSize: 20)),
+          child: Text(title, style: TextStyles.bold(fontSize: 20)),
         )
     );
   }

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:with_you_app/common/firebase_keys/firebase_keys.dart';
 
 class TripEntity {
@@ -13,8 +15,9 @@ class TripEntity {
   final String notes;
   final String notAllowed;
   final List<String> images;
+  final List<File>? pickedImages;
 
-  TripEntity({
+  TripEntity( {this.pickedImages,
     this.userId = '',
     required this.title,
     required this.price,
@@ -29,7 +32,7 @@ class TripEntity {
     required this.images,
   });
 
-  Map<String, dynamic> toJson(userId) {
+  Map<String, dynamic> toJson(userId,List<String> uploadedImagesPaths) {
     return {
       FireBaseTripKeys.userId: userId,
       FireBaseTripKeys.title: title,
@@ -42,7 +45,7 @@ class TripEntity {
       FireBaseTripKeys.notAllowed: notAllowed,
       FireBaseTripKeys.activities: activities,
       FireBaseTripKeys.notes: notes,
-      FireBaseTripKeys.images: images,
+      FireBaseTripKeys.images: uploadedImagesPaths,
     };
   }
 

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:with_you_app/common/common.dart';
 import 'package:with_you_app/common/material/app_bars.dart';
-import 'package:with_you_app/common/material/app_buttons.dart';
 import 'package:with_you_app/common/material/app_colors.dart';
 import 'package:with_you_app/common/material/app_tile.dart';
 import 'package:with_you_app/domain/use_cases/authentication/log_out_use_case.dart';

@@ -53,7 +53,7 @@ class _TermsPrivacyPageState extends State<TermsPrivacyPage> {
             Text(
                 "The Services consist of interactive features and areas that allow users to create, delete or update, including but not limited to photos,"
                 " voices, text, items, or other materials (collectively,). You understand that you are responsible for all data charges you incur by using the Services."
-                " You also understand that your User Content can\'t be viewable by others and you only have the ability to control who can access such content by adjusting your privacy settings."
+                " You also understand that your User Content can't be viewable by others and you only have the ability to control who can access such content by adjusting your privacy settings."
                 " And you agree to abide by our Community Guidelines, which may be updated from time to time.",
                 style: TextStyles.regular(color: AppColors.neutral_500)),
             const Padding(

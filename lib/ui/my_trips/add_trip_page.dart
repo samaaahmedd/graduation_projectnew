@@ -1,10 +1,13 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:with_you_app/common/common.dart';
 import 'package:with_you_app/common/material/app_bars.dart';
 import 'package:with_you_app/common/material/app_buttons.dart';
 import 'package:with_you_app/common/material/app_colors.dart';
+import 'package:with_you_app/common/material/app_snackbars.dart';
 import 'package:with_you_app/common/material/app_text_form_field.dart';
 import 'package:with_you_app/common/material/divider.dart';
 import 'package:with_you_app/common/material/text_styles.dart';
@@ -34,6 +37,7 @@ class _AddTripPageState extends State<AddTripPage> {
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _notesController = TextEditingController();
   final TextEditingController _notAllowedController = TextEditingController();
+  List<File> images = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +58,9 @@ class _AddTripPageState extends State<AddTripPage> {
               const SizedBox(height: 20),
               PickImageWidget(
                 label: 'Trip Popular Places Images :',
-                onchange: (pickedList) {},
+                onchange: (pickedList) {
+                  images = pickedList;
+                },
               ),
               const SizedBox(
                 height: 10,
@@ -146,7 +152,7 @@ class _AddTripPageState extends State<AddTripPage> {
   }
 
   void _createTripFun() async {
-    if (_formKey.currentState?.validate() == true) {
+    if (_formKey.currentState?.validate() == true && images.isNotEmpty) {
       setState(() {
         _createLoading = true;
       });
@@ -161,7 +167,8 @@ class _AddTripPageState extends State<AddTripPage> {
           phoneNumber: _phoneController.text,
           notes: _notesController.text,
           notAllowed: _notAllowedController.text,
-          images: ['temp.png', 'temp2.jpg']);
+          images: [],
+          pickedImages: images);
       final result = await _createTripUseCase.execute(context, tripEntity);
       if (result) {
         pop(context);
@@ -169,6 +176,11 @@ class _AddTripPageState extends State<AddTripPage> {
       setState(() {
         _createLoading = false;
       });
+    } else {
+      if (images.isEmpty) {
+        AppSnackBars.hint(context,
+            title: 'Images cant be empty,please select trip image first');
+      }
     }
   }
 }

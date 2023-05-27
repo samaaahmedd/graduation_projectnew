@@ -25,3 +25,9 @@ class FireBaseTripKeys{
   static const String durationInDays = 'durationInDays';
   static const String images = 'images';
 }
+
+class FireBaseStorageKeys{
+  static const String usersImagesCollection = 'usersImages';
+  static const String tripsImagesCollection = 'tripsImages';
+
+}

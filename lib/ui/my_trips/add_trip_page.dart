@@ -90,8 +90,8 @@ class _AddTripPageState extends State<AddTripPage> {
               AppTextFormField(
                 label: "Meeting Point",
                 hint: "Meeting location in details ...",
-                maxLines: 7,
-                minLines: 5,
+                maxLines: 5,
+                minLines: 3,
                 controller: _meetingPointController,
               ),
               AppTextFormField(

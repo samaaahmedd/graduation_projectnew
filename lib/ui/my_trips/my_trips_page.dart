@@ -12,6 +12,7 @@ import 'package:with_you_app/common/widgets/fail_widget.dart';
 import 'package:with_you_app/domain/mappers/mappers.dart';
 import 'package:with_you_app/domain/models/trips/trip_model.dart';
 import 'package:with_you_app/ui/my_trips/add_trip_page.dart';
+import 'package:with_you_app/ui/my_trips/trip_details_page.dart';
 
 class MyTripsPage extends StatefulWidget {
   const MyTripsPage({Key? key}) : super(key: key);
@@ -46,7 +47,9 @@ class _MyTripsPageState extends State<MyTripsPage> {
               itemCount: trips.length,
               itemBuilder: (context, index) {
                 return _TripWidget(
-                  onTap: () {},
+                  onTap: () {
+                    navigate(context, TripDetailsPage(trip: trips[index],));
+                  },
                   tripDetails: trips[index],
                 );
               },

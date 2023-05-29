@@ -7,11 +7,11 @@ import 'package:with_you_app/domain/models/authentication/register_entity.dart';
 class AddUserDataUseCase {
   final user = FirebaseAuth.instance.currentUser;
 
-  Future<void> execute(context, UserRegisterEntity userRegisterEntity) async {
+  Future<void> execute(context, UserEntity userRegisterEntity) async {
     try {
       DocumentReference usersRef = FirebaseFirestore.instance
           .collection(FireBaseUserKeys.userCollection)
-          .doc(user?.uid);
+          .doc(userRegisterEntity.emailAddress);
       usersRef.set(userRegisterEntity.toMap(), SetOptions(merge: true));
     } on FirebaseAuthException catch (e) {
       AppSnackBars.error(context, title: e.code.replaceAll('-', ' '));

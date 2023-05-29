@@ -33,7 +33,7 @@ class CreateTripUseCase {
       }
       // add trip details to cloud
       await trips.add(tripEntity.toJson(
-          _user?.uid ?? tripEntity.userId, uploadedImagesPaths));
+          _user?.email ?? tripEntity.userId, uploadedImagesPaths));
       AppSnackBars.success(context, title: 'Trip Created Successfully');
       return true;
     } on Exception catch (e) {

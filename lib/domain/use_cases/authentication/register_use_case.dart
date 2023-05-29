@@ -9,7 +9,7 @@ class RegisterUseCase {
   final SetUserInformationUseCase _informationUseCase =
       SetUserInformationUseCase();
   final AddUserDataUseCase _addUserDataUseCase = AddUserDataUseCase();
-  Future<bool> execute(context, UserRegisterEntity registerEntity) async {
+  Future<bool> execute(context, UserEntity registerEntity) async {
     try {
       final credential  = await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: registerEntity.emailAddress,

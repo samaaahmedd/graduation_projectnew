@@ -8,52 +8,45 @@ class AppTile extends StatelessWidget {
       required this.onTap,
       required this.icon,
       required this.text,
-      this.useDivider = false,
       this.trailing, this.isLoading = false})
       : super(key: key);
   final VoidCallback onTap;
   final IconData icon;
   final String text;
   final Icon? trailing;
-  final bool useDivider;
   final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ListTile(
-          trailing: isLoading
-              ? const SizedBox(
-                  height: 15,
-                  width: 15,
-                  child: CircularProgressIndicator(
-                    color: AppColors.primaryColor,
-                    strokeWidth: 3,
-                  ),
-                )
-              : trailing ??
-                  const Icon(Icons.arrow_forward_ios_rounded, size: 18),
-          onTap: onTap,
-          minLeadingWidth: 24,
-          leading: Icon(
-            icon,
-            color: AppColors.neutral_700,
-          ),
-          contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-          title: Text(text,
-              style: TextStyles.medium(
-                fontSize: 18,
-                color: AppColors.neutral_700,
-              )),
-        ),
-        useDivider
-            ? const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15.0),
-                child: Divider(color: AppColors.neutral_50, height: 2),
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 20,vertical: 7),
+      decoration: BoxDecoration(color:Colors.white,borderRadius: BorderRadius.circular(8) ),
+      // padding: const EdgeInsets.symmetric(vertical: 5.0,horizontal: 20),
+      child: ListTile(
+        trailing: isLoading
+            ? const SizedBox(
+                height: 15,
+                width: 15,
+                child: CircularProgressIndicator(
+                  color: AppColors.primaryColor,
+                  strokeWidth: 3,
+                ),
               )
-            : const SizedBox(),
-      ],
+            : trailing ??
+                const Icon(Icons.arrow_forward_ios_rounded, size: 18),
+        onTap: onTap,
+        minLeadingWidth: 24,
+        leading: Icon(
+          icon,
+          color: AppColors.neutral_700,
+        ),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 15,),
+        title: Text(text,
+            style: TextStyles.medium(
+              fontSize: 17,
+              color: AppColors.neutral_700,
+            )),
+      ),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:with_you_app/common/common.dart';
 import 'package:with_you_app/common/material/app_colors.dart';
 import 'package:with_you_app/common/material/text_styles.dart';
 import 'package:with_you_app/domain/models/trips/trip_model.dart';
@@ -110,7 +111,7 @@ class _TripDetailsPageState extends State<TripDetailsPage> {
 
   Widget _rowTile({required String text, double margin = 15}) {
     return Container(
-      color: AppColors.neutral_30,
+      color: AppColors.forthColor,
       padding: const EdgeInsets.all(12),
       margin: EdgeInsets.symmetric(vertical: margin),
       width: MediaQuery.of(context).size.width,
@@ -172,8 +173,8 @@ class _SliderImagesWidgetState extends State<_SliderImagesWidget> {
               enableInfiniteScroll: true,
               reverse: false,
               autoPlay: true,
-              autoPlayInterval: const Duration(seconds: 4),
-              autoPlayAnimationDuration: const Duration(seconds: 800),
+              autoPlayInterval: const Duration(seconds: 2),
+              autoPlayAnimationDuration: const Duration(seconds: 1),
               autoPlayCurve: Curves.fastOutSlowIn,
               enlargeCenterPage: true,
               enlargeFactor: 0.3,
@@ -184,6 +185,15 @@ class _SliderImagesWidgetState extends State<_SliderImagesWidget> {
               scrollDirection: Axis.horizontal,
             )),
         Positioned(bottom: 10, left: 0, right: 0, child: _progress()),
+        Positioned(
+            left: 10,
+            top: 10,
+            child: IconButton(
+                onPressed: () => pop(context),
+                icon: const Icon(
+                  Icons.arrow_back,
+                  color: Colors.white,
+                ))),
       ],
     );
   }

@@ -56,23 +56,28 @@ class _MorePageState extends State<MorePage> {
             //         fontWeight: FontWeight.w500,
             //         fontSize: 20)),
             AppTile(
-              icon: Iconsax.key ,
-              onTap: ()=> navigate(context, const UpdatePasswordPage()),
+              icon: Iconsax.key,
+              onTap: () => navigate(context, const UpdatePasswordPage()),
               text: "Update Password",
             ),
             AppTile(
-              icon: Icons.error_outline,
-              onTap: ()=> navigate(context, const AboutAppPage()),
-              text: "About App",
+              icon: Icons.payment_outlined,
+              onTap: () {},
+              text: "Payment",
             ),
             AppTile(
               icon: Icons.mail_outline_rounded,
-              onTap: ()=> navigate(context, const ContactUsPage()),
+              onTap: () => navigate(context, const ContactUsPage()),
               text: "Contact Us",
             ),
             AppTile(
+              icon: Icons.error_outline,
+              onTap: () => navigate(context, const AboutAppPage()),
+              text: "About App",
+            ),
+            AppTile(
               icon: Icons.privacy_tip_outlined,
-              onTap: ()=> navigate(context, const TermsPrivacyPage()),
+              onTap: () => navigate(context, const TermsPrivacyPage()),
               text: "Terms And Privacy",
             ),
             AppTile(

@@ -170,7 +170,7 @@ class _RegisterPageState extends State<RegisterPage> {
     if (_formKey.currentState!.validate()) {
       _isLoading = true;
       setState(() {});
-      UserRegisterEntity registerEntity = UserRegisterEntity(
+      UserEntity registerEntity = UserEntity(
         name: _nameController.text,
         phoneNumber: _phoneController.text,
         age: _ageController.text,

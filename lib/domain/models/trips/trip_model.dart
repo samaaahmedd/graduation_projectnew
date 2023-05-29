@@ -5,6 +5,7 @@ import 'package:with_you_app/common/firebase_keys/firebase_keys.dart';
 
 class TripEntity {
   final String userId;
+  final String id;
   final String title;
   final String price;
   final String activities;
@@ -20,6 +21,7 @@ class TripEntity {
 
   TripEntity( {this.pickedImages,
     this.userId = '',
+    this.id = '',
     required this.title,
     required this.price,
     required this.activities,
@@ -64,7 +66,7 @@ class TripEntity {
       phoneNumber: json[FireBaseTripKeys.contactPhone].toString(),
       notes: json[FireBaseTripKeys.notes].toString(),
       notAllowed: json[FireBaseTripKeys.notAllowed].toString(),
-      images: imagesConverted,
+      images: imagesConverted,id: json[FireBaseTripKeys.id].toString()
     );
   }
 }

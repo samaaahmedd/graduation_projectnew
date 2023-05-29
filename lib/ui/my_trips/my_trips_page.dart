@@ -6,7 +6,6 @@ import 'package:with_you_app/common/firebase_keys/firebase_keys.dart';
 import 'package:with_you_app/common/material/app_buttons.dart';
 import 'package:with_you_app/common/material/app_colors.dart';
 import 'package:with_you_app/common/material/app_loader.dart';
-import 'package:with_you_app/common/material/divider.dart';
 import 'package:with_you_app/common/material/text_styles.dart';
 import 'package:with_you_app/common/widgets/fail_widget.dart';
 import 'package:with_you_app/domain/mappers/mappers.dart';
@@ -135,10 +134,10 @@ class _TripWidget extends StatelessWidget {
                   ),
                   Text(tripDetails.description,
                       style: TextStyles.regular(color: AppColors.neutral_600,height: 1.3)),
-                  const AppDivider(height: 1.5),
-                  Text(tripDetails.activities,
-                      maxLines: 3,
-                      style: TextStyles.regular(color: AppColors.neutral_600,height: 1.3)),
+                  // const AppDivider(height: 1.5),
+                  // Text(tripDetails.activities,
+                  //     maxLines: 3,
+                  //     style: TextStyles.regular(color: AppColors.neutral_600,height: 1.3)),
                 ],
               ),
             ),

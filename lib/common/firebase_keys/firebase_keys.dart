@@ -1,5 +1,4 @@
-
-class FireBaseUserKeys{
+class FireBaseUserKeys {
   static const String userCollection = 'users';
   static const String email = 'email';
   static const String password = 'password';
@@ -10,7 +9,7 @@ class FireBaseUserKeys{
   static const String gender = 'gender';
 }
 
-class FireBaseTripKeys{
+class FireBaseTripKeys {
   static const String tripsCollection = 'trips';
   static const String userId = 'userId';
   static const String title = 'title';
@@ -23,11 +22,18 @@ class FireBaseTripKeys{
   static const String notes = 'notes';
   static const String notAllowed = 'notAllowedHints';
   static const String durationInDays = 'durationInDays';
+  static const String id = 'id';
   static const String images = 'images';
 }
 
-class FireBaseStorageKeys{
+class FireBaseStorageKeys {
   static const String usersImagesCollection = 'usersImages';
   static const String tripsImagesCollection = 'tripsImages';
+}
 
+class FireBaseBookingKeys {
+  static const String bookingCollection = 'booking';
+  static const String guideId = 'guideId';
+  static const String userId = 'userId';
+  static const String tripId = 'tripId';
 }

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:with_you_app/common/common.dart';
 import 'package:with_you_app/common/firebase_keys/firebase_keys.dart';
 import 'package:with_you_app/common/material/app_colors.dart';
 import 'package:with_you_app/common/material/app_loader.dart';
@@ -10,6 +11,8 @@ import 'package:with_you_app/common/widgets/fail_widget.dart';
 import 'package:with_you_app/domain/mappers/mappers.dart';
 import 'package:with_you_app/domain/models/trips/booking_model.dart';
 import 'package:with_you_app/domain/use_cases/trips/get_all_bboking_trips_with_detais.dart';
+
+import 'booking_details_page.dart';
 
 class MyBookingPage extends StatefulWidget {
   const MyBookingPage({Key? key}) : super(key: key);
@@ -159,7 +162,11 @@ class _TripWidget extends StatelessWidget {
                 0.0, 50 * (1.0 - animation!.value), 0.0),
             child: InkWell(
               onTap: () {
-
+                navigate(
+                    context,
+                    BookingDetailsPage(
+                      bookingEntity: bookingDetails,
+                    ));
               },
               child: Container(
                 width: MediaQuery.of(context).size.width,

@@ -49,6 +49,9 @@ flutter:
     - family: Roboto
       fonts:
         - asset: fonts/Roboto-Regular.ttf
+    - family: Pacifico
+      fonts:
+        - asset: fonts/Pacifico-Regular.ttf
 
   # example:
   # fonts:

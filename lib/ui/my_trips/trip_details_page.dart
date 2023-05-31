@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:with_you_app/common/common.dart';
+import 'package:with_you_app/common/images_paths/images_paths.dart';
 import 'package:with_you_app/common/material/app_colors.dart';
 import 'package:with_you_app/domain/models/trips/trip_model.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -65,7 +66,7 @@ class _SliderImagesWidgetState extends State<_SliderImagesWidget> {
                       image: image,
                       fit: BoxFit.cover,
                       width: MediaQuery.of(context).size.width,
-                      placeholder: ' ',
+                      placeholder: ImagesPaths.noImage,
                       placeholderErrorBuilder: (context, error, stackTrace) {
                         return Container(
                           color: Colors.grey.withOpacity(.3),

@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:with_you_app/common/common.dart';
 import 'package:with_you_app/common/firebase_keys/firebase_keys.dart';
+import 'package:with_you_app/common/images_paths/images_paths.dart';
 import 'package:with_you_app/common/material/app_buttons.dart';
 import 'package:with_you_app/common/material/app_colors.dart';
 import 'package:with_you_app/common/material/app_loader.dart';
@@ -47,7 +48,11 @@ class _MyTripsPageState extends State<MyTripsPage> {
               itemBuilder: (context, index) {
                 return _TripWidget(
                   onTap: () {
-                    navigate(context, TripDetailsPage(trip: trips[index],));
+                    navigate(
+                        context,
+                        TripDetailsPage(
+                          trip: trips[index],
+                        ));
                   },
                   tripDetails: trips[index],
                 );
@@ -72,9 +77,9 @@ class _MyTripsPageState extends State<MyTripsPage> {
   }
 }
 
-
 class _TripWidget extends StatelessWidget {
-  const _TripWidget({Key? key, required this.onTap, required this.tripDetails}) : super(key: key);
+  const _TripWidget({Key? key, required this.onTap, required this.tripDetails})
+      : super(key: key);
   final VoidCallback onTap;
   final TripEntity tripDetails;
   @override
@@ -109,16 +114,19 @@ class _TripWidget extends StatelessWidget {
               child: FadeInImage.assetNetwork(
                 image: tripDetails.images.first,
                 fit: BoxFit.cover,
-
                 height: 60,
                 width: 60,
-                placeholder: ' ',
+                placeholder: ImagesPaths.noImage,
                 placeholderErrorBuilder: (context, error, stackTrace) {
-                  return Container(color: Colors.grey.withOpacity(.3),);
+                  return Container(
+                    color: Colors.grey.withOpacity(.3),
+                  );
                 },
               ),
             ),
-            const SizedBox(width: 10,),
+            const SizedBox(
+              width: 10,
+            ),
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -133,7 +141,8 @@ class _TripWidget extends StatelessWidget {
                     height: 6,
                   ),
                   Text(tripDetails.description,
-                      style: TextStyles.regular(color: AppColors.neutral_600,height: 1.3)),
+                      style: TextStyles.regular(
+                          color: AppColors.neutral_600, height: 1.3)),
                   // const AppDivider(height: 1.5),
                   // Text(tripDetails.activities,
                   //     maxLines: 3,

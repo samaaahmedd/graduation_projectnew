@@ -30,18 +30,21 @@ class _HostPageState extends State<HostPage> {
   List<PersistentBottomNavBarItem> _navBarsItems() {
     return [
       PersistentBottomNavBarItem(
+        iconSize: 25,
         icon: const Icon(Icons.explore_outlined),
         title: ("Explore"),
-        activeColorPrimary: AppColors.neutral_700,
+        activeColorPrimary: AppColors.primaryColor,
         inactiveColorPrimary: AppColors.neutral_100,
       ),
       PersistentBottomNavBarItem(
+        iconSize: 22,
         icon: const Icon(Iconsax.map_14),
         title: ("My Trips"),
         activeColorPrimary: AppColors.neutral_700,
         inactiveColorPrimary: AppColors.neutral_100,
       ),
       PersistentBottomNavBarItem(
+        iconSize: 22,
         icon: const Icon(
           Iconsax.bookmark,
         ),
@@ -50,12 +53,14 @@ class _HostPageState extends State<HostPage> {
         inactiveColorPrimary: AppColors.neutral_100,
       ),
       PersistentBottomNavBarItem(
+        iconSize: 22,
         icon: const Icon(Iconsax.search_normal),
         title: ("Search"),
         activeColorPrimary: AppColors.neutral_700,
         inactiveColorPrimary: AppColors.neutral_100,
       ),
       PersistentBottomNavBarItem(
+        iconSize: 25,
         icon: const Icon(Iconsax.more4),
         title: ("More"),
         activeColorPrimary: AppColors.neutral_700,
@@ -86,6 +91,7 @@ class _HostPageState extends State<HostPage> {
         confineInSafeArea: true,
         backgroundColor: Colors.white, // Default is Colors.white.
         handleAndroidBackButtonPress: true, // Default is true.
+        navBarHeight: 60,
         resizeToAvoidBottomInset:
             true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
         stateManagement: true, // Default is true.

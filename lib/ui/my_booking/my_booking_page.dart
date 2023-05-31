@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:with_you_app/common/common.dart';
 import 'package:with_you_app/common/firebase_keys/firebase_keys.dart';
+import 'package:with_you_app/common/images_paths/images_paths.dart';
 import 'package:with_you_app/common/material/app_colors.dart';
 import 'package:with_you_app/common/material/app_loader.dart';
 import 'package:with_you_app/common/material/text_styles.dart';
@@ -198,7 +199,7 @@ class _TripWidget extends StatelessWidget {
                           image: bookingDetails.trip.images.first,
                           fit: BoxFit.cover,
                           width: double.infinity,
-                          placeholder: ' ',
+                          placeholder:ImagesPaths.noImage,
                           placeholderErrorBuilder:
                               (context, error, stackTrace) {
                             return Container(

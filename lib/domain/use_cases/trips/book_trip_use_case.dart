@@ -11,7 +11,10 @@ class BookTripUseCase {
     CreateTripEntity createTripEntity,
   ) async {
     try {
-      await booking.add(createTripEntity.toJson(createTripEntity));
+      print('${createTripEntity.guidedId}-${createTripEntity.tripId}');
+      await booking
+          .doc('${createTripEntity.guidedId}-${createTripEntity.tripId}')
+          .set(createTripEntity.toJson(createTripEntity));
       AppSnackBars.success(context, title: 'Trip Booked Successfully');
       return true;
     } on Exception catch (e) {

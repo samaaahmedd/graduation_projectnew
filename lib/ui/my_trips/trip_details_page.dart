@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:with_you_app/common/common.dart';
 import 'package:with_you_app/common/material/app_colors.dart';
-import 'package:with_you_app/common/material/text_styles.dart';
 import 'package:with_you_app/domain/models/trips/trip_model.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+
+import 'widgets/trip_details_preview_widget.dart';
+import 'widgets/trip_header_widget.dart';
 
 class TripDetailsPage extends StatefulWidget {
   final TripEntity trip;
@@ -26,103 +27,12 @@ class _TripDetailsPageState extends State<TripDetailsPage> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 _SliderImagesWidget(imagesPaths: widget.trip.images),
-                _rowTile(text: widget.trip.title, margin: 0),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 20.0, vertical: 10),
-                  child: Text(widget.trip.description,
-                      style: TextStyles.regular(
-                          fontSize: 16,
-                          color: AppColors.neutral_600,
-                          height: 1.3)),
-                ),
-                // const AppDivider(height: 1.5),
-                _rowTile(
-                  text: "Activities",
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Text(widget.trip.activities,
-                      maxLines: 3,
-                      style: TextStyles.medium(
-                          fontSize: 15,
-                          color: AppColors.neutral_600,
-                          height: 1.3)),
-                ),
-                _rowTile(
-                  text: "Trip Details",
-                ),
-                _iconTile(
-                    Icons.access_time_rounded, '${widget.trip.duration}  Day'),
-                _iconTile(Iconsax.location, widget.trip.meetingPoint),
-                _iconTile(Icons.person, '${widget.trip.noPersons}  Person'),
-                _iconTile(Icons.monetization_on_outlined, widget.trip.price),
-                _iconTile(Iconsax.mobile, widget.trip.phoneNumber),
-                _rowTile(
-                  text: "Not Allowed",
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Text(widget.trip.notAllowed,
-                      maxLines: 3,
-                      style: TextStyles.medium(
-                          fontSize: 15,
-                          color: AppColors.neutral_600,
-                          height: 1.3)),
-                ),
-                _rowTile(
-                  text: "Notes",
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Text(widget.trip.notes,
-                      maxLines: 3,
-                      style: TextStyles.medium(
-                          fontSize: 15,
-                          color: AppColors.neutral_600,
-                          height: 1.3)),
-                ),
-                const SizedBox(
-                  height: 70,
+                TripHeaderRowWidget(text: widget.trip.title, margin: 0),
+                TripDetailsPreviewWidget(
+                  trip: widget.trip,
                 ),
               ]),
         ),
-      ),
-    );
-  }
-
-  Widget _iconTile(IconData icon, String text) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 25),
-      child: Row(
-        children: [
-          Icon(icon, color: AppColors.neutral_300, size: 22),
-          const SizedBox(
-            width: 10,
-          ),
-          Text(text,
-              maxLines: 3,
-              style: TextStyles.regular(
-                  color: AppColors.neutral_600, fontSize: 16)),
-        ],
-      ),
-    );
-  }
-
-  Widget _rowTile({required String text, double margin = 15}) {
-    return Container(
-      color: AppColors.forthColor,
-      padding: const EdgeInsets.all(12),
-      margin: EdgeInsets.symmetric(vertical: margin),
-      width: MediaQuery.of(context).size.width,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10.0),
-        child: Text(text,
-            maxLines: 3,
-            style: TextStyles.bold(
-              fontSize: 19,
-              color: AppColors.neutral_500,
-            )),
       ),
     );
   }

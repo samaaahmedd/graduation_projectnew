@@ -13,7 +13,7 @@ import 'package:with_you_app/common/material/divider.dart';
 import 'package:with_you_app/common/material/text_styles.dart';
 import 'package:with_you_app/domain/models/trips/trip_model.dart';
 import 'package:with_you_app/domain/use_cases/trips/create_trip_use_case.dart';
-import 'pick_image_widget.dart';
+import 'widgets/pick_image_widget.dart';
 
 class AddTripPage extends StatefulWidget {
   const AddTripPage({Key? key}) : super(key: key);

@@ -13,6 +13,9 @@ import 'package:with_you_app/domain/models/authentication/register_entity.dart';
 import 'package:with_you_app/domain/models/trips/create_trip_entity.dart';
 import 'package:with_you_app/domain/models/trips/trip_model.dart';
 import 'package:with_you_app/domain/use_cases/trips/book_trip_use_case.dart';
+import 'package:with_you_app/ui/home/taps/trip_tap_widget.dart';
+
+import 'taps/trip_user_info_tap.dart';
 
 class HomeTripDetails extends StatefulWidget {
   final TripEntity tripEntity;
@@ -30,6 +33,57 @@ class _HomeTripDetailsState extends State<HomeTripDetails> {
   bool _isBookingLoading = false;
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppColors.appBackgroundColor,
+      appBar: AppBars.defaultAppBar(context, title: "Trip Details"),
+      body: FutureBuilder<DocumentSnapshot>(
+        future: _tripOwnerInfo.doc(widget.tripEntity.userId).get(),
+        builder:
+            (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+          if (snapshot.hasError) {
+            return const FailWidget();
+          }
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const AppLoader();
+          }
+          if (snapshot.hasData && snapshot.data?.data() != null) {
+            UserEntity userInfo = UserDataMapper.convert(snapshot.data!);
+            return Scaffold(
+              backgroundColor: AppColors.appBackgroundColor,
+              body: _DetailsBody(
+                tripEntity: widget.tripEntity,
+                user: userInfo,
+              ),
+              floatingActionButton: Container(
+                height: 50,
+                margin: const EdgeInsets.all(20),
+                child: AppButtons.primaryButton(
+                  text: 'Book Trip',
+                  isLoading: _isBookingLoading,
+                  onPressed: () async {
+                    _isBookingLoading = true;
+                    setState(() {});
+                    await _bookTripUseCase.execute(
+                        context,
+                        CreateTripEntity(
+                          // todo
+                          guidedId: widget.tripEntity.userId,
+                          tripId: widget.tripEntity.id,
+                          userId: userInfo.emailAddress,
+                        ));
+                    _isBookingLoading = false;
+                    setState(() {});
+                  },
+                ),
+              ),
+              floatingActionButtonLocation:
+                  FloatingActionButtonLocation.centerFloat,
+            );
+          }
+          return const SizedBox();
+        },
+      ),
+    );
     return Scaffold(
       backgroundColor: AppColors.appBackgroundColor,
       appBar: AppBars.defaultAppBar(context, title: "Trip Details"),
@@ -59,17 +113,19 @@ class _HomeTripDetailsState extends State<HomeTripDetails> {
         margin: const EdgeInsets.all(20),
         child: AppButtons.primaryButton(
           text: 'Book Trip',
-          onPressed: () {
-            _isBookingLoading = false;
+          isLoading: _isBookingLoading,
+          onPressed: () async {
+            _isBookingLoading = true;
             setState(() {});
-            _bookTripUseCase.execute(
+            await _bookTripUseCase.execute(
                 context,
                 CreateTripEntity(
+                  // todo
                   guidedId: widget.tripEntity.userId,
-                  tripId: widget.tripEntity.meetingPoint,
+                  tripId: widget.tripEntity.id,
                   userId: widget.tripEntity.id,
                 ));
-            _isBookingLoading = true;
+            _isBookingLoading = false;
             setState(() {});
           },
         ),
@@ -103,13 +159,17 @@ class _DetailsBodyState extends State<_DetailsBody> {
             setState(() {});
           },
         ),
-        IndexedStack(
-          index: selectedTap.index,
-          children: [
-            Text(
-                '${widget.tripEntity.title}  ${widget.tripEntity.description}'),
-            Text('${widget.user.name}  ${widget.user.emailAddress}'),
-          ],
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: IndexedStack(
+              index: selectedTap.index,
+              children: [
+                TripTapWidget(tripEntity: widget.tripEntity),
+                TripUserInfoTap(user: widget.user),
+              ],
+            ),
+          ),
         ),
       ],
     );

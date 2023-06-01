@@ -29,6 +29,12 @@ class UserDataMapper{
     return UserEntity.fromJson(data);
   }
 
+  static UserEntity convertQuery(QuerySnapshot snapshot){
+    Map<String, dynamic> data =
+    snapshot as Map<String, dynamic>;
+    return UserEntity.fromJson(data);
+  }
+
   static List<UserEntity> convertList(QuerySnapshot? snapshot) {
     if (snapshot != null) {
       final List<Map<String, dynamic>> data =

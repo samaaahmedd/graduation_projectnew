@@ -89,7 +89,6 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
           TextFormField(
             initialValue: widget.initialValue,
             cursorColor: AppColors.primaryColor,
-            // autovalidateMode: AutovalidateMode.onUserInteraction,
             enabled: widget.isEnabled,
             keyboardType: widget.keyboardType,
             controller: widget.controller,
@@ -99,19 +98,23 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
             decoration: InputDecoration(
                 filled: true,
                 hintText: widget.hint,
-                suffixIcon: widget.obscureText
-                    ? GestureDetector(
-                        onTap: onEyePressed,
-                        behavior: HitTestBehavior.translucent,
-                        child: Icon(
-                          passwordObscured
-                              ? Icons.remove_red_eye
-                              : Icons.remove_red_eye_outlined,
-                          color: AppColors.textPrimaryColor,
-                          size: 16,
-                        ),
-                      )
-                    : const SizedBox(),
+                suffixIcon: Visibility(
+                  visible: widget.suffix != null,
+                  replacement: widget.obscureText
+                      ? GestureDetector(
+                    onTap: onEyePressed,
+                    behavior: HitTestBehavior.translucent,
+                    child: Icon(
+                      passwordObscured
+                          ? Icons.remove_red_eye
+                          : Icons.remove_red_eye_outlined,
+                      color: AppColors.textPrimaryColor,
+                      size: 16,
+                    ),
+                  )
+                      : const SizedBox(),
+                  child: widget.suffix!,
+                ) ,
                 hintStyle: TextStyles.regular(
                     color: AppColors.textPrimaryColor.withOpacity(.5),
                     height: 1.4),

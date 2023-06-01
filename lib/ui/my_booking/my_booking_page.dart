@@ -45,6 +45,13 @@ class _MyBookingPageState extends State<MyBookingPage> {
           if (snapshot.hasData) {
             List<BookingResultModel> booking =
                 BookingResultMapper.convert(snapshot.data);
+            if (booking.isEmpty) {
+              return Center(
+                  child: Image.asset(
+                ImagesPaths.tripIllustrator,
+                scale: 3,
+              ));
+            }
             return BookingPageBody(
               bookingData: booking,
             );
@@ -131,7 +138,6 @@ class _BookingPageBodyState extends State<BookingPageBody>
               },
             );
           }
-
           return const SizedBox();
         }
         return const SizedBox();
@@ -199,7 +205,7 @@ class _TripWidget extends StatelessWidget {
                           image: bookingDetails.trip.images.first,
                           fit: BoxFit.cover,
                           width: double.infinity,
-                          placeholder:ImagesPaths.noImage,
+                          placeholder: ImagesPaths.noImage,
                           placeholderErrorBuilder:
                               (context, error, stackTrace) {
                             return Container(

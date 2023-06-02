@@ -10,7 +10,7 @@ class AppLoader extends StatelessWidget {
     return Center(
         child: LoadingAnimationWidget.fourRotatingDots(
       color: AppColors.neutral_600,
-      size: 50,
+      size: 45,
     ));
   }
 }

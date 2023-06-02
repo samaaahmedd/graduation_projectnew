@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 
 import 'ui/splash/splash_page.dart';
 
-
 class TheApp extends StatelessWidget {
   const TheApp({Key? key}) : super(key: key);
 
@@ -13,8 +12,9 @@ class TheApp extends StatelessWidget {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    return  MaterialApp(
-      theme: ThemeData(fontFamily: "Roboto"),
-        debugShowCheckedModeBanner: false, home: const SplashPage());
+    return MaterialApp(
+        theme: ThemeData(fontFamily: "Roboto"),
+        debugShowCheckedModeBanner: false,
+        home: const SplashPage());
   }
 }

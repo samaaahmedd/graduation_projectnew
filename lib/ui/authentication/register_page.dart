@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:with_you_app/common/common.dart';
 import 'package:with_you_app/common/utils/navigation.dart';
 import 'package:with_you_app/common/material/app_bars.dart';
 import 'package:with_you_app/common/material/app_buttons.dart';
@@ -11,6 +12,7 @@ import 'package:with_you_app/common/material/text_styles.dart';
 import 'package:with_you_app/domain/models/authentication/user_entity.dart';
 import 'package:with_you_app/domain/use_cases/authentication/register_use_case.dart';
 import 'package:with_you_app/ui/host_page.dart';
+import 'package:with_you_app/ui/more_page/profile_page/set_profile_image.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -30,20 +32,6 @@ class _RegisterPageState extends State<RegisterPage> {
   bool _isLoading = false;
   String _gender = 'Male';
   String _country = 'Egypt';
-  final List<String> _countries = [
-    'Egypt',
-    'United Status',
-    'Saudi Arabia',
-    'Tunis',
-    'Emirates',
-    'Angola',
-    'japan',
-    'Spain',
-    'Brazil',
-    'China',
-    'France',
-    'Greece',
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -77,11 +65,11 @@ class _RegisterPageState extends State<RegisterPage> {
                       AppTextFormField(
                         controller: _nameController,
                         hint: "Name",
-                        keyboardType: TextInputType.emailAddress,
                       ),
                       AppTextFormField(
                         controller: _emailController,
                         hint: "Email Address",
+                        keyboardType: TextInputType.emailAddress,
                       ),
                       AppTextFormField(
                         controller: _passwordController,
@@ -117,8 +105,8 @@ class _RegisterPageState extends State<RegisterPage> {
                           _country = selectedItem ?? '';
                           setState(() {});
                         },
-                        itemsValues: _countries,
-                        showItems: _countries,
+                        itemsValues: countries,
+                        showItems: countries,
                         hint: "Country",
                         value: _country,
                         selectedText: _country,
@@ -181,7 +169,7 @@ class _RegisterPageState extends State<RegisterPage> {
       );
       final result = await _registerUseCase.execute(context, registerEntity);
       if (result) {
-        navigateRemoveReplacement(context, const HostPage());
+        navigateRemoveReplacement(context, const SetUserProfileImagePage());
       }
       _isLoading = false;
       setState(() {});

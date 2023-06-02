@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:with_you_app/common/material/divider.dart';
+import 'package:with_you_app/common/material/network_image.dart';
 import 'package:with_you_app/domain/models/trips/trip_model.dart';
 import 'package:with_you_app/ui/my_trips/widgets/trip_details_preview_widget.dart';
 
@@ -32,17 +33,10 @@ class _TripTapWidgetState extends State<TripTapWidget> {
               return ClipRRect(
                 clipBehavior: Clip.antiAliasWithSaveLayer,
                 borderRadius: BorderRadius.circular(8.0),
-                child: FadeInImage.assetNetwork(
-                  image: widget.tripEntity.images[index],
-                  fit: BoxFit.cover,
+                child: AppNetworkImage(
+                  path: widget.tripEntity.images[index],
                   width: double.infinity,
                   height: double.infinity,
-                  placeholder: ' ',
-                  placeholderErrorBuilder: (context, error, stackTrace) {
-                    return Container(
-                      color: Colors.grey.withOpacity(.3),
-                    );
-                  },
                 ),
               );
             },
@@ -51,7 +45,9 @@ class _TripTapWidgetState extends State<TripTapWidget> {
           TripDetailsPreviewWidget(
             trip: widget.tripEntity,
           ),
-          const SizedBox(height: 100,),
+          const SizedBox(
+            height: 100,
+          ),
         ],
       ),
     );

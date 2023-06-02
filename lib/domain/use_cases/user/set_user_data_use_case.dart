@@ -4,19 +4,21 @@ import 'package:with_you_app/common/firebase_keys/firebase_keys.dart';
 import 'package:with_you_app/common/material/app_snackbars.dart';
 import 'package:with_you_app/domain/models/authentication/user_entity.dart';
 
-class AddUserDataUseCase {
+class SetUserDataUseCase {
   final user = FirebaseAuth.instance.currentUser;
 
-  Future<void> execute(context, UserEntity userRegisterEntity) async {
+  Future<bool> execute(context, UserEntity user) async {
     try {
       DocumentReference usersRef = FirebaseFirestore.instance
           .collection(FireBaseUserKeys.userCollection)
-          .doc(userRegisterEntity.emailAddress);
-      usersRef.set(userRegisterEntity.toMap(), SetOptions(merge: true));
+          .doc(user.emailAddress);
+      usersRef.set(user.toMap(), SetOptions(merge: true));
+      return true;
     } on FirebaseAuthException catch (e) {
       AppSnackBars.error(context, title: e.code.replaceAll('-', ' '));
     } catch (e) {
       AppSnackBars.error(context, title: e.toString());
     }
+    return false;
   }
 }

@@ -16,7 +16,8 @@ class AppBars extends StatelessWidget {
   final Color? leadingColor;
   final bool autoImplementLeading;
 
-  static AppBar leadingAppBar(context,{Color? iconColor,Color? backgroundColor}) {
+  static AppBar leadingAppBar(context,
+      {Color? iconColor, Color? backgroundColor}) {
     return AppBar(
       backgroundColor: backgroundColor ?? Colors.transparent,
       elevation: 0,
@@ -29,35 +30,37 @@ class AppBars extends StatelessWidget {
     );
   }
 
-  static AppBar header(context, {required String title}){
-    return AppBar(
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      automaticallyImplyLeading: false,
-      title: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0),
-        child: Text(title , style: TextStyles.bold(fontSize: 23)),
-      )
-    );
-  }
-
-  static AppBar defaultAppBar(context, {required String title,Color? iconColor}){
+  static AppBar header(context, {required String title}) {
     return AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         automaticallyImplyLeading: false,
-        leading: IconButton(
-            onPressed: () => pop(context),
-            icon: Icon(
-              Icons.arrow_back,
-              color: iconColor ?? AppColors.neutral_700,
-            )),
         title: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
-          child: Text(title, style: TextStyles.bold(fontSize: 20)),
-        )
+          child: Text(title, style: TextStyles.bold(fontSize: 23)),
+        ));
+  }
+
+  static AppBar defaultAppBar(context,
+      {required String title, Color? iconColor, List<Widget>? actions}) {
+    return AppBar(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      automaticallyImplyLeading: false,
+      leading: IconButton(
+          onPressed: () => pop(context),
+          icon: Icon(
+            Icons.arrow_back,
+            color: iconColor ?? AppColors.neutral_700,
+          )),
+      title: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        child: Text(title, style: TextStyles.bold(fontSize: 20)),
+      ),
+      actions: actions,
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return AppBar(

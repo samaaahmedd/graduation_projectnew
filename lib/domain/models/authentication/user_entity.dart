@@ -8,16 +8,17 @@ class UserEntity {
   final String password;
   final String gender;
   final String country;
+  final String image;
 
-  UserEntity({
-    required this.name,
-    required this.phoneNumber,
-    required this.age,
-    required this.emailAddress,
-    required this.password,
-    required this.gender,
-    required this.country,
-  });
+  UserEntity(
+      {required this.name,
+      required this.phoneNumber,
+      required this.age,
+      required this.emailAddress,
+      required this.password,
+      required this.gender,
+      required this.country,
+      this.image = ''});
 
   Map<String, dynamic> toMap() {
     return {
@@ -40,6 +41,7 @@ class UserEntity {
       name: json[FireBaseUserKeys.name].toString(),
       password: json[FireBaseUserKeys.password].toString(),
       phoneNumber: json[FireBaseUserKeys.phone].toString(),
+      image: json[FireBaseUserKeys.image].toString(),
     );
   }
 }

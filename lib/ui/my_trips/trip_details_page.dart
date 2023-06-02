@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:with_you_app/common/material/network_image.dart';
 import 'package:with_you_app/common/utils/navigation.dart';
 import 'package:with_you_app/common/images_paths/images_paths.dart';
 import 'package:with_you_app/common/material/app_colors.dart';
@@ -62,16 +63,9 @@ class _SliderImagesWidgetState extends State<_SliderImagesWidget> {
                   (image) => ClipRRect(
                     clipBehavior: Clip.antiAliasWithSaveLayer,
                     borderRadius: BorderRadius.circular(8.0),
-                    child: FadeInImage.assetNetwork(
-                      image: image,
-                      fit: BoxFit.cover,
+                    child: AppNetworkImage(
+                      path: image,
                       width: MediaQuery.of(context).size.width,
-                      placeholder: ImagesPaths.noImage,
-                      placeholderErrorBuilder: (context, error, stackTrace) {
-                        return Container(
-                          color: Colors.grey.withOpacity(.3),
-                        );
-                      },
                     ),
                   ),
                 )
@@ -81,7 +75,7 @@ class _SliderImagesWidgetState extends State<_SliderImagesWidget> {
               aspectRatio: 16 / 9,
               viewportFraction: 1,
               initialPage: 0,
-              enableInfiniteScroll: true,
+              enableInfiniteScroll: false,
               reverse: false,
               autoPlay: true,
               autoPlayInterval: const Duration(seconds: 2),

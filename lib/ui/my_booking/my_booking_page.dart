@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:with_you_app/common/material/network_image.dart';
 import 'package:with_you_app/common/utils/navigation.dart';
 import 'package:with_you_app/common/firebase_keys/firebase_keys.dart';
 import 'package:with_you_app/common/images_paths/images_paths.dart';
@@ -201,17 +202,9 @@ class _TripWidget extends StatelessWidget {
                       child: ClipRRect(
                         clipBehavior: Clip.antiAliasWithSaveLayer,
                         borderRadius: BorderRadius.circular(8.0),
-                        child: FadeInImage.assetNetwork(
-                          image: bookingDetails.trip.images.first,
-                          fit: BoxFit.cover,
+                        child: AppNetworkImage(
+                          path: bookingDetails.trip.images.first,
                           width: double.infinity,
-                          placeholder: ImagesPaths.noImage,
-                          placeholderErrorBuilder:
-                              (context, error, stackTrace) {
-                            return Container(
-                              color: Colors.grey.withOpacity(.3),
-                            );
-                          },
                         ),
                       ),
                     ),

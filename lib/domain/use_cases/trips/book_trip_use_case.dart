@@ -11,7 +11,6 @@ class BookTripUseCase {
     CreateTripEntity createTripEntity,
   ) async {
     try {
-      print('${createTripEntity.guidedId}-${createTripEntity.tripId}');
       await booking
           .doc('${createTripEntity.guidedId}-${createTripEntity.tripId}')
           .set(createTripEntity.toJson(createTripEntity));

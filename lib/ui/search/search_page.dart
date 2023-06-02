@@ -15,7 +15,7 @@ import 'package:with_you_app/common/material/text_styles.dart';
 import 'package:with_you_app/common/material/fail_widget.dart';
 import 'package:with_you_app/domain/mappers/mappers.dart';
 import 'package:with_you_app/domain/models/authentication/user_entity.dart';
-import 'package:with_you_app/ui/home/taps/trip_user_info_tap.dart';
+import 'package:with_you_app/ui/explore/taps/trip_user_info_tap.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);

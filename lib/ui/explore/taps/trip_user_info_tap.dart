@@ -21,7 +21,7 @@ class TripUserInfoTap extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Text(user.name ?? '',
+            child: Text(user.name,
              style: TextStyles.medium(
                     fontSize: 15, color: AppColors.neutral_600, height: 1.3)),
           ),
@@ -30,7 +30,7 @@ class TripUserInfoTap extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Text(user.phoneNumber ?? '',
+            child: Text(user.phoneNumber,
                 style: TextStyles.medium(
                     fontSize: 15, color: AppColors.neutral_600, height: 1.3)),
           ),
@@ -39,7 +39,7 @@ class TripUserInfoTap extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Text(user.emailAddress ?? '',
+            child: Text(user.emailAddress,
                 style: TextStyles.medium(
                     fontSize: 15, color: AppColors.neutral_600, height: 1.3)),
           ),
@@ -48,7 +48,7 @@ class TripUserInfoTap extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Text(user.country ?? '',
+            child: Text(user.country ,
                 style: TextStyles.medium(
                     fontSize: 15, color: AppColors.neutral_600, height: 1.3)),
           ),
@@ -57,7 +57,7 @@ class TripUserInfoTap extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Text(user.gender ?? '',
+            child: Text(user.gender ,
                 style: TextStyles.medium(
                     fontSize: 15, color: AppColors.neutral_600, height: 1.3)),
           ),
@@ -66,7 +66,7 @@ class TripUserInfoTap extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Text(user.age ?? '',
+            child: Text(user.age ,
                 style: TextStyles.medium(
                     fontSize: 15, color: AppColors.neutral_600, height: 1.3)),
           ),

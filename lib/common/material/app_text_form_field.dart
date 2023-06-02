@@ -102,19 +102,19 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
                   visible: widget.suffix != null,
                   replacement: widget.obscureText
                       ? GestureDetector(
-                    onTap: onEyePressed,
-                    behavior: HitTestBehavior.translucent,
-                    child: Icon(
-                      passwordObscured
-                          ? Icons.remove_red_eye
-                          : Icons.remove_red_eye_outlined,
-                      color: AppColors.textPrimaryColor,
-                      size: 16,
-                    ),
-                  )
+                          onTap: onEyePressed,
+                          behavior: HitTestBehavior.translucent,
+                          child: Icon(
+                            passwordObscured
+                                ? Icons.remove_red_eye
+                                : Icons.remove_red_eye_outlined,
+                            color: AppColors.textPrimaryColor,
+                            size: 16,
+                          ),
+                        )
                       : const SizedBox(),
-                  child: widget.suffix!,
-                ) ,
+                  child: widget.suffix ?? const SizedBox(),
+                ),
                 hintStyle: TextStyles.regular(
                     color: AppColors.textPrimaryColor.withOpacity(.5),
                     height: 1.4),

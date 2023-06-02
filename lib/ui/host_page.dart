@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:with_you_app/common/material/app_colors.dart';
-import 'package:with_you_app/ui/home/home_page.dart';
-
+import 'package:with_you_app/ui/explore/explore_page.dart';
 import 'more_page./more_page.dart';
 import 'my_booking/my_booking_page.dart';
 import 'my_trips/my_trips_page.dart';
@@ -20,7 +19,7 @@ class _HostPageState extends State<HostPage> {
   final PersistentTabController _persistentTabController =
       PersistentTabController();
   final List<Widget> _tabs = const [
-    HomePage(),
+    ExplorePage(),
     MyTripsPage(),
     MyBookingPage(),
     SearchPage(),

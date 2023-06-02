@@ -7,18 +7,18 @@ import 'package:with_you_app/common/material/app_loader.dart';
 import 'package:with_you_app/common/material/fail_widget.dart';
 import 'package:with_you_app/domain/mappers/mappers.dart';
 import 'package:with_you_app/domain/models/trips/trip_model.dart';
-import 'package:with_you_app/ui/home/home_trip_card.dart';
+import 'explore_trip_card.dart';
+import 'explore_trip_details.dart';
 
-import 'home_trip_details.dart';
-
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class ExplorePage extends StatefulWidget {
+  const ExplorePage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<ExplorePage> createState() => _ExplorePageState();
 }
 
-class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
+class _ExplorePageState extends State<ExplorePage>
+    with TickerProviderStateMixin {
   final Stream<QuerySnapshot> _tripsStream = FirebaseFirestore.instance
       .collection(FireBaseTripKeys.tripsCollection)
       .snapshots();
@@ -65,11 +65,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   ),
                 );
                 _animationController?.forward();
-                return TripCard(
+                return ExploreTripCard(
                   onTap: () {
                     navigate(
                         context,
-                        HomeTripDetails(
+                        ExploreTripDetails(
                           tripEntity: trips[index],
                         ));
                   },

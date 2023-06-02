@@ -13,15 +13,16 @@ import 'package:with_you_app/domain/models/trips/trip_model.dart';
 import 'package:with_you_app/domain/use_cases/trips/book_trip_use_case.dart';
 import 'package:with_you_app/ui/my_trips/widgets/trip_page_details_body.dart';
 
-class HomeTripDetails extends StatefulWidget {
+class ExploreTripDetails extends StatefulWidget {
   final TripEntity tripEntity;
-  const HomeTripDetails({Key? key, required this.tripEntity}) : super(key: key);
+  const ExploreTripDetails({Key? key, required this.tripEntity})
+      : super(key: key);
 
   @override
-  State<HomeTripDetails> createState() => _HomeTripDetailsState();
+  State<ExploreTripDetails> createState() => _ExploreTripDetailsState();
 }
 
-class _HomeTripDetailsState extends State<HomeTripDetails> {
+class _ExploreTripDetailsState extends State<ExploreTripDetails> {
   final CollectionReference _tripOwnerInfo =
       FirebaseFirestore.instance.collection(FireBaseUserKeys.userCollection);
   final BookTripUseCase _bookTripUseCase = BookTripUseCase();

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:with_you_app/common/material/app_colors.dart';
-import 'models/filter_model.dart';
 
 
 class FilterPage extends StatefulWidget {
@@ -11,7 +10,7 @@ class FilterPage extends StatefulWidget {
 }
 
 class _FilterPageState extends State<FilterPage> {
-  final FilterModel? _filterModel = FilterModel.getInstance();
+  // final FilterModel? _filterModel = FilterModel.getInstance();
   // UserType? _userType;
   // double? _sliderValue;
   // Gender? _gender;
@@ -120,10 +119,10 @@ class _FilterPageState extends State<FilterPage> {
     );
   }
 
-  void _restoreFilterDefaultValues() {
-    _filterModel?.emptyAllValues();
-    Navigator.of(context).pop(_filterModel);
-  }
+  // void _restoreFilterDefaultValues() {
+  //   _filterModel?.emptyAllValues();
+  //   Navigator.of(context).pop(_filterModel);
+  // }
 
   // void _getFilterValues() {
   //   if (_filterModel != null) {

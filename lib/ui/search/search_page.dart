@@ -4,16 +4,17 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:with_you_app/common/common.dart';
+import 'package:with_you_app/common/utils/navigation.dart';
 import 'package:with_you_app/common/firebase_keys/firebase_keys.dart';
+import 'package:with_you_app/common/images_paths/images_paths.dart';
 import 'package:with_you_app/common/material/app_bars.dart';
 import 'package:with_you_app/common/material/app_colors.dart';
 import 'package:with_you_app/common/material/app_loader.dart';
 import 'package:with_you_app/common/material/app_text_form_field.dart';
 import 'package:with_you_app/common/material/text_styles.dart';
-import 'package:with_you_app/common/widgets/fail_widget.dart';
+import 'package:with_you_app/common/material/fail_widget.dart';
 import 'package:with_you_app/domain/mappers/mappers.dart';
-import 'package:with_you_app/domain/models/authentication/register_entity.dart';
+import 'package:with_you_app/domain/models/authentication/user_entity.dart';
 import 'package:with_you_app/ui/home/taps/trip_user_info_tap.dart';
 
 class SearchPage extends StatefulWidget {
@@ -51,7 +52,11 @@ class _SearchPageState extends State<SearchPage> {
           ),
         ),
         body: Visibility(
-            replacement: const SizedBox(),
+            replacement: Center(
+                child: Image.asset(
+              ImagesPaths.searchIllustration,
+              scale: 2,
+            )),
             visible: _searchText.isNotEmpty,
             child: FutureBuilder<QuerySnapshot>(
               future: _user.get(),

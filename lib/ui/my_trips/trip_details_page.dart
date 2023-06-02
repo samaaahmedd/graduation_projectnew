@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:with_you_app/common/common.dart';
+import 'package:with_you_app/common/utils/navigation.dart';
 import 'package:with_you_app/common/images_paths/images_paths.dart';
 import 'package:with_you_app/common/material/app_colors.dart';
 import 'package:with_you_app/domain/models/trips/trip_model.dart';

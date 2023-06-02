@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:with_you_app/common/material/app_colors.dart';
 import 'package:with_you_app/common/material/text_styles.dart';
-import 'package:with_you_app/domain/models/authentication/register_entity.dart';
+import 'package:with_you_app/domain/models/authentication/user_entity.dart';
 import 'package:with_you_app/ui/my_trips/widgets/trip_header_widget.dart';
 
 class TripUserInfoTap extends StatelessWidget {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:with_you_app/common/material/app_colors.dart';
 import 'package:with_you_app/common/material/text_styles.dart';
 import 'package:with_you_app/common/utils/extenstions.dart';
-import 'package:with_you_app/domain/models/authentication/register_entity.dart';
+import 'package:with_you_app/domain/models/authentication/user_entity.dart';
 import 'package:with_you_app/domain/models/trips/trip_model.dart';
 import 'package:with_you_app/ui/home/taps/trip_tap_widget.dart';
 import 'package:with_you_app/ui/home/taps/trip_user_info_tap.dart';

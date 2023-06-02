@@ -32,8 +32,6 @@ class UserEntity {
   }
 
   static UserEntity fromJson(Map<String, dynamic> json) {
-    print('------------------------------------');
-    print(json.toString());
     return UserEntity(
       age: json[FireBaseUserKeys.age].toString(),
       country: json[FireBaseUserKeys.country].toString(),

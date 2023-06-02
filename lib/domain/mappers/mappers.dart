@@ -1,6 +1,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:with_you_app/domain/models/authentication/register_entity.dart';
+import 'package:with_you_app/domain/models/authentication/user_entity.dart';
 import 'package:with_you_app/domain/models/trips/booking_model.dart';
 import 'package:with_you_app/domain/models/trips/trip_model.dart';
 

@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:with_you_app/common/firebase_keys/firebase_keys.dart';
-import 'package:with_you_app/domain/models/authentication/register_entity.dart';
+import 'package:with_you_app/domain/models/authentication/user_entity.dart';
 import 'package:with_you_app/domain/models/trips/trip_model.dart';
 
 class BookingResultModel {

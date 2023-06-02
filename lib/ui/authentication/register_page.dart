@@ -1,14 +1,14 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:with_you_app/common/common.dart';
+import 'package:with_you_app/common/utils/navigation.dart';
 import 'package:with_you_app/common/material/app_bars.dart';
 import 'package:with_you_app/common/material/app_buttons.dart';
 import 'package:with_you_app/common/material/app_colors.dart';
 import 'package:with_you_app/common/material/app_text_form_field.dart';
 import 'package:with_you_app/common/material/drop_down_menu_single_select.dart';
 import 'package:with_you_app/common/material/text_styles.dart';
-import 'package:with_you_app/domain/models/authentication/register_entity.dart';
+import 'package:with_you_app/domain/models/authentication/user_entity.dart';
 import 'package:with_you_app/domain/use_cases/authentication/register_use_case.dart';
 import 'package:with_you_app/ui/host_page.dart';
 

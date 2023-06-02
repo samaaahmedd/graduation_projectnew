@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:with_you_app/common/material/app_snackbars.dart';
-import 'package:with_you_app/domain/models/authentication/register_entity.dart';
+import 'package:with_you_app/domain/models/authentication/user_entity.dart';
 import 'package:with_you_app/domain/use_cases/user/add_user_data_use_case.dart';
 
 import 'set_user_information.dart';

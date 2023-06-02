@@ -59,6 +59,7 @@ class _LogInPageState extends State<LogInPage> {
                       AppTextFormField(
                         controller: _emailController,
                         hint: "Email Address",
+                        keyboardType: TextInputType.emailAddress,
                       ),
                       const SizedBox(
                         height: 20,
@@ -124,9 +125,9 @@ class _LogInPageState extends State<LogInPage> {
         case UserAuthStateEnum.unVerified:
           navigateRemoveReplacement(context, const HostPage());
           break;
-          // navigate(context, const EmailVerificationPage());
-          // break;
-          case UserAuthStateEnum.unAuthenticated:
+        // navigate(context, const EmailVerificationPage());
+        // break;
+        case UserAuthStateEnum.unAuthenticated:
           break;
       }
       _isLoading = false;

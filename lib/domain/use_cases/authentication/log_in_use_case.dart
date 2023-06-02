@@ -13,8 +13,8 @@ class LogInUseCase {
         return UserAuthStateEnum.isVerified;
       } else if (isEmailVerified == false) {
         await result.user?.sendEmailVerification();
-        AppSnackBars.hint(context,
-            title: 'Please Check Your Mail Then Verify Your Email First.');
+        // AppSnackBars.hint(context,
+        //     title: 'Please Check Your Mail Then Verify Your Email First.');
         return UserAuthStateEnum.unVerified;
       } else {
         return UserAuthStateEnum.isVerified;

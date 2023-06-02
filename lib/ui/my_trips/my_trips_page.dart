@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:with_you_app/common/images_paths/images_paths.dart';
 import 'package:with_you_app/common/material/network_image.dart';
 import 'package:with_you_app/common/utils/navigation.dart';
 import 'package:with_you_app/common/firebase_keys/firebase_keys.dart';
@@ -43,6 +44,13 @@ class _MyTripsPageState extends State<MyTripsPage> {
           }
           if (snapshot.hasData) {
             List<TripEntity> trips = TripsMapper.convert(snapshot.data);
+            if (trips.isEmpty) {
+              return Center(
+                  child: Image.asset(
+                ImagesPaths.noBooking,
+                scale: 3,
+              ));
+            }
             return ListView.builder(
               itemCount: trips.length,
               itemBuilder: (context, index) {

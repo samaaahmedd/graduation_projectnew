@@ -139,6 +139,7 @@ class _BookingPageBodyState extends State<BookingPageBody>
               },
             );
           }
+
           return const SizedBox();
         }
         return const SizedBox();
@@ -210,22 +211,11 @@ class _TripWidget extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(12.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(bookingDetails.trip.title,
-                              style: TextStyles.medium(
-                                  fontSize: 16,
-                                  color: AppColors.neutral_600,
-                                  height: 1.3)),
-                          // const AppDivider(
-                          //     height: 1, horizontalPadding: 0, verticalPadding: 5),
-                          // Text(bookingDetails.user.name,
-                          //     style: TextStyles.medium(
-                          //         fontSize: 16, color: AppColors.neutral_600, height: 1.3)),
-                        ],
-                      ),
+                      child: Text(bookingDetails.trip.title,
+                          style: TextStyles.medium(
+                              fontSize: 16,
+                              color: AppColors.neutral_600,
+                              height: 1.3)),
                     ),
                   ],
                 ),

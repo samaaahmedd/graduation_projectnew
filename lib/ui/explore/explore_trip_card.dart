@@ -73,6 +73,8 @@ class ExploreTripCard extends StatelessWidget {
                             height: 6,
                           ),
                           Text(tripDetails.description,
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
                               style: TextStyles.regular(
                                   fontSize: 16, color: AppColors.neutral_600)),
                           const SizedBox(

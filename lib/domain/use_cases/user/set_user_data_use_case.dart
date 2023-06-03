@@ -12,7 +12,7 @@ class SetUserDataUseCase {
       DocumentReference usersRef = FirebaseFirestore.instance
           .collection(FireBaseUserKeys.userCollection)
           .doc(user.emailAddress);
-      usersRef.set(user.toMap(), SetOptions(merge: true));
+      await usersRef.set(user.toMap(), SetOptions(merge: true));
       return true;
     } on FirebaseAuthException catch (e) {
       AppSnackBars.error(context, title: e.code.replaceAll('-', ' '));

@@ -10,7 +10,6 @@ import 'package:with_you_app/common/material/fail_widget.dart';
 import 'package:with_you_app/common/material/network_image.dart';
 import 'package:with_you_app/common/material/text_styles.dart';
 import 'package:with_you_app/common/utils/navigation.dart';
-import 'package:with_you_app/common/material/app_bars.dart';
 import 'package:with_you_app/common/material/app_colors.dart';
 import 'package:with_you_app/common/material/app_tile.dart';
 import 'package:with_you_app/domain/mappers/mappers.dart';
@@ -33,8 +32,6 @@ class MorePage extends StatefulWidget {
 
 class _MorePageState extends State<MorePage> {
   final LogOutUseCase _logOutUseCase = LogOutUseCase();
-  final CollectionReference _userInfo =
-      FirebaseFirestore.instance.collection(FireBaseUserKeys.userCollection);
 
   final _user = FirebaseFirestore.instance
       .collection(FireBaseUserKeys.userCollection)

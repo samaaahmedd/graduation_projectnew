@@ -10,6 +10,7 @@ import 'package:with_you_app/common/material/app_snackbars.dart';
 import 'package:with_you_app/common/material/app_text_form_field.dart';
 import 'package:with_you_app/common/material/divider.dart';
 import 'package:with_you_app/common/material/drop_down_menu_single_select.dart';
+import 'package:with_you_app/common/material/languages_drop_down.dart';
 import 'package:with_you_app/common/material/network_image.dart';
 import 'package:with_you_app/common/material/text_styles.dart';
 import 'package:with_you_app/common/utils/navigation.dart';
@@ -32,10 +33,13 @@ class _ProfilePageState extends State<ProfilePage> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _ageController = TextEditingController();
-  String _gender = 'Male';
-  String _country = 'Egypt';
-  bool _enableEdit = false;
+  final TextEditingController _experienceController = TextEditingController();
+  String? _gender;
+  String? _country;
+  String? _countryOfResidence;
   String _image = '';
+  List<String> _languages = [];
+  bool _enableEdit = false;
   bool _isLoading = false;
   @override
   void initState() {
@@ -45,6 +49,10 @@ class _ProfilePageState extends State<ProfilePage> {
     _gender = widget.userInfo.gender;
     _country = widget.userInfo.country;
     _image = widget.userInfo.image;
+    _languages = widget.userInfo.languages.map((e) => e).toList();
+    _experienceController.text = widget.userInfo.experience;
+    _countryOfResidence = widget.userInfo.countryOfResidence;
+    setState(() {});
     super.initState();
   }
 
@@ -120,7 +128,15 @@ class _ProfilePageState extends State<ProfilePage> {
                 maxLength: 3,
                 keyboardType: TextInputType.number,
               ),
-              SingleSelectDropDown(
+              AppTextFormField(
+                controller: _experienceController,
+                isEnabled: _enableEdit,
+                hint: "Experience",
+                label: "Experience",
+                maxLength: 3,
+                keyboardType: TextInputType.number,
+              ),
+              SingleSelectDropDown<String?>(
                 isEnabled: _enableEdit,
                 onChanged: (selectedItem) {
                   _gender = selectedItem ?? '';
@@ -133,7 +149,20 @@ class _ProfilePageState extends State<ProfilePage> {
                 value: _gender,
                 selectedText: _gender,
               ),
-              SingleSelectDropDown(
+              SingleSelectDropDown<String?>(
+                isEnabled: _enableEdit,
+                label: "Country Of Residence",
+                onChanged: (selectedItem) {
+                  _countryOfResidence = selectedItem ?? '';
+                  setState(() {});
+                },
+                itemsValues: countries,
+                showItems: countries,
+                hint: "Country Of Residence",
+                value: _countryOfResidence,
+                selectedText: _countryOfResidence,
+              ),
+              SingleSelectDropDown<String?>(
                 isEnabled: _enableEdit,
                 onChanged: (selectedItem) {
                   _country = selectedItem ?? '';
@@ -145,6 +174,14 @@ class _ProfilePageState extends State<ProfilePage> {
                 label: "Country",
                 value: _country,
                 selectedText: _country,
+              ),
+              LanguagesDropDown(
+                label: "Languages",
+                isEnabled: _enableEdit,
+                initialValues: _languages,
+                onchange: (languages) {
+                  _languages = languages;
+                },
               ),
               const SizedBox(
                 height: 25,
@@ -164,25 +201,39 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: AppButtons.primaryButton(
                   text: "Save",
                   onPressed: () async {
-                    _isLoading = true;
-                    setState(() {});
-                    UserEntity user = UserEntity(
-                        name: _nameController.text,
-                        phoneNumber: _phoneController.text,
-                        age: _ageController.text,
-                        emailAddress: widget.userInfo.emailAddress,
-                        password: widget.userInfo.password,
-                        gender: _gender,
-                        country: _country);
-                    final result =
-                        await _setUserDataUseCase.execute(context, user);
-                    if (result) {
-                      _enableEdit = false;
-                      AppSnackBars.success(context,
-                          title: 'Profile Updated Successfully');
+                    if (_formKey.currentState?.validate() ?? false) {
+                      _isLoading = true;
+                      setState(() {});
+                      if (_gender == null ||
+                          _country == null ||
+                          _countryOfResidence == null ||
+                          _languages.isEmpty) {
+                        AppSnackBars.hint(context,
+                            title:
+                                'Please Make Sure That , Gender Or Country Or Country Of Residence Or Languages arent empty');
+                      } else {
+                        UserEntity user = UserEntity(
+                            name: _nameController.text,
+                            phoneNumber: _phoneController.text,
+                            age: _ageController.text,
+                            emailAddress: widget.userInfo.emailAddress,
+                            password: widget.userInfo.password,
+                            gender: _gender ?? '',
+                            countryOfResidence: _countryOfResidence ?? '',
+                            experience: _experienceController.text,
+                            languages: _languages,
+                            country: _country ?? '');
+                        final result =
+                            await _setUserDataUseCase.execute(context, user);
+                        if (result) {
+                          _enableEdit = false;
+                          AppSnackBars.success(context,
+                              title: 'Profile Updated Successfully');
+                        }
+                      }
+                      _isLoading = false;
+                      setState(() {});
                     }
-                    _isLoading = false;
-                    setState(() {});
                   },
                   isLoading: _isLoading,
                 ),

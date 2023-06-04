@@ -13,7 +13,6 @@ import 'package:with_you_app/common/material/drop_down_menu_single_select.dart';
 import 'package:with_you_app/common/material/text_styles.dart';
 import 'package:with_you_app/domain/models/authentication/user_entity.dart';
 import 'package:with_you_app/domain/use_cases/user/set_user_data_use_case.dart';
-import 'package:with_you_app/ui/host_page.dart';
 import 'package:with_you_app/ui/more_page/profile_page/set_profile_image.dart';
 
 class CompleteRegisterPage extends StatefulWidget {
@@ -91,6 +90,7 @@ class _CompleteRegisterPageState extends State<CompleteRegisterPage> {
                         keyboardType: TextInputType.number,
                       ),
                       LanguagesDropDown(
+                        initialValues: _languages,
                         onchange: (languages) {
                           _languages = languages;
                         },
@@ -184,14 +184,16 @@ class _CompleteRegisterPageState extends State<CompleteRegisterPage> {
                 'Please Make Sure That , Gender Or Country Or Country Of Residence Or Languages arent empty');
       } else {
         UserEntity registerEntity = UserEntity(
-          name: widget.name,
-          phoneNumber: _phoneController.text,
-          age: _ageController.text,
-          emailAddress: widget.email,
-          password: widget.password,
-          gender: _gender!,
-          country: _country!,
-        );
+            name: widget.name,
+            phoneNumber: _phoneController.text,
+            age: _ageController.text,
+            emailAddress: widget.email,
+            password: widget.password,
+            gender: _gender ?? "",
+            country: _country ?? '',
+            languages: _languages,
+            countryOfResidence: _countryOfResidence ?? '',
+            experience: _experienceController.text);
         final result =
             await _setUserDataUseCase.execute(context, registerEntity);
         if (result) {

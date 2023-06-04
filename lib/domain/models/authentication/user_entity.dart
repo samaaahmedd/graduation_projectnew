@@ -1,6 +1,7 @@
+import 'package:equatable/equatable.dart';
 import 'package:with_you_app/common/firebase_keys/firebase_keys.dart';
 
-class UserEntity {
+class UserEntity extends Equatable {
   final String name;
   final String phoneNumber;
   final String age;
@@ -58,4 +59,25 @@ class UserEntity {
           .toList(),
     );
   }
+
+  @override
+  String toString() {
+    return 'UserEntity{name: $name, phoneNumber: $phoneNumber, age: $age, emailAddress: $emailAddress, password: $password, gender: $gender, country: $country, image: $image, languages: $languages, countryOfResidence: $countryOfResidence, experience: $experience}';
+  }
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [
+        age,
+        country,
+        countryOfResidence,
+        languages,
+        experience,
+        phoneNumber,
+        emailAddress,
+        password,
+        image,
+        name,
+        gender
+      ];
 }

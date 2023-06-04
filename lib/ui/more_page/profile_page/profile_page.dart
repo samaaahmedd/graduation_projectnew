@@ -34,6 +34,9 @@ class _ProfilePageState extends State<ProfilePage> {
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _ageController = TextEditingController();
   final TextEditingController _experienceController = TextEditingController();
+  final TextEditingController _cityController = TextEditingController();
+  final TextEditingController _priceController = TextEditingController();
+
   String? _gender;
   String? _country;
   String? _countryOfResidence;
@@ -52,6 +55,8 @@ class _ProfilePageState extends State<ProfilePage> {
     _languages = widget.userInfo.languages.map((e) => e).toList();
     _experienceController.text = widget.userInfo.experience;
     _countryOfResidence = widget.userInfo.countryOfResidence;
+    _cityController.text = widget.userInfo.city;
+    _priceController.text = widget.userInfo.pricePerHour;
     setState(() {});
     super.initState();
   }
@@ -129,6 +134,14 @@ class _ProfilePageState extends State<ProfilePage> {
                 keyboardType: TextInputType.number,
               ),
               AppTextFormField(
+                controller: _priceController,
+                isEnabled: _enableEdit,
+                hint: "Price ( per hour )",
+                label: "Price ( per hour )",
+                maxLength: 3,
+                keyboardType: TextInputType.number,
+              ),
+              AppTextFormField(
                 controller: _experienceController,
                 isEnabled: _enableEdit,
                 hint: "Experience",
@@ -174,6 +187,12 @@ class _ProfilePageState extends State<ProfilePage> {
                 label: "Country",
                 value: _country,
                 selectedText: _country,
+              ),
+              AppTextFormField(
+                isEnabled: _enableEdit,
+                controller: _cityController,
+                hint: "Current City",
+                label: "Current City",
               ),
               LanguagesDropDown(
                 label: "Languages",

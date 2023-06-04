@@ -1,13 +1,13 @@
-
 import 'package:flutter/material.dart';
 import 'package:with_you_app/common/material/app_colors.dart';
 import 'package:with_you_app/common/material/text_styles.dart';
 
-class TripHeaderRowWidget extends StatelessWidget {
-  const TripHeaderRowWidget({Key? key, required this.text,  this.margin = 15}) : super(key: key);
+class HeaderRowWidget extends StatelessWidget {
+  const HeaderRowWidget({Key? key, required this.text, this.margin = 15})
+      : super(key: key);
 
   final String text;
-  final double margin ;
+  final double margin;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -20,9 +20,10 @@ class TripHeaderRowWidget extends StatelessWidget {
         child: Text(text,
             maxLines: 3,
             style: TextStyles.bold(
-              fontSize: 19,
+              fontSize: 16,
               color: AppColors.neutral_500,
             )),
       ),
-    );  }
+    );
+  }
 }

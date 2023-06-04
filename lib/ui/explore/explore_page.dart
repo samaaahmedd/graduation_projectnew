@@ -1,14 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:with_you_app/common/utils/navigation.dart';
 import 'package:with_you_app/common/firebase_keys/firebase_keys.dart';
 import 'package:with_you_app/common/material/app_colors.dart';
 import 'package:with_you_app/common/material/app_loader.dart';
 import 'package:with_you_app/common/material/fail_widget.dart';
+import 'package:with_you_app/common/utils/navigation.dart';
 import 'package:with_you_app/domain/mappers/mappers.dart';
-import 'package:with_you_app/domain/models/trips/trip_model.dart';
-import 'explore_trip_card.dart';
-import 'explore_trip_details.dart';
+import 'package:with_you_app/domain/models/authentication/user_entity.dart';
+import 'package:with_you_app/ui/explore/explore_user_details.dart';
+import 'explore_user_card.dart';
 
 class ExplorePage extends StatefulWidget {
   const ExplorePage({Key? key}) : super(key: key);
@@ -20,7 +20,7 @@ class ExplorePage extends StatefulWidget {
 class _ExplorePageState extends State<ExplorePage>
     with TickerProviderStateMixin {
   final Stream<QuerySnapshot> _tripsStream = FirebaseFirestore.instance
-      .collection(FireBaseTripKeys.tripsCollection)
+      .collection(FireBaseUserKeys.userCollection)
       .snapshots();
   AnimationController? _animationController;
 
@@ -50,12 +50,17 @@ class _ExplorePageState extends State<ExplorePage>
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const AppLoader();
           }
-          if (snapshot.hasData && snapshot.data != null) {
-            List<TripEntity> trips = TripsMapper.convert(snapshot.data);
+          if (snapshot.hasData &&
+              snapshot.data != null &&
+              snapshot.data?.docs != null) {
+            List<UserEntity> users = snapshot.data?.docs
+                    .map((e) => UserDataMapper.convert(e))
+                    .toList() ??
+                [];
             return ListView.builder(
-              itemCount: trips.length,
+              itemCount: users.length,
               itemBuilder: (context, index) {
-                final int count = trips.length;
+                final int count = users.length;
                 final Animation<double> animation =
                     Tween<double>(begin: 0.0, end: 1.0).animate(
                   CurvedAnimation(
@@ -65,17 +70,17 @@ class _ExplorePageState extends State<ExplorePage>
                   ),
                 );
                 _animationController?.forward();
-                return ExploreTripCard(
+                return UserCard(
                   onTap: () {
                     navigate(
                         context,
-                        ExploreTripDetails(
-                          tripEntity: trips[index],
+                        ExploreUserDetails(
+                          user: users[index],
                         ));
                   },
                   animation: animation,
                   animationController: _animationController,
-                  tripDetails: trips[index],
+                  user: users[index],
                 );
               },
               padding: const EdgeInsets.all(20),

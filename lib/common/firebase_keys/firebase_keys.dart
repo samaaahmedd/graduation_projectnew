@@ -11,6 +11,10 @@ class FireBaseUserKeys {
   static const String experience = 'experience';
   static const String countryOfResidence = 'countryOfResidence';
   static const String image = 'image';
+  static const String pricePerHour = 'pricePerHour';
+  static const String city = 'city';
+  static const String rate = 'rate';
+  static const String type = 'type';
 }
 
 class FireBaseTripKeys {

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:with_you_app/common/common.dart';
+import 'package:with_you_app/common/material/app_snackbars.dart';
 import 'package:with_you_app/common/utils/navigation.dart';
 import 'package:with_you_app/common/material/app_bars.dart';
 import 'package:with_you_app/common/material/app_buttons.dart';
@@ -28,7 +29,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
+  String? _userType;
   bool _isLoading = false;
   @override
   Widget build(BuildContext context) {
@@ -73,6 +74,25 @@ class _RegisterPageState extends State<RegisterPage> {
                         hint: "Password",
                         maxLength: 25,
                         obscureText: true,
+                      ),
+                      SingleSelectDropDown<String?>(
+                        onChanged: (selectedItem) {
+                          _userType = selectedItem ?? '';
+                          setState(() {});
+                        },
+                        itemsValues: const [
+                          'Tourist',
+                          'Tour Guide',
+                          'Photographer'
+                        ],
+                        showItems: const [
+                          'Tourist',
+                          'Tour Guide',
+                          'Photographer'
+                        ],
+                        hint: "User Type",
+                        value: _userType,
+                        selectedText: _userType,
                       ),
                       const SizedBox(
                         height: 25,
@@ -119,21 +139,26 @@ class _RegisterPageState extends State<RegisterPage> {
 
   void _onRegister() async {
     if (_formKey.currentState!.validate()) {
-      _isLoading = true;
-      setState(() {});
-      final result = await _registerUseCase.execute(context,
-          password: _passwordController.text, email: _emailController.text);
-      if (result) {
-        navigateRemoveReplacement(
-            context,
-            CompleteRegisterPage(
-              email: _emailController.text,
-              name: _nameController.text,
-              password: _passwordController.text,
-            ));
+      if (_userType != null) {
+        _isLoading = true;
+        setState(() {});
+        final result = await _registerUseCase.execute(context,
+            password: _passwordController.text, email: _emailController.text);
+        if (result) {
+          navigateRemoveReplacement(
+              context,
+              CompleteRegisterPage(
+                userType: _userType ?? '',
+                email: _emailController.text,
+                name: _nameController.text,
+                password: _passwordController.text,
+              ));
+        }
+        _isLoading = false;
+        setState(() {});
+      } else {
+        AppSnackBars.hint(context, title: 'Please , Select User Type First');
       }
-      _isLoading = false;
-      setState(() {});
     }
   }
 }

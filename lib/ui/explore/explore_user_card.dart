@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:with_you_app/common/images_paths/images_paths.dart';
 import 'package:with_you_app/common/material/app_colors.dart';
 import 'package:with_you_app/common/material/network_image.dart';
+import 'package:with_you_app/common/material/rating_bar.dart';
 import 'package:with_you_app/common/material/text_styles.dart';
-import 'package:with_you_app/domain/models/trips/trip_model.dart';
+import 'package:with_you_app/domain/models/authentication/user_entity.dart';
 
-class ExploreTripCard extends StatelessWidget {
-  const ExploreTripCard(
+class UserCard extends StatelessWidget {
+  const UserCard(
       {Key? key,
       required this.onTap,
-      required this.tripDetails,
+      required this.user,
       this.animationController,
       this.animation})
       : super(key: key);
   final VoidCallback onTap;
-  final TripEntity tripDetails;
+  final UserEntity user;
 
   final AnimationController? animationController;
   final Animation<double>? animation;
@@ -31,9 +31,9 @@ class ExploreTripCard extends StatelessWidget {
             child: InkWell(
               onTap: onTap,
               child: Container(
-                height: 320,
                 width: MediaQuery.of(context).size.width,
                 margin: const EdgeInsets.symmetric(vertical: 8),
+                padding: const EdgeInsets.all(12),
                 clipBehavior: Clip.antiAliasWithSaveLayer,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
@@ -48,50 +48,62 @@ class ExploreTripCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: Column(
+                child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Expanded(
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
                       child: AppNetworkImage(
-                        path: tripDetails.images.first,
-                        width: MediaQuery.of(context).size.width,
+                        path: user.image,
+                        width: 55,
+                        height: 55,
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(15),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Expanded(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(tripDetails.title,
-                              maxLines: 2,
+                          Text(user.name,
+                              maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyles.bold(
                                   fontSize: 18, color: AppColors.neutral_100)),
+                          RatingBar(rate: double.tryParse(user.rate) ?? 3),
                           const SizedBox(
-                            height: 6,
+                            height: 10,
                           ),
-                          Text(tripDetails.description,
+                          Text(user.type.toUpperCase(),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyles.bold(
+                                  color: AppColors.neutral_100)),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Text('${user.countryOfResidence} / ${user.city}',
                               maxLines: 3,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyles.regular(
-                                  fontSize: 16, color: AppColors.neutral_600)),
+                                  color: AppColors.neutral_600)),
                           const SizedBox(
-                            height: 12,
+                            height: 6,
                           ),
                           Row(
                             children: [
-                              Expanded(
-                                  child: _tile(
-                                      icon: Icons.access_time_rounded,
-                                      text: '${tripDetails.duration} Day')),
-                              _tile(
-                                  icon: Icons.monetization_on_outlined,
-                                  text: tripDetails.price),
-                              const SizedBox(
-                                width: 25,
-                              ),
+                              Text(user.gender,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyles.regular(
+                                      color: AppColors.neutral_600)),
+                              const Spacer(),
+                              Text('${user.pricePerHour} \$ / h',
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyles.regular(
+                                      color: AppColors.neutral_600)),
                             ],
                           ),
                         ],

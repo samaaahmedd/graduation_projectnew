@@ -19,11 +19,13 @@ class CompleteRegisterPage extends StatefulWidget {
   final String email;
   final String name;
   final String password;
+  final String userType;
   const CompleteRegisterPage({
     Key? key,
     required this.email,
     required this.name,
     required this.password,
+    required this.userType,
   }) : super(key: key);
 
   @override
@@ -36,6 +38,8 @@ class _CompleteRegisterPageState extends State<CompleteRegisterPage> {
   final TextEditingController _ageController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _experienceController = TextEditingController();
+  final TextEditingController _cityController = TextEditingController();
+  final TextEditingController _priceController = TextEditingController();
   String? _gender;
   List<String> _languages = [];
   String? _country;
@@ -89,6 +93,12 @@ class _CompleteRegisterPageState extends State<CompleteRegisterPage> {
                         maxLength: 3,
                         keyboardType: TextInputType.number,
                       ),
+                      AppTextFormField(
+                        controller: _priceController,
+                        hint: "Price ( per hour )",
+                        maxLength: 3,
+                        keyboardType: TextInputType.number,
+                      ),
                       LanguagesDropDown(
                         initialValues: _languages,
                         onchange: (languages) {
@@ -127,6 +137,10 @@ class _CompleteRegisterPageState extends State<CompleteRegisterPage> {
                         hint: "Country Of Residence",
                         value: _countryOfResidence,
                         selectedText: _countryOfResidence,
+                      ),
+                      AppTextFormField(
+                        controller: _cityController,
+                        hint: "Current City",
                       ),
                       const SizedBox(
                         height: 25,
@@ -192,7 +206,10 @@ class _CompleteRegisterPageState extends State<CompleteRegisterPage> {
             gender: _gender ?? "",
             country: _country ?? '',
             languages: _languages,
+            type: widget.userType,
             countryOfResidence: _countryOfResidence ?? '',
+            city: _cityController.text,
+            pricePerHour: _priceController.text,
             experience: _experienceController.text);
         final result =
             await _setUserDataUseCase.execute(context, registerEntity);

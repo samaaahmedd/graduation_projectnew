@@ -7,7 +7,7 @@ import 'package:with_you_app/domain/models/trips/trip_model.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 import 'widgets/trip_details_preview_widget.dart';
-import 'widgets/trip_header_widget.dart';
+import '../../common/material/trip_header_widget.dart';
 
 class TripDetailsPage extends StatefulWidget {
   final TripEntity trip;
@@ -29,7 +29,7 @@ class _TripDetailsPageState extends State<TripDetailsPage> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 _SliderImagesWidget(imagesPaths: widget.trip.images),
-                TripHeaderRowWidget(text: widget.trip.title, margin: 0),
+                HeaderRowWidget(text: widget.trip.title, margin: 0),
                 TripDetailsPreviewWidget(
                   trip: widget.trip,
                 ),

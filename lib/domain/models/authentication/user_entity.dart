@@ -12,20 +12,29 @@ class UserEntity extends Equatable {
   final String image;
   final List<String> languages;
   final String countryOfResidence;
+  final String city;
   final String experience;
+  final String pricePerHour;
+  final String rate;
+  final String type;
 
-  UserEntity(
-      {required this.name,
-      required this.phoneNumber,
-      required this.age,
-      required this.emailAddress,
-      required this.password,
-      required this.gender,
-      required this.country,
-      this.languages = const [],
-      this.countryOfResidence = '',
-      this.experience = '',
-      this.image = ''});
+  const UserEntity({
+    required this.name,
+    required this.phoneNumber,
+    required this.age,
+    required this.emailAddress,
+    required this.password,
+    required this.gender,
+    required this.country,
+    this.languages = const [],
+    this.countryOfResidence = '',
+    this.experience = '',
+    this.image = '',
+    this.city = '',
+    this.pricePerHour = '',
+    this.rate = '0',
+    this.type = '',
+  });
 
   Map<String, dynamic> toMap() {
     return {
@@ -39,10 +48,18 @@ class UserEntity extends Equatable {
       FireBaseUserKeys.languages: languages,
       FireBaseUserKeys.countryOfResidence: countryOfResidence,
       FireBaseUserKeys.experience: experience,
+      FireBaseUserKeys.city: city,
+      FireBaseUserKeys.rate: rate,
+      FireBaseUserKeys.pricePerHour: pricePerHour,
+      FireBaseUserKeys.type: type,
     };
   }
 
   static UserEntity fromJson(Map<String, dynamic> json) {
+    final List<String> languages = (json[FireBaseUserKeys.languages] as List?)
+            ?.map((e) => e as String)
+            .toList() ??
+        <String>[];
     return UserEntity(
       age: json[FireBaseUserKeys.age].toString(),
       country: json[FireBaseUserKeys.country].toString(),
@@ -52,11 +69,13 @@ class UserEntity extends Equatable {
       password: json[FireBaseUserKeys.password].toString(),
       phoneNumber: json[FireBaseUserKeys.phone].toString(),
       image: json[FireBaseUserKeys.image].toString(),
+      pricePerHour: json[FireBaseUserKeys.pricePerHour].toString(),
+      city: json[FireBaseUserKeys.city].toString(),
+      rate: json[FireBaseUserKeys.rate].toString(),
       countryOfResidence: json[FireBaseUserKeys.countryOfResidence].toString(),
       experience: json[FireBaseUserKeys.experience].toString(),
-      languages: (json[FireBaseUserKeys.languages] as List)
-          .map((e) => e as String)
-          .toList(),
+      type: json[FireBaseUserKeys.type].toString(),
+      languages: languages,
     );
   }
 

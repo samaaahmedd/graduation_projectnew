@@ -1,9 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:with_you_app/common/material/app_colors.dart';
 import 'package:with_you_app/common/material/text_styles.dart';
 import 'package:with_you_app/domain/models/authentication/user_entity.dart';
-import 'package:with_you_app/ui/my_trips/widgets/trip_header_widget.dart';
+import 'package:with_you_app/common/material/trip_header_widget.dart';
 
 class TripUserInfoTap extends StatelessWidget {
   final UserEntity user;
@@ -16,16 +15,16 @@ class TripUserInfoTap extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const TripHeaderRowWidget(
+          const HeaderRowWidget(
             text: "Name",
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Text(user.name,
-             style: TextStyles.medium(
+                style: TextStyles.medium(
                     fontSize: 15, color: AppColors.neutral_600, height: 1.3)),
           ),
-          const TripHeaderRowWidget(
+          const HeaderRowWidget(
             text: "Phone Number",
           ),
           Padding(
@@ -34,7 +33,7 @@ class TripUserInfoTap extends StatelessWidget {
                 style: TextStyles.medium(
                     fontSize: 15, color: AppColors.neutral_600, height: 1.3)),
           ),
-          const TripHeaderRowWidget(
+          const HeaderRowWidget(
             text: "Email Address",
           ),
           Padding(
@@ -43,30 +42,30 @@ class TripUserInfoTap extends StatelessWidget {
                 style: TextStyles.medium(
                     fontSize: 15, color: AppColors.neutral_600, height: 1.3)),
           ),
-          const TripHeaderRowWidget(
+          const HeaderRowWidget(
             text: "Country",
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Text(user.country ,
+            child: Text(user.country,
                 style: TextStyles.medium(
                     fontSize: 15, color: AppColors.neutral_600, height: 1.3)),
           ),
-          const TripHeaderRowWidget(
+          const HeaderRowWidget(
             text: "Gender",
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Text(user.gender ,
+            child: Text(user.gender,
                 style: TextStyles.medium(
                     fontSize: 15, color: AppColors.neutral_600, height: 1.3)),
           ),
-          const TripHeaderRowWidget(
+          const HeaderRowWidget(
             text: "Age",
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Text(user.age ,
+            child: Text(user.age,
                 style: TextStyles.medium(
                     fontSize: 15, color: AppColors.neutral_600, height: 1.3)),
           ),

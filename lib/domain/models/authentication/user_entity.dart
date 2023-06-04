@@ -9,6 +9,9 @@ class UserEntity {
   final String gender;
   final String country;
   final String image;
+  final List<String> languages;
+  final String countryOfResidence;
+  final String experience;
 
   UserEntity(
       {required this.name,
@@ -18,6 +21,9 @@ class UserEntity {
       required this.password,
       required this.gender,
       required this.country,
+      this.languages = const [],
+      this.countryOfResidence = '',
+      this.experience = '',
       this.image = ''});
 
   Map<String, dynamic> toMap() {
@@ -29,6 +35,9 @@ class UserEntity {
       FireBaseUserKeys.gender: gender,
       FireBaseUserKeys.age: age,
       FireBaseUserKeys.country: country,
+      FireBaseUserKeys.languages: languages,
+      FireBaseUserKeys.countryOfResidence: countryOfResidence,
+      FireBaseUserKeys.experience: experience,
     };
   }
 
@@ -42,6 +51,11 @@ class UserEntity {
       password: json[FireBaseUserKeys.password].toString(),
       phoneNumber: json[FireBaseUserKeys.phone].toString(),
       image: json[FireBaseUserKeys.image].toString(),
+      countryOfResidence: json[FireBaseUserKeys.countryOfResidence].toString(),
+      experience: json[FireBaseUserKeys.experience].toString(),
+      languages: (json[FireBaseUserKeys.languages] as List)
+          .map((e) => e as String)
+          .toList(),
     );
   }
 }

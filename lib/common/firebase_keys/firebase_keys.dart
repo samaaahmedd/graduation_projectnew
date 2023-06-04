@@ -7,6 +7,9 @@ class FireBaseUserKeys {
   static const String country = 'country';
   static const String phone = 'phone';
   static const String gender = 'gender';
+  static const String languages = 'languages';
+  static const String experience = 'experience';
+  static const String countryOfResidence = 'countryOfResidence';
   static const String image = 'image';
 }
 

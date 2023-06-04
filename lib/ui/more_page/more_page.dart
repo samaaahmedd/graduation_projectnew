@@ -142,8 +142,6 @@ class _MorePageState extends State<MorePage> {
               ),
             );
           }
-          print('else ---------------------- ${snapshot.data.toString()}');
-
           return const SizedBox();
         },
       ),

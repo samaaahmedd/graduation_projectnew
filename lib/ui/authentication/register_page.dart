@@ -11,6 +11,7 @@ import 'package:with_you_app/common/material/drop_down_menu_single_select.dart';
 import 'package:with_you_app/common/material/text_styles.dart';
 import 'package:with_you_app/domain/models/authentication/user_entity.dart';
 import 'package:with_you_app/domain/use_cases/authentication/register_use_case.dart';
+import 'package:with_you_app/ui/authentication/complete_register_page.dart';
 import 'package:with_you_app/ui/host_page.dart';
 import 'package:with_you_app/ui/more_page/profile_page/set_profile_image.dart';
 
@@ -25,14 +26,10 @@ class _RegisterPageState extends State<RegisterPage> {
   final RegisterUseCase _registerUseCase = RegisterUseCase();
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _phoneController = TextEditingController();
-  final TextEditingController _ageController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  bool _isLoading = false;
-  String _gender = 'Male';
-  String _country = 'Egypt';
 
+  bool _isLoading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,40 +73,6 @@ class _RegisterPageState extends State<RegisterPage> {
                         hint: "Password",
                         maxLength: 25,
                         obscureText: true,
-                      ),
-                      AppTextFormField(
-                        controller: _phoneController,
-                        hint: "Phone Number",
-                        maxLength: 11,
-                        keyboardType: TextInputType.phone,
-                      ),
-                      AppTextFormField(
-                        controller: _ageController,
-                        hint: "Age",
-                        maxLength: 3,
-                        keyboardType: TextInputType.number,
-                      ),
-                      SingleSelectDropDown(
-                        onChanged: (selectedItem) {
-                          _gender = selectedItem ?? '';
-                          setState(() {});
-                        },
-                        itemsValues: const ['Male', 'Female'],
-                        showItems: const ['Male', 'Female'],
-                        hint: "Gender",
-                        value: _gender,
-                        selectedText: _gender,
-                      ),
-                      SingleSelectDropDown(
-                        onChanged: (selectedItem) {
-                          _country = selectedItem ?? '';
-                          setState(() {});
-                        },
-                        itemsValues: countries,
-                        showItems: countries,
-                        hint: "Country",
-                        value: _country,
-                        selectedText: _country,
                       ),
                       const SizedBox(
                         height: 25,
@@ -158,18 +121,16 @@ class _RegisterPageState extends State<RegisterPage> {
     if (_formKey.currentState!.validate()) {
       _isLoading = true;
       setState(() {});
-      UserEntity registerEntity = UserEntity(
-        name: _nameController.text,
-        phoneNumber: _phoneController.text,
-        age: _ageController.text,
-        emailAddress: _emailController.text,
-        password: _passwordController.text,
-        gender: _gender,
-        country: _country,
-      );
-      final result = await _registerUseCase.execute(context, registerEntity);
+      final result = await _registerUseCase.execute(context,
+          password: _passwordController.text, email: _emailController.text);
       if (result) {
-        navigateRemoveReplacement(context, const SetUserProfileImagePage());
+        navigateRemoveReplacement(
+            context,
+            CompleteRegisterPage(
+              email: _emailController.text,
+              name: _nameController.text,
+              password: _passwordController.text,
+            ));
       }
       _isLoading = false;
       setState(() {});

@@ -177,16 +177,17 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
                   : Colors.redAccent,
               fontSize: 16,
             ),
-            validator: (value) {
-              if (value == null || value == '') {
-                if (widget.label != null) {
-                  return '${widget.label} can\'t be empty';
-                } else {
-                  return '${widget.hint} can\'t be empty';
-                }
-              }
-              return null;
-            },
+            validator: widget.validator ??
+                (value) {
+                  if (value == null || value == '') {
+                    if (widget.label != null) {
+                      return '${widget.label} can\'t be empty';
+                    } else {
+                      return '${widget.hint} can\'t be empty';
+                    }
+                  }
+                  return null;
+                },
             maxLength: widget.maxLength,
             maxLines: widget.maxLines,
             minLines: widget.minLines,

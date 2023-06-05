@@ -133,22 +133,39 @@ class _ProfilePageState extends State<ProfilePage> {
                 maxLength: 3,
                 keyboardType: TextInputType.number,
               ),
-              AppTextFormField(
-                controller: _priceController,
-                isEnabled: _enableEdit,
-                hint: "Price ( per hour )",
-                label: "Price ( per hour )",
-                maxLength: 3,
-                keyboardType: TextInputType.number,
-              ),
-              AppTextFormField(
-                controller: _experienceController,
-                isEnabled: _enableEdit,
-                hint: "Experience",
-                label: "Experience",
-                maxLength: 3,
-                keyboardType: TextInputType.number,
-              ),
+              widget.userInfo.type == "Tourist"
+                  ? const SizedBox()
+                  : Column(
+                      children: [
+                        AppTextFormField(
+                          controller: _priceController,
+                          isEnabled: _enableEdit,
+                          hint: "Price ( per hour )",
+                          label: "Price ( per hour )",
+                          maxLength: 3,
+                          keyboardType: TextInputType.number,
+                          validator: widget.userInfo.type == "Tourist"
+                              ? (value) {
+                                  return null;
+                                }
+                              : null,
+                        ),
+                        AppTextFormField(
+                          controller: _experienceController,
+                          isEnabled: _enableEdit,
+                          hint: "Experience",
+                          label: "Experience",
+                          maxLength: 3,
+                          keyboardType: TextInputType.number,
+                          validator: widget.userInfo.type == "Tourist"
+                              ? (value) {
+                                  return null;
+                                }
+                              : null,
+                        ),
+                      ],
+                    ),
+
               SingleSelectDropDown<String?>(
                 isEnabled: _enableEdit,
                 onChanged: (selectedItem) {
@@ -241,6 +258,11 @@ class _ProfilePageState extends State<ProfilePage> {
                             countryOfResidence: _countryOfResidence ?? '',
                             experience: _experienceController.text,
                             languages: _languages,
+                            type: widget.userInfo.type,
+                            pricePerHour: _priceController.text,
+                            city: _cityController.text,
+                            image: widget.userInfo.image,
+                            rate: widget.userInfo.rate,
                             country: _country ?? '');
                         final result =
                             await _setUserDataUseCase.execute(context, user);

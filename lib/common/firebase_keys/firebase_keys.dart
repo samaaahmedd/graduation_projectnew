@@ -45,3 +45,14 @@ class FireBaseBookingKeys {
   static const String userId = 'userId';
   static const String tripId = 'tripId';
 }
+
+class FireBaseRequestUserKeys {
+  static const String requestsCollection = 'requests';
+  static const String userId = 'userId';
+  static const String requestedUserId = 'requestedUserId';
+  static const String date = 'date';
+  static const String numberOfPersons = 'numberOfPersons';
+  static const String requestState = 'Waiting';
+  static const String expectedPrice = 'expectedPrice';
+  static const String bookingDuration = 'bookingDuration';
+}

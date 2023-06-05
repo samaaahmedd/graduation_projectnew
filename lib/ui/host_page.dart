@@ -37,8 +37,8 @@ class _HostPageState extends State<HostPage> {
       ),
       PersistentBottomNavBarItem(
         iconSize: 22,
-        icon: const Icon(Iconsax.map_14),
-        title: ("My Trips"),
+        icon: const Icon(Iconsax.direct_inbox4),
+        title: ("Requests"),
         activeColorPrimary: AppColors.neutral_700,
         inactiveColorPrimary: AppColors.neutral_100,
       ),
@@ -47,7 +47,7 @@ class _HostPageState extends State<HostPage> {
         icon: const Icon(
           Iconsax.bookmark,
         ),
-        title: ("My Booking"),
+        title: ("Booking"),
         activeColorPrimary: AppColors.neutral_700,
         inactiveColorPrimary: AppColors.neutral_100,
       ),

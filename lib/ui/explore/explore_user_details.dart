@@ -9,10 +9,13 @@ import 'package:with_you_app/common/material/fail_widget.dart';
 import 'package:with_you_app/common/material/network_image.dart';
 import 'package:with_you_app/common/material/rating_bar.dart';
 import 'package:with_you_app/common/material/text_styles.dart';
+import 'package:with_you_app/common/utils/navigation.dart';
 import 'package:with_you_app/domain/mappers/mappers.dart';
 import 'package:with_you_app/domain/models/authentication/user_entity.dart';
 import 'package:with_you_app/domain/use_cases/trips/book_trip_use_case.dart';
 import 'package:with_you_app/common/material/trip_header_widget.dart';
+
+import 'send_request_page/send_request_page.dart';
 
 class ExploreUserDetails extends StatefulWidget {
   final UserEntity user;
@@ -25,9 +28,6 @@ class ExploreUserDetails extends StatefulWidget {
 class _ExploreUserDetailsState extends State<ExploreUserDetails> {
   final CollectionReference _tripOwnerInfo =
       FirebaseFirestore.instance.collection(FireBaseUserKeys.userCollection);
-  final BookTripUseCase _bookTripUseCase = BookTripUseCase();
-
-  bool _isBookingLoading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,20 +55,12 @@ class _ExploreUserDetailsState extends State<ExploreUserDetails> {
                 margin: const EdgeInsets.all(20),
                 child: AppButtons.primaryButton(
                   text: 'Book Trip',
-                  isLoading: _isBookingLoading,
-                  onPressed: () async {
-                    _isBookingLoading = true;
-                    setState(() {});
-                    // await _bookTripUseCase.execute(
-                    //     context,
-                    //     CreateTripEntity(
-                    //       // todo
-                    //       guidedId: widget.tripEntity.userId,
-                    //       tripId: widget.tripEntity.id,
-                    //       userId: userInfo.emailAddress,
-                    //     ));
-                    _isBookingLoading = false;
-                    setState(() {});
+                  onPressed: () {
+                    navigate(
+                        context,
+                        SendRequestPage(
+                          userEntity: widget.user,
+                        ));
                   },
                 ),
               ),

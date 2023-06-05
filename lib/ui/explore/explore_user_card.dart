@@ -20,6 +20,88 @@ class UserCard extends StatelessWidget {
   final Animation<double>? animation;
   @override
   Widget build(BuildContext context) {
+    if (animationController == null) {
+      return Container(
+        width: MediaQuery.of(context).size.width,
+        margin: const EdgeInsets.symmetric(vertical: 8),
+        padding: const EdgeInsets.all(12),
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          color: Colors.white,
+          border: Border.all(color: AppColors.neutral_30),
+          boxShadow: const [
+            BoxShadow(
+              color: AppColors.neutral_30,
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: Offset(1, 2), // changes position of shadow
+            ),
+          ],
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: AppNetworkImage(
+                path: user.image,
+                width: 55,
+                height: 55,
+              ),
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(user.name,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyles.bold(
+                          fontSize: 18, color: AppColors.neutral_100)),
+                  RatingBar(rate: double.tryParse(user.rate) ?? 3),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(user.type.toUpperCase(),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyles.bold(color: AppColors.neutral_100)),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text('${user.countryOfResidence} / ${user.city}',
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyles.regular(color: AppColors.neutral_600)),
+                  const SizedBox(
+                    height: 6,
+                  ),
+                  Row(
+                    children: [
+                      Text(user.gender,
+                          overflow: TextOverflow.ellipsis,
+                          style:
+                              TextStyles.regular(color: AppColors.neutral_600)),
+                      const Spacer(),
+                      Text('${user.pricePerHour} \$ / h',
+                          overflow: TextOverflow.ellipsis,
+                          style:
+                              TextStyles.regular(color: AppColors.neutral_600)),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
+    }
     return AnimatedBuilder(
       animation: animationController!,
       builder: (BuildContext context, Widget? child) {
@@ -116,25 +198,6 @@ class UserCard extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-
-  Widget _tile({required IconData icon, required String text}) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Icon(icon, size: 20, color: AppColors.neutral_400),
-          const SizedBox(
-            width: 7,
-          ),
-          Text(text,
-              style: TextStyles.regular(
-                  fontSize: 15, color: AppColors.neutral_400)),
-        ],
-      ),
     );
   }
 }

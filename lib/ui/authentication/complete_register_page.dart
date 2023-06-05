@@ -87,18 +87,30 @@ class _CompleteRegisterPageState extends State<CompleteRegisterPage> {
                         maxLength: 3,
                         keyboardType: TextInputType.number,
                       ),
-                      AppTextFormField(
-                        controller: _experienceController,
-                        hint: "Experience",
-                        maxLength: 3,
-                        keyboardType: TextInputType.number,
-                      ),
-                      AppTextFormField(
-                        controller: _priceController,
-                        hint: "Price ( per hour )",
-                        maxLength: 3,
-                        keyboardType: TextInputType.number,
-                      ),
+                      widget.userType == 'Tourist'
+                          ? const SizedBox()
+                          : Column(
+                              children: [
+                                AppTextFormField(
+                                  controller: _experienceController,
+                                  hint: "Experience",
+                                  maxLength: 3,
+                                  keyboardType: TextInputType.number,
+                                  validator: widget.userType == 'Tourist'
+                                      ? (value) {}
+                                      : null,
+                                ),
+                                AppTextFormField(
+                                  controller: _priceController,
+                                  hint: "Price ( per hour )",
+                                  validator: widget.userType == 'Tourist'
+                                      ? (value) {}
+                                      : null,
+                                  maxLength: 3,
+                                  keyboardType: TextInputType.number,
+                                ),
+                              ],
+                            ),
                       LanguagesDropDown(
                         initialValues: _languages,
                         onchange: (languages) {
@@ -140,7 +152,7 @@ class _CompleteRegisterPageState extends State<CompleteRegisterPage> {
                       ),
                       AppTextFormField(
                         controller: _cityController,
-                        hint: "Current City",
+                        hint: "City",
                       ),
                       const SizedBox(
                         height: 25,

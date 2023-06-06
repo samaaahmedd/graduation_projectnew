@@ -83,7 +83,7 @@ class _ExplorePageState extends State<ExplorePage>
                   user: users[index],
                 );
               },
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(0),
             );
           }
           return const SizedBox();

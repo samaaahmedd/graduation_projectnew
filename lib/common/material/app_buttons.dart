@@ -103,14 +103,16 @@ class AppButtons extends StatelessWidget {
     Color? disabledTextColor,
     Color? textColor,
     bool isExpanded = false,
+    bool? isLoading,
     double? height,
   }) {
     return AppButtons(
       text: text,
       height: height,
+      isLoading: isLoading ?? false,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.0),
-          side: const BorderSide(width: 1, color: AppColors.borderColor)),
+          side: const BorderSide(width: 1.5, color: AppColors.neutral_500)),
       onPressed: onPressed,
       disabledTextColor: disabledTextColor ?? AppColors.textSecondaryColor,
       buttonColor: Colors.transparent,
@@ -188,7 +190,9 @@ class AppButtons extends StatelessWidget {
                             softWrap: true,
                           )),
                 )),
-            const SizedBox(width: 10,),
+            const SizedBox(
+              width: 10,
+            ),
             AnimatedSwitcher(
               duration: const Duration(milliseconds: 500),
               key: ValueKey(isLoading),

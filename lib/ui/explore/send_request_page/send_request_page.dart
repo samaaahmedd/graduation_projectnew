@@ -2,6 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:with_you_app/common/firebase_keys/firebase_keys.dart';
 import 'package:with_you_app/common/material/app_bars.dart';
 import 'package:with_you_app/common/material/app_buttons.dart';
 import 'package:with_you_app/common/material/app_colors.dart';
@@ -105,7 +106,7 @@ class _SendRequestPageState extends State<SendRequestPage> {
                   numberOfPersons: _numberPersonsController.text,
                   bookingDuration: _durationController.text,
                   expectedPrice: _priceController.text,
-                  requestState: "Waiting");
+                  requestState: FireBaseRequestUserKeys.waitingState);
               final result =
                   await _requestUserUseCase.execute(context, requestEntity);
               if (result) {

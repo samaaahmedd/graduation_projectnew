@@ -4,6 +4,7 @@ import 'package:with_you_app/common/material/app_colors.dart';
 import 'package:with_you_app/ui/explore/explore_page.dart';
 import 'more_page./more_page.dart';
 import 'my_booking/my_booking_page.dart';
+import 'my_requests/my_requests_page.dart';
 import 'my_trips/my_trips_page.dart';
 import 'search/search_page.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
@@ -20,7 +21,7 @@ class _HostPageState extends State<HostPage> {
       PersistentTabController();
   final List<Widget> _tabs = const [
     ExplorePage(),
-    MyTripsPage(),
+    MyRequestsPage(),
     MyBookingPage(),
     SearchPage(),
     MorePage(),

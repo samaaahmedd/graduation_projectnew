@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:with_you_app/common/firebase_keys/firebase_keys.dart';
 
 class RequestEntity extends Equatable {
+  final String requestId;
   final String userId;
   final String requestedUserId;
   final String date;
@@ -11,6 +12,7 @@ class RequestEntity extends Equatable {
   final String requestState;
 
   const RequestEntity({
+    this.requestId = '',
     required this.bookingDuration,
     required this.expectedPrice,
     required this.userId,
@@ -20,8 +22,10 @@ class RequestEntity extends Equatable {
     required this.requestState,
   });
 
-  static RequestEntity fromJson(Map<String, dynamic> json) {
+  static RequestEntity fromJson(Map<String, dynamic> json,
+      {String? requestId}) {
     return RequestEntity(
+      requestId: requestId ?? '',
       userId: json[FireBaseRequestUserKeys.userId].toString(),
       requestedUserId: json[FireBaseRequestUserKeys.requestedUserId].toString(),
       date: json[FireBaseRequestUserKeys.date].toString(),

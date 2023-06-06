@@ -92,13 +92,13 @@ class _AppCustomDateFieldState extends State<AppCustomDateField> {
                       mode: CupertinoDatePickerModeModified.date,
                       dateOrder: DatePickerDateOrder.dmy,
                       use24hFormat: true,
-                      minimumDate: DateTime.utc(1900, 1, 1),
+                      minimumDate: DateTime.now(),
                       initialDateTime: _selectedDay ?? DateTime.now(),
-                      maximumDate: DateTime.now(),
-                      validTextStyle: TextStyles.regular(
-                          fontSize: 14, color: CupertinoColors.black),
+                      maximumDate: DateTime.utc(2025, 1, 1),
+                      validTextStyle:
+                          TextStyles.regular(color: CupertinoColors.black),
                       notValidTextStyle: TextStyles.regular(
-                          fontSize: 14, color: CupertinoColors.inactiveGray),
+                          color: CupertinoColors.inactiveGray),
                       additionalSpaceString: 4,
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       alignment: Alignment.center,

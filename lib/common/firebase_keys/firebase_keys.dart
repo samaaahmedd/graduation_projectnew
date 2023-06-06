@@ -52,7 +52,10 @@ class FireBaseRequestUserKeys {
   static const String requestedUserId = 'requestedUserId';
   static const String date = 'date';
   static const String numberOfPersons = 'numberOfPersons';
-  static const String requestState = 'Waiting';
+  static const String requestState = 'requestState';
   static const String expectedPrice = 'expectedPrice';
   static const String bookingDuration = 'bookingDuration';
+  static const String waitingState = 'Waiting';
+  static const String acceptedState = 'Accepted';
+  static const String canceledState = 'Canceled';
 }

@@ -12,7 +12,6 @@ import 'package:with_you_app/common/material/text_styles.dart';
 import 'package:with_you_app/common/utils/navigation.dart';
 import 'package:with_you_app/domain/mappers/mappers.dart';
 import 'package:with_you_app/domain/models/authentication/user_entity.dart';
-import 'package:with_you_app/domain/use_cases/trips/book_trip_use_case.dart';
 import 'package:with_you_app/common/material/trip_header_widget.dart';
 
 import 'send_request_page/send_request_page.dart';
@@ -33,44 +32,62 @@ class _ExploreUserDetailsState extends State<ExploreUserDetails> {
     return Scaffold(
       backgroundColor: AppColors.appBackgroundColor,
       appBar: AppBars.defaultAppBar(context, title: "Trip Details"),
-      body: FutureBuilder<DocumentSnapshot>(
-        future: _tripOwnerInfo.doc(widget.user.emailAddress).get(),
-        builder:
-            (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-          if (snapshot.hasError) {
-            return const FailWidget();
-          }
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const AppLoader();
-          }
-          if (snapshot.hasData && snapshot.data?.data() != null) {
-            UserEntity userInfo = UserDataMapper.convert(snapshot.data!);
-            return Scaffold(
-              backgroundColor: AppColors.appBackgroundColor,
-              body: UserInfoPreview(
-                user: userInfo,
-              ),
-              floatingActionButton: Container(
-                height: 50,
-                margin: const EdgeInsets.all(20),
-                child: AppButtons.primaryButton(
-                  text: 'Book Trip',
-                  onPressed: () {
-                    navigate(
-                        context,
-                        SendRequestPage(
-                          userEntity: widget.user,
-                        ));
-                  },
-                ),
-              ),
-              floatingActionButtonLocation:
-                  FloatingActionButtonLocation.centerFloat,
-            );
-          }
-          return const SizedBox();
-        },
+      body: UserInfoPreview(
+        user: widget.user,
       ),
+      floatingActionButton: Container(
+        height: 50,
+        margin: const EdgeInsets.all(20),
+        child: AppButtons.primaryButton(
+          text: 'REQUEST  ${widget.user.type}',
+          onPressed: () {
+            navigate(
+                context,
+                SendRequestPage(
+                  userEntity: widget.user,
+                ));
+          },
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      // body: FutureBuilder<DocumentSnapshot>(
+      //   future: _tripOwnerInfo.doc(widget.user.emailAddress).get(),
+      //   builder:
+      //       (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+      //     if (snapshot.hasError) {
+      //       return const FailWidget();
+      //     }
+      //     if (snapshot.connectionState == ConnectionState.waiting) {
+      //       return const AppLoader();
+      //     }
+      //     if (snapshot.hasData && snapshot.data?.data() != null) {
+      //       UserEntity userInfo = UserDataMapper.convert(snapshot.data!);
+      //       return Scaffold(
+      //         backgroundColor: AppColors.appBackgroundColor,
+      //         body: UserInfoPreview(
+      //           user: userInfo,
+      //         ),
+      //         floatingActionButton: Container(
+      //           height: 50,
+      //           margin: const EdgeInsets.all(20),
+      //           child: AppButtons.primaryButton(
+      //             text: 'REQUEST  ${widget.user.type}',
+      //             onPressed: () {
+      //               navigate(
+      //                   context,
+      //                   SendRequestPage(
+      //                     userEntity: widget.user,
+      //                   ));
+      //             },
+      //           ),
+      //         ),
+      //         floatingActionButtonLocation:
+      //             FloatingActionButtonLocation.centerFloat,
+      //       );
+      //     }
+      //     return const SizedBox();
+      //   },
+      // ),
     );
   }
 }

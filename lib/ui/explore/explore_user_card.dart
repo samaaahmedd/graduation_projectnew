@@ -131,68 +131,61 @@ class UserCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: Column(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                  '${user.type}  -  ${user.gender}  -  ${user.age} years old',
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyles.bold(
-                                      fontSize: 12,
-                                      color: AppColors.neutral_100)),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(user.name,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyles.bold(
-                                      fontSize: 20,
-                                      color: AppColors.neutral_500)),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                  'Detailed Address : ${user.countryOfResidence} / ${user.city}',
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                              '${user.type}  -  ${user.gender}  -  ${user.age} years old',
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyles.bold(
+                                  fontSize: 12, color: AppColors.neutral_100)),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Text(user.name,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyles.bold(
+                                  fontSize: 20, color: AppColors.neutral_500)),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                              'Detailed Address : ${user.countryOfResidence} / ${user.city}',
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyles.regular(
+                                  // fontSize: 13,
+                                  color: AppColors.neutral_600)),
+                          RatingBar(rate: double.tryParse(user.rate) ?? 3),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          user.pricePerHour.isNotEmpty
+                              ? Text('Price Per Hour : ${user.pricePerHour}',
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyles.regular(
                                       // fontSize: 13,
-                                      color: AppColors.neutral_600)),
-                              RatingBar(rate: double.tryParse(user.rate) ?? 3),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              user.pricePerHour.isNotEmpty
-                                  ? Text(
-                                      'Price Per Hour : ${user.pricePerHour}',
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyles.regular(
-                                          // fontSize: 13,
-                                          color: AppColors.neutral_600))
-                                  : const SizedBox(),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(40),
-                          child: AppNetworkImage(
-                            path: user.image,
-                            width: 50,
-                            height: 50,
-                          ),
-                        ),
-                      ],
+                                      color: AppColors.neutral_600))
+                              : const SizedBox(),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(40),
+                      child: AppNetworkImage(
+                        path: user.image,
+                        width: 50,
+                        height: 50,
+                      ),
                     ),
                   ],
                 ),

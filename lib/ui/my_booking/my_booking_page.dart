@@ -2,19 +2,15 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:with_you_app/common/material/network_image.dart';
-import 'package:with_you_app/common/utils/navigation.dart';
 import 'package:with_you_app/common/firebase_keys/firebase_keys.dart';
 import 'package:with_you_app/common/images_paths/images_paths.dart';
 import 'package:with_you_app/common/material/app_colors.dart';
 import 'package:with_you_app/common/material/app_loader.dart';
-import 'package:with_you_app/common/material/text_styles.dart';
 import 'package:with_you_app/common/material/fail_widget.dart';
-import 'package:with_you_app/domain/mappers/mappers.dart';
-import 'package:with_you_app/domain/models/trips/booking_model.dart';
-import 'package:with_you_app/domain/use_cases/trips/get_all_bboking_trips_with_detais.dart';
-
-import 'booking_details_page.dart';
+import 'package:with_you_app/common/material/text_styles.dart';
+import 'package:with_you_app/common/utils/navigation.dart';
+import 'package:with_you_app/domain/models/requests/requests.dart';
+import 'package:with_you_app/ui/my_requests/request_details.dart';
 
 class MyBookingPage extends StatefulWidget {
   const MyBookingPage({Key? key}) : super(key: key);
@@ -24,9 +20,9 @@ class MyBookingPage extends StatefulWidget {
 }
 
 class _MyBookingPageState extends State<MyBookingPage> {
-  final Stream<QuerySnapshot> _bookingStream = FirebaseFirestore.instance
-      .collection(FireBaseBookingKeys.bookingCollection)
-      .where(FireBaseBookingKeys.userId,
+  final Stream<QuerySnapshot> _requestsStream = FirebaseFirestore.instance
+      .collection(FireBaseRequestUserKeys.requestsCollection)
+      .where(FireBaseRequestUserKeys.userId,
           isEqualTo: FirebaseAuth.instance.currentUser?.email)
       .snapshots();
 
@@ -34,196 +30,110 @@ class _MyBookingPageState extends State<MyBookingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.appBackgroundColor,
-      body: StreamBuilder(
-        stream: _bookingStream,
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
+      body: StreamBuilder<QuerySnapshot>(
+        stream: _requestsStream,
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             return const FailWidget();
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const AppLoader();
           }
-          if (snapshot.hasData) {
-            List<BookingResultModel> booking =
-                BookingResultMapper.convert(snapshot.data);
-            if (booking.isEmpty) {
+          if (snapshot.hasData && snapshot.data?.docs != null) {
+            List<RequestEntity> requests = snapshot.data?.docs
+                    .map((e) => RequestEntity.fromJson(
+                        e.data() as Map<String, dynamic>,
+                        requestId: e.id))
+                    .toList() ??
+                [];
+            if (requests.isEmpty) {
               return Center(
-                  child: Image.asset(
-                ImagesPaths.tripIllustrator,
-                scale: 3,
+                  child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    ImagesPaths.tripIllustrator,
+                    scale: 3,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Text("You Don't Book Any Trip Yet",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyles.bold(
+                          fontSize: 20, color: AppColors.neutral_500)),
+                ],
               ));
             }
-            return BookingPageBody(
-              bookingData: booking,
+            return ListView.builder(
+              itemCount: requests.length,
+              itemBuilder: (context, index) {
+                final requestEntity = requests[index];
+                return InkWell(
+                  onTap: () {
+                    navigate(
+                        context,
+                        RequestDetailsPage(
+                          requestEntity: requestEntity,
+                          canAccept: false,
+                        ));
+                  },
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    margin: const EdgeInsets.symmetric(vertical: 8),
+                    padding: const EdgeInsets.fromLTRB(25, 15, 15, 15),
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.only(
+                        bottomRight: Radius.circular(20),
+                      ),
+                      color: Colors.white,
+                      border: Border.all(color: AppColors.neutral_30),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: AppColors.neutral_30,
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: Offset(1, 2), // changes position of shadow
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                            'Date : ${requestEntity.date}  -  No.Persons : ${requestEntity.numberOfPersons}',
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyles.bold(
+                                fontSize: 12, color: AppColors.neutral_100)),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Text(requestEntity.userId.split('@').first,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyles.bold(
+                                fontSize: 20, color: AppColors.neutral_500)),
+                        const SizedBox(
+                          height: 14,
+                        ),
+                        Text('Request State : ${requestEntity.requestState}',
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyles.bold(
+                                fontSize: 12, color: AppColors.neutral_100)),
+                      ],
+                    ),
+                  ),
+                );
+              },
+              padding: const EdgeInsetsDirectional.fromSTEB(0, 20, 20, 40),
             );
           }
           return const SizedBox();
         },
       ),
-    );
-  }
-}
-
-class BookingPageBody extends StatefulWidget {
-  const BookingPageBody({Key? key, required this.bookingData})
-      : super(key: key);
-  final List<BookingResultModel> bookingData;
-
-  @override
-  State<BookingPageBody> createState() => _BookingPageBodyState();
-}
-
-class _BookingPageBodyState extends State<BookingPageBody>
-    with TickerProviderStateMixin {
-  final GetAllBookingTripsWithDetails _allBookingTripsWithDetails =
-      GetAllBookingTripsWithDetails();
-
-  Future<List<MyBookingEntity>> getData() async {
-    return await _allBookingTripsWithDetails.execute(widget.bookingData);
-  }
-
-  AnimationController? _animationController;
-
-  @override
-  void initState() {
-    super.initState();
-    _animationController = AnimationController(
-        duration: const Duration(milliseconds: 2000), vsync: this);
-  }
-
-  @override
-  void dispose() {
-    _animationController?.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder<List<MyBookingEntity>>(
-      future: getData(),
-      builder: (BuildContext context,
-          AsyncSnapshot<List<MyBookingEntity>> snapshot) {
-        if (snapshot.hasError) {
-          return const FailWidget();
-        }
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const AppLoader();
-        }
-        if (snapshot.hasData) {
-          final data = snapshot.data;
-          if (data != null) {
-            return GridView.builder(
-              padding: const EdgeInsets.all(10),
-              itemCount: data.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: .65,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10),
-              itemBuilder: (BuildContext context, int index) {
-                final int count = data.length;
-                final Animation<double> animation =
-                    Tween<double>(begin: 0.0, end: 1.0).animate(
-                  CurvedAnimation(
-                    parent: _animationController!,
-                    curve: Interval((1 / count) * index, 1.0,
-                        curve: Curves.fastOutSlowIn),
-                  ),
-                );
-                _animationController?.forward();
-                return _TripWidget(
-                  animation: animation,
-                  animationController: _animationController,
-                  bookingDetails: data[index],
-                );
-              },
-            );
-          }
-
-          return const SizedBox();
-        }
-        return const SizedBox();
-      },
-    );
-  }
-}
-
-class _TripWidget extends StatelessWidget {
-  const _TripWidget(
-      {Key? key,
-      required this.bookingDetails,
-      this.animationController,
-      this.animation})
-      : super(key: key);
-  final MyBookingEntity bookingDetails;
-
-  final AnimationController? animationController;
-  final Animation<double>? animation;
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: animationController!,
-      builder: (BuildContext context, Widget? child) {
-        return FadeTransition(
-          opacity: animation!,
-          child: Transform(
-            transform: Matrix4.translationValues(
-                0.0, 50 * (1.0 - animation!.value), 0.0),
-            child: InkWell(
-              onTap: () {
-                navigate(
-                    context,
-                    BookingDetailsPage(
-                      bookingEntity: bookingDetails,
-                    ));
-              },
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                margin: const EdgeInsets.symmetric(vertical: 8),
-                // padding: const EdgeInsets.all(15),
-                clipBehavior: Clip.antiAliasWithSaveLayer,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: Colors.white,
-                  border: Border.all(color: AppColors.neutral_30),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: AppColors.neutral_30,
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: Offset(1, 2), // changes position of shadow
-                    ),
-                  ],
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: ClipRRect(
-                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                        borderRadius: BorderRadius.circular(8.0),
-                        child: AppNetworkImage(
-                          path: bookingDetails.trip.images.first,
-                          width: double.infinity,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Text(bookingDetails.trip.title,
-                          style: TextStyles.medium(
-                              fontSize: 16,
-                              color: AppColors.neutral_600,
-                              height: 1.3)),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        );
-      },
     );
   }
 }

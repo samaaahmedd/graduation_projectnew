@@ -113,7 +113,7 @@ class UserDetailsPage extends StatelessWidget {
               height: 50,
               margin: const EdgeInsets.all(20),
               child: AppButtons.primaryButton(
-                text: 'REQUEST  ${user.type}',
+                text: 'BOOK  ${user.type.toUpperCase()}',
                 onPressed: () {
                   navigate(
                       context,

@@ -6,6 +6,7 @@ import 'package:with_you_app/common/images_paths/images_paths.dart';
 import 'package:with_you_app/common/material/app_colors.dart';
 import 'package:with_you_app/common/material/app_loader.dart';
 import 'package:with_you_app/common/material/fail_widget.dart';
+import 'package:with_you_app/common/material/text_styles.dart';
 import 'package:with_you_app/domain/models/requests/requests.dart';
 import 'widgets/border_tab_inductor.dart';
 import 'widgets/requests_card.dart';
@@ -34,7 +35,7 @@ class _MyRequestsPageState extends State<MyRequestsPage>
 
   final Stream<QuerySnapshot> _requestsStream = FirebaseFirestore.instance
       .collection(FireBaseRequestUserKeys.requestsCollection)
-      .where(FireBaseTripKeys.userId,
+      .where(FireBaseRequestUserKeys.requestedUserId,
           isEqualTo: FirebaseAuth.instance.currentUser?.email)
       .snapshots();
 
@@ -75,9 +76,19 @@ class _MyRequestsPageState extends State<MyRequestsPage>
             }
             if (requests.isEmpty) {
               return Center(
-                  child: Image.asset(
-                ImagesPaths.noBooking,
-                scale: 3,
+                  child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    ImagesPaths.noBooking,
+                    scale: 3,
+                  ),
+                  Text("You Don't Have Any Requests",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyles.bold(
+                          fontSize: 20, color: AppColors.neutral_500)),
+                ],
               ));
             }
             return Column(
@@ -104,12 +115,15 @@ class _MyRequestsPageState extends State<MyRequestsPage>
                         children: [
                           RequestCardBuilder(
                             requests: waitingList,
+                            emptyImagePath: ImagesPaths.waitingIllustration,
                           ),
                           RequestCardBuilder(
                             requests: acceptedList,
+                            emptyImagePath: ImagesPaths.acceptedIllustration,
                           ),
                           RequestCardBuilder(
                             requests: canceledList,
+                            emptyImagePath: ImagesPaths.cancelIllustration,
                           ),
                         ],
                       );

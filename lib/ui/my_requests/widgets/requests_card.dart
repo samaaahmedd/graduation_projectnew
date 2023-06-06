@@ -6,11 +6,21 @@ import 'package:with_you_app/domain/models/requests/requests.dart';
 import 'package:with_you_app/ui/my_requests/request_details.dart';
 
 class RequestCardBuilder extends StatelessWidget {
-  const RequestCardBuilder({Key? key, required this.requests})
+  final String emptyImagePath;
+  const RequestCardBuilder(
+      {Key? key, required this.requests, required this.emptyImagePath})
       : super(key: key);
   final List<RequestEntity> requests;
   @override
   Widget build(BuildContext context) {
+    if (requests.isEmpty) {
+      return Center(
+        child: Image.asset(
+          emptyImagePath,
+          scale: 1.5,
+        ),
+      );
+    }
     return ListView.builder(
       itemCount: requests.length,
       itemBuilder: (context, index) {

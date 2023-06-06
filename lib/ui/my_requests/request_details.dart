@@ -19,7 +19,10 @@ import 'package:with_you_app/domain/use_cases/user/set_user_request_state.dart';
 
 class RequestDetailsPage extends StatelessWidget {
   final RequestEntity requestEntity;
-  RequestDetailsPage({Key? key, required this.requestEntity}) : super(key: key);
+  final bool canAccept;
+  RequestDetailsPage(
+      {Key? key, required this.requestEntity, this.canAccept = true})
+      : super(key: key);
 
   final _user =
       FirebaseFirestore.instance.collection(FireBaseUserKeys.userCollection);
@@ -128,12 +131,14 @@ class RequestDetailsPage extends StatelessWidget {
                         style:
                             TextStyles.regular(color: AppColors.neutral_600)),
                   ),
-                  ContainerWidget(
-                    child: Text(
-                        'Expected Price : ${requestEntity.expectedPrice}',
-                        style:
-                            TextStyles.regular(color: AppColors.neutral_600)),
-                  ),
+                  requestEntity.expectedPrice.isNotEmpty
+                      ? ContainerWidget(
+                          child: Text(
+                              'Expected Price : ${requestEntity.expectedPrice}',
+                              style: TextStyles.regular(
+                                  color: AppColors.neutral_600)),
+                        )
+                      : const SizedBox(),
                   ContainerWidget(
                     child: Text(
                         'Booking Duration : ${requestEntity.bookingDuration}  day',
@@ -148,7 +153,8 @@ class RequestDetailsPage extends StatelessWidget {
         },
       ),
       bottomNavigationBar:
-          requestEntity.requestState == FireBaseRequestUserKeys.waitingState
+          (requestEntity.requestState == FireBaseRequestUserKeys.waitingState &&
+                  canAccept)
               ? Container(
                   height: 50,
                   margin: const EdgeInsets.fromLTRB(25, 10, 25, 30),

@@ -47,20 +47,22 @@ class RequestCardBuilder extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(requestEntity.requestedUserId,
-                    maxLines: 2,
+                Text(
+                    'Date : ${requestEntity.date}  -  No.Persons : ${requestEntity.numberOfPersons}',
                     overflow: TextOverflow.ellipsis,
                     style: TextStyles.bold(
-                        fontSize: 16, color: AppColors.neutral_100)),
+                        fontSize: 12, color: AppColors.neutral_100)),
                 const SizedBox(
-                  height: 6,
+                  height: 10,
                 ),
-                Text(requestEntity.date,
-                    style: TextStyles.regular(
-                        color: AppColors.neutral_600, height: 1.3)),
-                Text(requestEntity.numberOfPersons,
-                    style: TextStyles.regular(
-                        color: AppColors.neutral_600, height: 1.3)),
+                Text(requestEntity.userId.split('@').first,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyles.bold(
+                        fontSize: 20, color: AppColors.neutral_500)),
+                const SizedBox(
+                  height: 10,
+                ),
               ],
             ),
           ),

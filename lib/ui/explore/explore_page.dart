@@ -7,7 +7,7 @@ import 'package:with_you_app/common/material/fail_widget.dart';
 import 'package:with_you_app/common/utils/navigation.dart';
 import 'package:with_you_app/domain/mappers/mappers.dart';
 import 'package:with_you_app/domain/models/authentication/user_entity.dart';
-import 'package:with_you_app/ui/explore/explore_user_details.dart';
+import 'package:with_you_app/ui/user_details_page/explore_user_details.dart';
 import 'explore_user_card.dart';
 
 class ExplorePage extends StatefulWidget {
@@ -74,7 +74,7 @@ class _ExplorePageState extends State<ExplorePage>
                   onTap: () {
                     navigate(
                         context,
-                        ExploreUserDetails(
+                        UserDetailsPage(
                           user: users[index],
                         ));
                   },

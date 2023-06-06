@@ -16,6 +16,7 @@ import 'package:with_you_app/common/material/fail_widget.dart';
 import 'package:with_you_app/domain/mappers/mappers.dart';
 import 'package:with_you_app/domain/models/authentication/user_entity.dart';
 import 'package:with_you_app/ui/explore/taps/trip_user_info_tap.dart';
+import 'package:with_you_app/ui/user_details_page/explore_user_details.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -86,7 +87,7 @@ class _SearchPageState extends State<SearchPage> {
                   return ListView.builder(
                     itemCount: searchList.length,
                     itemBuilder: (context, index) {
-                      return UserCard(
+                      return _SearchCard(
                         user: searchList[index],
                       );
                     },
@@ -100,9 +101,9 @@ class _SearchPageState extends State<SearchPage> {
   }
 }
 
-class UserCard extends StatelessWidget {
+class _SearchCard extends StatelessWidget {
   final UserEntity user;
-  const UserCard({Key? key, required this.user}) : super(key: key);
+  const _SearchCard({Key? key, required this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +112,7 @@ class UserCard extends StatelessWidget {
         navigate(
             context,
             UserDetailsPage(
-              userEntity: user,
+              user: user,
             ));
       },
       child: Container(
@@ -122,8 +123,8 @@ class UserCard extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              height: 45,
-              width: 45,
+              height: 40,
+              width: 40,
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
@@ -139,26 +140,26 @@ class UserCard extends StatelessWidget {
               width: 10,
             ),
             Expanded(
-                child: Text(
-              user.name,
-              style: TextStyles.medium(fontSize: 16),
+                child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(user.name,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyles.bold(
+                        fontSize: 15, color: AppColors.neutral_500)),
+                const SizedBox(
+                  height: 8,
+                ),
+                Text('${user.type}  -  ${user.countryOfResidence}',
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyles.bold(
+                        fontSize: 12, color: AppColors.neutral_100)),
+              ],
             )),
           ],
         ),
       ),
-    );
-  }
-}
-
-class UserDetailsPage extends StatelessWidget {
-  final UserEntity userEntity;
-  const UserDetailsPage({Key? key, required this.userEntity}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBars.defaultAppBar(context, title: 'Tour Guide Details'),
-      body: TripUserInfoTap(user: userEntity),
     );
   }
 }

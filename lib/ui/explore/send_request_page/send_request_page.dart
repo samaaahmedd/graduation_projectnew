@@ -50,6 +50,10 @@ class _SendRequestPageState extends State<SendRequestPage> {
               UserCard(
                 user: widget.userEntity,
                 onTap: () {},
+                padding: 0,
+              ),
+              const SizedBox(
+                height: 20,
               ),
               AppCustomDateField(
                 label: 'Date',

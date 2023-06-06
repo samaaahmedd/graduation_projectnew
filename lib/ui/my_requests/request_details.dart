@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:with_you_app/common/firebase_keys/firebase_keys.dart';
@@ -5,24 +7,20 @@ import 'package:with_you_app/common/material/app_bars.dart';
 import 'package:with_you_app/common/material/app_buttons.dart';
 import 'package:with_you_app/common/material/app_colors.dart';
 import 'package:with_you_app/common/material/app_loader.dart';
+import 'package:with_you_app/common/material/container_widget.dart';
 import 'package:with_you_app/common/material/fail_widget.dart';
 import 'package:with_you_app/common/material/network_image.dart';
 import 'package:with_you_app/common/material/text_styles.dart';
+import 'package:with_you_app/common/utils/navigation.dart';
 import 'package:with_you_app/domain/mappers/mappers.dart';
 import 'package:with_you_app/domain/models/authentication/user_entity.dart';
 import 'package:with_you_app/domain/models/requests/requests.dart';
 import 'package:with_you_app/domain/use_cases/user/set_user_request_state.dart';
 
-class RequestDetailsPage extends StatefulWidget {
+class RequestDetailsPage extends StatelessWidget {
   final RequestEntity requestEntity;
-  const RequestDetailsPage({Key? key, required this.requestEntity})
-      : super(key: key);
+  RequestDetailsPage({Key? key, required this.requestEntity}) : super(key: key);
 
-  @override
-  State<RequestDetailsPage> createState() => _RequestDetailsPageState();
-}
-
-class _RequestDetailsPageState extends State<RequestDetailsPage> {
   final _user =
       FirebaseFirestore.instance.collection(FireBaseUserKeys.userCollection);
 
@@ -30,6 +28,7 @@ class _RequestDetailsPageState extends State<RequestDetailsPage> {
       SetUserRequestStateUseCase();
 
   final ValueNotifier<bool> _isAcceptLoading = ValueNotifier<bool>(false);
+
   final ValueNotifier<bool> _isCancelLoading = ValueNotifier<bool>(false);
 
   @override
@@ -38,7 +37,7 @@ class _RequestDetailsPageState extends State<RequestDetailsPage> {
       backgroundColor: AppColors.appBackgroundColor,
       appBar: AppBars.defaultAppBar(context, title: 'Request Details'),
       body: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-        stream: _user.doc(widget.requestEntity.requestedUserId).snapshots(),
+        stream: _user.doc(requestEntity.userId).snapshots(),
         builder:
             (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
           if (snapshot.hasError) {
@@ -53,41 +52,93 @@ class _RequestDetailsPageState extends State<RequestDetailsPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    padding: const EdgeInsets.all(10),
-                    margin: const EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(5)),
+                  ContainerWidget(
+                    child: Text('Request State : ${requestEntity.requestState}',
+                        style:
+                            TextStyles.regular(color: AppColors.neutral_600)),
+                  ),
+                  ContainerWidget(
                     child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Container(
-                          width: 65,
-                          height: 65,
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          decoration: BoxDecoration(
-                              color: AppColors.neutral_30,
-                              borderRadius: BorderRadius.circular(50)),
-                          child: AppNetworkImage(path: userInfo.image),
+                        Expanded(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                  '${userInfo.type}  -  ${userInfo.gender}  -  ${userInfo.age} years old',
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyles.bold(
+                                      fontSize: 12,
+                                      color: AppColors.neutral_100)),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(userInfo.name,
+                                  style: TextStyles.bold(
+                                      fontSize: 20,
+                                      color: AppColors.neutral_500)),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                  'Country Of Residence : ${userInfo.countryOfResidence}',
+                                  style: TextStyles.regular(
+                                      color: AppColors.neutral_600)),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text('Phone Number : ${userInfo.phoneNumber}',
+                                  style: TextStyles.regular(
+                                      color: AppColors.neutral_600)),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                  'Languages : ${userInfo.languages.join(' , ')}',
+                                  style: TextStyles.regular(
+                                      color: AppColors.neutral_600)),
+                            ],
+                          ),
                         ),
                         const SizedBox(
-                          width: 15,
+                          width: 10,
                         ),
-                        Expanded(
-                            child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(userInfo.name,
-                                style: TextStyles.bold(fontSize: 18)),
-                            const SizedBox(
-                              height: 7,
-                            ),
-                            Text(userInfo.emailAddress,
-                                style: TextStyles.medium(fontSize: 15)),
-                          ],
-                        ))
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(40),
+                          child: AppNetworkImage(
+                            path: userInfo.image,
+                            width: 50,
+                            height: 50,
+                          ),
+                        ),
                       ],
                     ),
+                  ),
+                  ContainerWidget(
+                    child: Text('Date : ${requestEntity.date}',
+                        style:
+                            TextStyles.regular(color: AppColors.neutral_600)),
+                  ),
+                  ContainerWidget(
+                    child: Text(
+                        'Number Of Persons : ${requestEntity.numberOfPersons}',
+                        style:
+                            TextStyles.regular(color: AppColors.neutral_600)),
+                  ),
+                  ContainerWidget(
+                    child: Text(
+                        'Expected Price : ${requestEntity.expectedPrice}',
+                        style:
+                            TextStyles.regular(color: AppColors.neutral_600)),
+                  ),
+                  ContainerWidget(
+                    child: Text(
+                        'Booking Duration : ${requestEntity.bookingDuration}  day',
+                        style:
+                            TextStyles.regular(color: AppColors.neutral_600)),
                   ),
                 ],
               ),
@@ -96,53 +147,64 @@ class _RequestDetailsPageState extends State<RequestDetailsPage> {
           return const SizedBox();
         },
       ),
-      bottomNavigationBar: Container(
-        height: 50,
-        margin: const EdgeInsets.fromLTRB(25, 10, 25, 30),
-        child: Row(
-          children: [
-            Expanded(
-                child: ValueListenableBuilder(
-              valueListenable: _isCancelLoading,
-              builder: (context, value, child) {
-                return AppButtons.outline(
-                  text: 'Reject',
-                  isLoading: value,
-                  onPressed: () async {
-                    _isCancelLoading.value = true;
-                    final result = await _setUserRequestStateUseCase.execute(
-                        context,
-                        widget.requestEntity.requestId,
-                        FireBaseRequestUserKeys.canceledState);
-                    _isCancelLoading.value = false;
-                  },
-                );
-              },
-            )),
-            const SizedBox(
-              width: 15,
-            ),
-            Expanded(
-                child: ValueListenableBuilder(
-              valueListenable: _isAcceptLoading,
-              builder: (context, value, child) {
-                return AppButtons.primaryButton(
-                  text: 'Accept',
-                  isLoading: value,
-                  onPressed: () async {
-                    _isAcceptLoading.value = true;
-                    final result = await _setUserRequestStateUseCase.execute(
-                        context,
-                        widget.requestEntity.requestId,
-                        FireBaseRequestUserKeys.acceptedState);
-                    _isAcceptLoading.value = false;
-                  },
-                );
-              },
-            )),
-          ],
-        ),
-      ),
+      bottomNavigationBar:
+          requestEntity.requestState == FireBaseRequestUserKeys.waitingState
+              ? Container(
+                  height: 50,
+                  margin: const EdgeInsets.fromLTRB(25, 10, 25, 30),
+                  child: Row(
+                    children: [
+                      Expanded(
+                          child: ValueListenableBuilder(
+                        valueListenable: _isCancelLoading,
+                        builder: (context, value, child) {
+                          return AppButtons.outline(
+                            text: 'Reject',
+                            isLoading: value,
+                            onPressed: () async {
+                              _isCancelLoading.value = true;
+                              final result =
+                                  await _setUserRequestStateUseCase.execute(
+                                      context,
+                                      requestEntity.requestId,
+                                      FireBaseRequestUserKeys.canceledState);
+                              if (result) {
+                                pop(context);
+                              }
+                              _isCancelLoading.value = false;
+                            },
+                          );
+                        },
+                      )),
+                      const SizedBox(
+                        width: 15,
+                      ),
+                      Expanded(
+                          child: ValueListenableBuilder(
+                        valueListenable: _isAcceptLoading,
+                        builder: (context, value, child) {
+                          return AppButtons.primaryButton(
+                            text: 'Accept',
+                            isLoading: value,
+                            onPressed: () async {
+                              _isAcceptLoading.value = true;
+                              final result =
+                                  await _setUserRequestStateUseCase.execute(
+                                      context,
+                                      requestEntity.requestId,
+                                      FireBaseRequestUserKeys.acceptedState);
+                              if (result) {
+                                pop(context);
+                              }
+                              _isAcceptLoading.value = false;
+                            },
+                          );
+                        },
+                      )),
+                    ],
+                  ),
+                )
+              : const SizedBox(),
     );
   }
 }

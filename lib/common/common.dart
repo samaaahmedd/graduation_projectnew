@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 final List<String> countries = [
   'Egypt',
   'United Status',
@@ -14,3 +12,6 @@ final List<String> countries = [
   'France',
   'Greece',
 ];
+
+const List<String> userTypeList = ['Tourist', 'Tour Guide', 'Photographer'];
+const List<String> genderList = ['Male', 'Female'];

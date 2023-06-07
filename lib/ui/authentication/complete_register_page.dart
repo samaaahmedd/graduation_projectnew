@@ -122,8 +122,8 @@ class _CompleteRegisterPageState extends State<CompleteRegisterPage> {
                           _gender = selectedItem ?? '';
                           setState(() {});
                         },
-                        itemsValues: const ['Male', 'Female'],
-                        showItems: const ['Male', 'Female'],
+                        itemsValues: genderList,
+                        showItems: genderList,
                         hint: "Gender",
                         value: _gender,
                         selectedText: _gender,

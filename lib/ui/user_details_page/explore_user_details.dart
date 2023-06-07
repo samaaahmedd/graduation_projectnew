@@ -9,6 +9,7 @@ import 'package:with_you_app/common/material/text_styles.dart';
 import 'package:with_you_app/common/utils/navigation.dart';
 import 'package:with_you_app/domain/models/authentication/user_entity.dart';
 import 'package:with_you_app/ui/explore/send_request_page/send_request_page.dart';
+import 'package:with_you_app/ui/more_page/profile_page/full_image_page.dart';
 
 class UserDetailsPage extends StatelessWidget {
   final UserEntity user;
@@ -151,20 +152,29 @@ class _PageAppBar extends StatelessWidget {
           Positioned(
             bottom: 0,
             left: MediaQuery.of(context).size.width * .1,
-            child: Material(
-              elevation: .8,
-              shape: RoundedRectangleBorder(
-                  side: const BorderSide(color: Colors.white, width: 3),
-                  borderRadius: BorderRadius.circular(100)),
-              child: ClipRRect(
-                  borderRadius: BorderRadius.circular(100),
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  child: AppNetworkImage(
-                    path: imagePath,
-                    scale: .5,
-                    width: MediaQuery.of(context).size.width * .3,
-                    height: MediaQuery.of(context).size.width * .3,
-                  )),
+            child: GestureDetector(
+              onTap: () {
+                navigate(
+                    context,
+                    FullImagePage(
+                      imagePath: imagePath,
+                    ));
+              },
+              child: Material(
+                elevation: .8,
+                shape: RoundedRectangleBorder(
+                    side: const BorderSide(color: Colors.white, width: 3),
+                    borderRadius: BorderRadius.circular(100)),
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(100),
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    child: AppNetworkImage(
+                      path: imagePath,
+                      scale: .5,
+                      width: MediaQuery.of(context).size.width * .3,
+                      height: MediaQuery.of(context).size.width * .3,
+                    )),
+              ),
             ),
           ),
           Padding(

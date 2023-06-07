@@ -80,16 +80,8 @@ class _RegisterPageState extends State<RegisterPage> {
                           _userType = selectedItem ?? '';
                           setState(() {});
                         },
-                        itemsValues: const [
-                          'Tourist',
-                          'Tour Guide',
-                          'Photographer'
-                        ],
-                        showItems: const [
-                          'Tourist',
-                          'Tour Guide',
-                          'Photographer'
-                        ],
+                        itemsValues: userTypeList,
+                        showItems: userTypeList,
                         hint: "User Type",
                         value: _userType,
                         selectedText: _userType,

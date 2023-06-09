@@ -59,7 +59,10 @@ class _SendRequestPageState extends State<SendRequestPage> {
                 label: 'Date',
                 hintText: 'Request in Date!',
                 onchange: (dateTime) {
-                  birthDate = dateTime;
+                  _dateController.text=dateTime.toString();
+                  birthDate = dateTime; setState(() {
+
+                  });
                 },
                 textEditingController: _dateController,
               ),

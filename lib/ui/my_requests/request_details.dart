@@ -20,8 +20,9 @@ import 'package:with_you_app/domain/use_cases/user/set_user_request_state.dart';
 class RequestDetailsPage extends StatelessWidget {
   final RequestEntity requestEntity;
   final bool canAccept;
+  final bool fromBooking;
   RequestDetailsPage(
-      {Key? key, required this.requestEntity, this.canAccept = true})
+      {Key? key, required this.requestEntity, this.canAccept = true, this.fromBooking = false})
       : super(key: key);
 
   final _user =
@@ -40,7 +41,7 @@ class RequestDetailsPage extends StatelessWidget {
       backgroundColor: AppColors.appBackgroundColor,
       appBar: AppBars.defaultAppBar(context, title: 'Request Details'),
       body: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-        stream: _user.doc(requestEntity.userId).snapshots(),
+        stream: _user.doc(fromBooking?requestEntity.requestedUserId:requestEntity.userId).snapshots(),
         builder:
             (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
           if (snapshot.hasError) {

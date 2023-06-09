@@ -94,7 +94,7 @@ class _AppCustomDateFieldState extends State<AppCustomDateField> {
                       use24hFormat: true,
                       minimumDate: DateTime.now(),
                       initialDateTime: _selectedDay ?? DateTime.now(),
-                      maximumDate: DateTime.utc(2025, 1, 1),
+                      maximumDate: DateTime.utc(2040, 1, 1),
                       validTextStyle:
                           TextStyles.regular(color: CupertinoColors.black),
                       notValidTextStyle: TextStyles.regular(

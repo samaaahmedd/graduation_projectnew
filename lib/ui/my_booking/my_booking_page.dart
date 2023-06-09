@@ -76,7 +76,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                         context,
                         RequestDetailsPage(
                           requestEntity: requestEntity,
-                          canAccept: false,
+                          canAccept: false,fromBooking: true,
                         ));
                   },
                   child: Container(
@@ -111,7 +111,7 @@ class _MyBookingPageState extends State<MyBookingPage> {
                         const SizedBox(
                           height: 10,
                         ),
-                        Text(requestEntity.userId.split('@').first,
+                        Text(requestEntity.requestedUserId.split('@').first,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyles.bold(

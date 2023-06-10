@@ -49,6 +49,9 @@ flutter:
     - assets/
 
   fonts:
+    - family: Dancing Script
+      fonts:
+        - asset: fonts/DancingScript-Regular.ttf
     - family: Roboto
       fonts:
         - asset: fonts/Roboto-Regular.ttf

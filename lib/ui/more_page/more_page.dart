@@ -21,6 +21,7 @@ import 'package:with_you_app/ui/more_page/contact_us_page/contact_us_page.dart';
 import 'package:with_you_app/ui/more_page/terms_privacy_page/terms_privacy_page.dart';
 import 'package:with_you_app/ui/more_page/update_password/update_password_page.dart';
 
+import '../../welcome_page.dart';
 import 'profile_page/profile_page.dart';
 
 class MorePage extends StatefulWidget {
@@ -153,7 +154,7 @@ class _MorePageState extends State<MorePage> {
     setState(() {});
     final bool result = await _logOutUseCase.execute(context);
     if (result) {
-      navigateRemoveReplacement(context, const LogInPage());
+      navigateRemoveReplacement(context, const WelcomePage());
     }
     _logOutLoading = false;
     setState(() {});

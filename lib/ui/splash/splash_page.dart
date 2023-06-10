@@ -7,6 +7,8 @@ import 'package:with_you_app/domain/use_cases/authentication/check_if_user_login
 import 'package:with_you_app/ui/authentication/log_in_page.dart';
 import 'package:with_you_app/ui/host_page.dart';
 
+import '../../welcome_page.dart';
+
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
 
@@ -50,7 +52,7 @@ class _SplashPageState extends State<SplashPage> {
     if (isLogIn) {
       navigateRemoveReplacement(context, const HostPage());
     } else {
-      navigateRemoveReplacement(context, const LogInPage());
+      navigateRemoveReplacement(context, const WelcomePage());
     }
   }
 

@@ -1,12 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:with_you_app/common/utils/navigation.dart';
-import 'package:with_you_app/common/images_paths/images_paths.dart';
 import 'package:with_you_app/common/material/app_colors.dart';
 import 'package:with_you_app/domain/use_cases/authentication/check_if_user_login_use_case.dart';
-import 'package:with_you_app/ui/authentication/log_in_page.dart';
 import 'package:with_you_app/ui/host_page.dart';
-
 import '../../welcome_page.dart';
 
 class SplashPage extends StatefulWidget {
@@ -28,7 +25,6 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff3843d9),
       body: Container(
         alignment: Alignment.center,
         decoration: BoxDecoration(
@@ -41,8 +37,10 @@ class _SplashPageState extends State<SplashPage> {
         child: Padding(
           padding: const EdgeInsets.all(0.2),
           child: Image.asset(
-            ImagesPaths.logo,
-            scale: 1.2,
+            'assets/withUF.png',
+            scale: 3,
+            width: MediaQuery.of(context).size.width * .5,
+            height: MediaQuery.of(context).size.width * .5,
             isAntiAlias: true,
           ),
         ),
@@ -58,5 +56,4 @@ class _SplashPageState extends State<SplashPage> {
       navigateRemoveReplacement(context, const WelcomePage());
     }
   }
-
 }

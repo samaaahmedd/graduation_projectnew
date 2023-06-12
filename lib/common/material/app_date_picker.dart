@@ -52,15 +52,12 @@ class _AppCustomDateFieldState extends State<AppCustomDateField> {
         DateTime.now().year, DateTime.now().month, DateTime.now().day + 1))) {
       selectedEndDateOfCalender.clear();
       selectedEndDateOfCalender.add(selectedDay);
-      getSelectedDay(selectedEndDateOfCalender);
       _selectedDay = selectedDay;
-      widget.textEditingController.text = DateFormat.yMd().format(selectedDay);
       widget.onchange(selectedDay);
+      widget.textEditingController.text =
+          DateFormat.yMd().format(selectedDay).toString().split(' ').first;
+      setState(() {});
     }
-  }
-
-  void getSelectedDay(List<DateTime> selectedDate) {
-    this.selectedDate = selectedDate;
   }
 
   @override
@@ -88,11 +85,12 @@ class _AppCustomDateFieldState extends State<AppCustomDateField> {
                     child: CupertinoDatePickerModified(
                       onDateTimeChanged: (value) {
                         _onTableCalenderDayClick(value);
+                        setState(() {});
                       },
                       mode: CupertinoDatePickerModeModified.date,
                       dateOrder: DatePickerDateOrder.dmy,
                       use24hFormat: true,
-                      minimumDate: DateTime.now(),
+                      minimumDate: DateTime.utc(1990, 1, 1),
                       initialDateTime: _selectedDay ?? DateTime.now(),
                       maximumDate: DateTime.utc(2040, 1, 1),
                       validTextStyle:

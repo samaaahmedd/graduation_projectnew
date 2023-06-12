@@ -1,17 +1,13 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:with_you_app/common/utils/navigation.dart';
-import 'package:with_you_app/common/images_paths/images_paths.dart';
 import 'package:with_you_app/common/material/app_colors.dart';
 import 'package:with_you_app/domain/use_cases/authentication/check_if_user_login_use_case.dart';
-import 'package:with_you_app/ui/authentication/log_in_page.dart';
 import 'package:with_you_app/ui/host_page.dart';
-
 import '../../welcome_page.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
-
   @override
   State<SplashPage> createState() => _SplashPageState();
 }
@@ -21,33 +17,30 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   void initState() {
-    Timer(const Duration(seconds: 10), () => _navigateTo());
+    Timer(const Duration(seconds: 4), () => _navigateTo());
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff3843d9),
-      body: Center(
-        child: Container(
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: AppColors.primaryGradiantColors,
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
+      body: Container(
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: AppColors.primaryGradiantColors,
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
           ),
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(0.2),
-              child: Image.asset(
-                ImagesPaths.logo,
-                scale: 3.0,
-                isAntiAlias: true,
-              ),
-            ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(0.2),
+          child: Image.asset(
+            'assets/withUF.png',
+            scale: 3,
+            width: MediaQuery.of(context).size.width * .5,
+            height: MediaQuery.of(context).size.width * .5,
+            isAntiAlias: true,
           ),
         ),
       ),
@@ -62,5 +55,4 @@ class _SplashPageState extends State<SplashPage> {
       navigateRemoveReplacement(context, const WelcomePage());
     }
   }
-
 }

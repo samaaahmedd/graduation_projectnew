@@ -50,7 +50,7 @@ class AppSnackBars extends StatelessWidget {
         color: AppColors.warningLight,
         icon: Icons.report_gmailerrorred_outlined,
         snackBarPosition: SnackBarPosition.bottom,
-        borderSide:  const BorderSide(width: 1, color: AppColors.warning),
+        borderSide: const BorderSide(width: 1, color: AppColors.warning),
       ).build(context) as SnackBar,
     );
   }
@@ -68,13 +68,12 @@ class AppSnackBars extends StatelessWidget {
     );
   }
 
-
   static void hint(context, {required String title}) {
     ScaffoldMessenger.of(context).removeCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       AppSnackBars(
         title: title,
-        icon:  Icons.tips_and_updates_outlined,
+        icon: Icons.tips_and_updates_outlined,
         borderSide: const BorderSide(width: 1, color: AppColors.neutral_30),
       ).build(context) as SnackBar,
     );
@@ -118,8 +117,7 @@ class AppSnackBars extends StatelessWidget {
                         child: Text(
                           subTitle!,
                           style: TextStyles.regular(
-                              color: AppColors.neutral_400,
-                              height: 1.1),
+                              color: AppColors.neutral_400, height: 1.1),
                         ),
                       )
                     : const SizedBox(),
@@ -130,7 +128,6 @@ class AppSnackBars extends StatelessWidget {
       ),
     );
   }
-
 
   static const double toastHorizontalMargin = 16;
 

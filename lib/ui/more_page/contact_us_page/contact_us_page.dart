@@ -45,7 +45,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                 minLeadingWidth: 20,
                 leading: Icon(Icons.email_outlined,
                     color: AppColors.neutral_700, size: 26),
-                title: Text('samaa_ahmed@gmail.com',
+                title: Text('withyou.withueverywhere@gmail.com',
                     style: TextStyle(
                         color: AppColors.neutral_700,
                         fontWeight: FontWeight.w500,

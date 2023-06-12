@@ -29,21 +29,25 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xff3843d9),
-      body: Container(
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: AppColors.primaryGradiantColors,
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
+      body: Center(
+        child: Container(
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: AppColors.primaryGradiantColors,
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
           ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(0.2),
-          child: Image.asset(
-            ImagesPaths.logo,
-            scale: 1.2,
-            isAntiAlias: true,
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(0.2),
+              child: Image.asset(
+                ImagesPaths.logo,
+                scale: 3.0,
+                isAntiAlias: true,
+              ),
+            ),
           ),
         ),
       ),

@@ -21,7 +21,7 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   void initState() {
-    Timer(const Duration(seconds: 4), () => _navigateTo());
+    Timer(const Duration(seconds: 10), () => _navigateTo());
     super.initState();
   }
 
@@ -38,10 +38,13 @@ class _SplashPageState extends State<SplashPage> {
             end: Alignment.bottomCenter,
           ),
         ),
-        child: Image.asset(
-          ImagesPaths.logo,
-          scale: 1.2,
-          isAntiAlias: true,
+        child: Padding(
+          padding: const EdgeInsets.all(0.2),
+          child: Image.asset(
+            ImagesPaths.logo,
+            scale: 1.2,
+            isAntiAlias: true,
+          ),
         ),
       ),
     );

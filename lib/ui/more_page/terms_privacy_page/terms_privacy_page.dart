@@ -28,7 +28,7 @@ class _TermsPrivacyPageState extends State<TermsPrivacyPage> {
             ),
             Text(
                 "These Terms of Use govern your use of WITH YOU,and any information, text, graphics, photos or other materials "
-                "appearing on the NOTA app, referencing these Terms. you must read and,"
+                "appearing on the With You app, referencing these Terms. you must read and,"
                 " understand these terms.",
                 style: TextStyles.regular(color: AppColors.neutral_500)),
             const Padding(
@@ -40,7 +40,7 @@ class _TermsPrivacyPageState extends State<TermsPrivacyPage> {
               height: 15,
             ),
             Text(
-                "The NOTA app Privacy Policy is incorporated into these Terms. By accepting these Terms, you agree to access your storage and microphone through the Services in accordance with the Privacy Policy,",
+                "The With You app Privacy Policy is incorporated into these Terms. By accepting these Terms, you agree to access your storage and microphone through the Services in accordance with the Privacy Policy,",
                 style: TextStyles.regular(color: AppColors.neutral_500)),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 25),

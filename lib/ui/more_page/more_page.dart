@@ -110,11 +110,11 @@ class _MorePageState extends State<MorePage> {
                     onTap: () => navigate(context, const UpdatePasswordPage()),
                     text: "Update Password",
                   ),
-                  AppTile(
-                    icon: Icons.payment_outlined,
-                    onTap: () {},
-                    text: "Payment",
-                  ),
+                  // AppTile(
+                  //   icon: Icons.payment_outlined,
+                  //   onTap: () {},
+                  //   text: "Payment",
+                  // ),
                   AppTile(
                     icon: Icons.mail_outline_rounded,
                     onTap: () => navigate(context, const ContactUsPage()),
